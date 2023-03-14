@@ -1,11 +1,11 @@
-package school.sptech.apitreinoyou2up;
+package school.sptech.apitreinoyou2up.classes;
 
 public abstract class Treino {
 
     private int codigo;
     private String local;
     private int duracao; // em minutos
-    private String intensidade; // baixa, média, forte
+    private String intensidade; // baixa, média, alta
 
 
     public Treino() {
@@ -19,21 +19,7 @@ public abstract class Treino {
     }
 
 
-    public double getGastoCalorico(){
-        double met = 0;
-        double peso = 70.0; // valor ilustrativo do peso humano para realizar o cálculo
-
-        if(intensidade.equalsIgnoreCase("baixa")){
-            met =  3.5;
-        } else if (intensidade.equalsIgnoreCase("media")) {
-            met = 5.0;
-        }
-        else if (intensidade.equalsIgnoreCase("alta")){
-            met = 6.0;
-        }
-
-        return met * peso * (duracao / 60);
-    };
+    public abstract double getGastoCalorico();
 
     public int getCodigo() {
         return codigo;

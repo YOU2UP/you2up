@@ -1,9 +1,10 @@
-package school.sptech.apitreinoyou2up;
+package school.sptech.apitreinoyou2up.controllers;
 
 import org.springframework.web.bind.annotation.*;
+import school.sptech.apitreinoyou2up.classes.Treino;
+import school.sptech.apitreinoyou2up.classes.TreinoAcademia;
+import school.sptech.apitreinoyou2up.classes.TreinoArLivre;
 
-import javax.swing.tree.TreeNode;
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.List;
 
