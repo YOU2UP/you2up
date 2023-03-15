@@ -147,7 +147,7 @@ header.MeuHeader{
     align-items: center;
     margin: 0;
 }
-#menu #links li{
+#menu #links li,footer .menu ul li{
     list-style: none;
     font-size: 16px;
     color: #ffffff;
@@ -158,6 +158,11 @@ header.MeuHeader{
     color: #fff;
     font-size: 1.25rem;
     transition: .3s;
+}
+#menu a:hover, .menu li a:hover{
+    color: #ff9200;
+    font-size: 1.30rem;
+    cursor: pointer;
 }
 #carrouselPrincipal{
     width: 100vw;
@@ -304,7 +309,7 @@ flex-direction: column;
 }
 .watch-slider2 img{
     width: 250px;
-    margin-left: 20%;
+margin-bottom: 1rem;
     
 }
 
@@ -477,7 +482,13 @@ footer .contact .desc{
 }
 footer .menu ul li {
     margin-right: 1rem;
+   
 
+}
+footer .menu ul li a{
+    color: white;
+    size: 1.05;
+    transition: .3s;
 }
 footer .menu a{
     font-size: 1rem;
@@ -487,11 +498,7 @@ footer .menu a:hover{
     font-size: 1.1rem;
     cursor: pointer;
 }
-#menu a:hover{
-    color: #ff9200;
-    font-size: 1.30rem;
-    cursor: pointer;
-}
+
 .divisao{
     height: 2px;
     width: 80%;
