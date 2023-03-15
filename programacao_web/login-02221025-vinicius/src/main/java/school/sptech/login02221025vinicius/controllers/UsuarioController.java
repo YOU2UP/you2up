@@ -4,7 +4,6 @@ package school.sptech.login02221025vinicius.controllers;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.login02221025vinicius.classes.Usuario;
 import school.sptech.login02221025vinicius.dtos.UsuarioDto;
-
 import java.util.ArrayList;
 import java.util.List;
 
