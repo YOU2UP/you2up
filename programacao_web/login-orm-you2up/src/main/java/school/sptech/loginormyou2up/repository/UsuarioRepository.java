@@ -1,7 +1,7 @@
-package school.sptech.loginormyou2up.repositorys;
+package school.sptech.loginormyou2up.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import school.sptech.loginormyou2up.classes.Usuario;
+import school.sptech.loginormyou2up.domain.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 }

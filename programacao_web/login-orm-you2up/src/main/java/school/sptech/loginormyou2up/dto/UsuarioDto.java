@@ -1,27 +1,24 @@
-package school.sptech.loginormyou2up.classes;
+package school.sptech.loginormyou2up.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.validation.constraints.*;
+import school.sptech.loginormyou2up.domain.Usuario;
+
 import java.time.LocalDate;
 
-@Entity
-public class Usuario {
-    @Id
+public class UsuarioDto {
+
+    public UsuarioDto(Usuario usuario){
+        setId(usuario.getId());
+        setEmail(usuario.getEmail());
+        setNome(usuario.getNome());
+        setDataNascimento(usuario.getDataNascimento());
+        setNotaMedia(usuario.getNotaMedia());
+    }
+
+
     private Integer id;
-
-    @Size(min = 3)
     private String nome;
-
-    @Email
     private String email;
-    private String senha;
-
-    @Past
     private LocalDate dataNascimento;
-
-    @DecimalMin(value = "0.0")
-    @DecimalMax(value = "10.0")
     private Double notaMedia;
     private String descricao;
 
@@ -48,14 +45,6 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public LocalDate getDataNascimento() {

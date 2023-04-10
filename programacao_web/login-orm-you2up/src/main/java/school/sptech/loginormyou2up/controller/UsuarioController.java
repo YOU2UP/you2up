@@ -1,12 +1,10 @@
-package school.sptech.loginormyou2up.controllers;
+package school.sptech.loginormyou2up.controller;
 
-import org.apache.catalina.LifecycleState;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import school.sptech.loginormyou2up.classes.Usuario;
-import school.sptech.loginormyou2up.repositorys.UsuarioRepository;
+import school.sptech.loginormyou2up.domain.Usuario;
+import school.sptech.loginormyou2up.repository.UsuarioRepository;
 
 import javax.validation.Valid;
 import java.util.List;
