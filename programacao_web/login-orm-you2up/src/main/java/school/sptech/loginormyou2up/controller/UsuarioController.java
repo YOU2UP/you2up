@@ -42,4 +42,16 @@ public class UsuarioController {
         return ResponseEntity.status(404).build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Usuario> deleteById(@PathVariable Integer id){
+        Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
+
+        if(usuarioOpt.isPresent()){
+            usuarioRepository.deleteById(id);
+            return ResponseEntity.status(200).build();
+        }
+
+        return ResponseEntity.status(404).build();
+    }
+
 }
