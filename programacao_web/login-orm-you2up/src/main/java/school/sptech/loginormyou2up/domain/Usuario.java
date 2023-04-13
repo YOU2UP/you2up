@@ -1,15 +1,16 @@
 package school.sptech.loginormyou2up.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import school.sptech.loginormyou2up.models.observer.Observador;
+
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-public class Usuario {
+public class Usuario implements Observador {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Size(min = 3)
@@ -23,10 +24,25 @@ public class Usuario {
     private LocalDate dataNascimento;
 
     @DecimalMin(value = "0.0")
-    @DecimalMax(value = "10.0")
+    @DecimalMax(value = "5.0")
     private Double notaMedia;
     private String descricao;
 
+    public boolean isAutenticado;
+
+
+    @Override
+    public void notificarTreino(Treino treino) {
+
+    }
+
+    public boolean isAutenticado() {
+        return isAutenticado;
+    }
+
+    public void setAutenticado(boolean autenticado) {
+        isAutenticado = autenticado;
+    }
 
     public Integer getId() {
         return id;

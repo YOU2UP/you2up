@@ -1,11 +1,14 @@
 package school.sptech.loginormyou2up.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import school.sptech.loginormyou2up.models.observer.Observado;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
-public class Treino {
+public class Treino implements Observado {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String periodo;
@@ -15,6 +18,12 @@ public class Treino {
     private int peso;
 
     private String estagio; // iniciante, intermediário, avançado
+
+
+    @Override
+    public void notificarUsuario() {
+
+    }
 
     public Integer getId() {
         return id;
