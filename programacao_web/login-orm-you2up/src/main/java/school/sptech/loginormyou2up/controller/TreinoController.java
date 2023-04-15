@@ -7,6 +7,7 @@ import school.sptech.loginormyou2up.domain.Treino;
 import school.sptech.loginormyou2up.repository.TreinoRepository;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ public class TreinoController {
     @Autowired
     private TreinoRepository treinoRepository;
 
+    private List<Treino> treinos = new ArrayList<>();
 
     @GetMapping
     public ResponseEntity<List<Treino>> getAll(){
@@ -28,8 +30,11 @@ public class TreinoController {
     }
 
     @PostMapping
-    public ResponseEntity<Treino> post(@RequestBody @Valid Treino Treino){
-        return ResponseEntity.status(201).body(treinoRepository.save(Treino));
+    public ResponseEntity<Treino> post(@RequestBody @Valid Treino treino){
+        Treino novoTreino = treinoRepository.save(treino);
+        Treino treinoNotificarUser = new Treino();
+        treinoNotificarUser.notificarUsuario(novoTreino);
+        return ResponseEntity.status(201).body(novoTreino);
     }
 
     @GetMapping("/{id}")

@@ -1,8 +1,11 @@
 package school.sptech.loginormyou2up.domain;
 
 import school.sptech.loginormyou2up.models.observer.Observado;
+import school.sptech.loginormyou2up.models.observer.Observador;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -19,11 +22,8 @@ public class Treino implements Observado {
 
     private String estagio; // iniciante, intermediário, avançado
 
-
-    @Override
-    public void notificarUsuario() {
-
-    }
+    //private String[] usuarios = {"user1", "user2"};
+    private List<Observador> usuarios = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -63,5 +63,35 @@ public class Treino implements Observado {
 
     public void setEstagio(String estagio) {
         this.estagio = estagio;
+    }
+
+    public List<Observador> getUsuarios() {
+        return usuarios;
+    }
+
+//    @Override
+//    public void notificarUsuario(Treino treino) {
+//        Usuario usuario = new Usuario();
+//        for (int i = 0; i < usuarios.length; i++) {
+//            usuario.notificarTreino(treino);
+//        }
+//    }
+
+    @Override
+    public void notificarUsuario(Treino treino) {
+        for (Observador usuario: usuarios) {
+            usuario.notificarTreino(treino);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Treino{" +
+                "id=" + id +
+                ", periodo='" + periodo + '\'' +
+                ", preferencia='" + preferencia + '\'' +
+                ", peso=" + peso +
+                ", estagio='" + estagio + '\'' +
+                '}';
     }
 }

@@ -1,6 +1,7 @@
 package school.sptech.loginormyou2up.models.observer;
 
-public interface Observado {
-    void notificarUsuario();
+import school.sptech.loginormyou2up.domain.Treino;
 
+public interface Observado {
+    void notificarUsuario(Treino treino);
 }

@@ -30,12 +30,6 @@ public class Usuario implements Observador {
 
     public boolean isAutenticado;
 
-
-    @Override
-    public void notificarTreino(Treino treino) {
-
-    }
-
     public boolean isAutenticado() {
         return isAutenticado;
     }
@@ -100,6 +94,9 @@ public class Usuario implements Observador {
         this.descricao = descricao;
     }
 
-    public static class Treino {
+    @Override
+    public void notificarTreino(Treino treino) {
+        System.out.println("Novo treino encontrado, que tal dar uma olhada?");
+        System.out.println(treino);
     }
 }
