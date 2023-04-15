@@ -1,34 +1,27 @@
 package school.sptech.loginormyou2up.domain;
 
-import school.sptech.loginormyou2up.models.observer.Observador;
+import school.sptech.loginormyou2up.service.observer.Observador;
+
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Entity
 public class Usuario implements Observador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Size(min = 3)
     private String nome;
-
-    @Email
     private String email;
     private String senha;
-
-    @Past
     private LocalDate dataNascimento;
-
-    @DecimalMin(value = "0.0")
-    @DecimalMax(value = "5.0")
     private Double notaMedia;
     private String descricao;
 
-    public boolean isAutenticado;
+    private String estagio; // iniciante, intermediário, avançado
+
+    @ManyToOne
+    private Treino treino;
 
 
     @Override
@@ -36,12 +29,20 @@ public class Usuario implements Observador {
 
     }
 
-    public boolean isAutenticado() {
-        return isAutenticado;
+    public String getEstagio() {
+        return estagio;
     }
 
-    public void setAutenticado(boolean autenticado) {
-        isAutenticado = autenticado;
+    public void setEstagio(String estagio) {
+        this.estagio = estagio;
+    }
+
+    public Treino getTreino() {
+        return treino;
+    }
+
+    public void setTreino(Treino treino) {
+        this.treino = treino;
     }
 
     public Integer getId() {
@@ -98,8 +99,5 @@ public class Usuario implements Observador {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public static class Treino {
     }
 }

@@ -1,4 +1,4 @@
-package school.sptech.loginormyou2up.extra;
+package school.sptech.loginormyou2up.service.extra;
 
 public class ListaObj <T> {
     private T[] vetor;

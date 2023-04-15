@@ -1,8 +1,9 @@
 package school.sptech.loginormyou2up.domain;
 
-import school.sptech.loginormyou2up.models.observer.Observado;
+import school.sptech.loginormyou2up.service.observer.Observado;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -15,14 +16,33 @@ public class Treino implements Observado {
 
     private String preferencia;
 
-    private int peso;
+    private LocalDateTime inicioTreino;
 
-    private String estagio; // iniciante, intermediário, avançado
+    @OneToMany(mappedBy = "treino")
+    private List<Usuario> usuarios;
 
 
     @Override
     public void notificarUsuario() {
 
+    }
+
+
+
+    public LocalDateTime getInicioTreino() {
+        return inicioTreino;
+    }
+
+    public void setInicioTreino(LocalDateTime inicioTreino) {
+        this.inicioTreino = inicioTreino;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     public Integer getId() {
@@ -49,19 +69,5 @@ public class Treino implements Observado {
         this.preferencia = preferencia;
     }
 
-    public int getPeso() {
-        return peso;
-    }
 
-    public void setPeso(int peso) {
-        this.peso = peso;
-    }
-
-    public String getEstagio() {
-        return estagio;
-    }
-
-    public void setEstagio(String estagio) {
-        this.estagio = estagio;
-    }
 }
