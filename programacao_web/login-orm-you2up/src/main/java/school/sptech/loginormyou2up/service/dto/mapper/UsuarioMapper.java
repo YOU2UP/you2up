@@ -4,8 +4,7 @@ import school.sptech.loginormyou2up.domain.Usuario;
 import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoCriacao;
 import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoJsonTreino;
 import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoResposta;
-import school.sptech.loginormyou2up.service.usuario.UsuarioService;
-import school.sptech.loginormyou2up.service.usuario.autenticacao.dto.UsuarioTokenDto;
+import school.sptech.loginormyou2up.service.dto.usuario.UsuarioTokenDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,19 +21,6 @@ public class UsuarioMapper {
         return dto;
     }
 
-
-    public static UsuarioDtoResposta convertToDtoResposta(UsuarioDtoCriacao usuario) {
-        UsuarioDtoResposta dto = new UsuarioDtoResposta();
-
-        dto.setId(usuario.getId());
-        dto.setNome(usuario.getNome());
-        dto.setEmail(usuario.getEmail());
-        dto.setDataNascimento(usuario.getDataNascimento());
-        dto.setTreino(usuario.getTreino());
-
-        return dto;
-    }
-
     public static UsuarioDtoResposta convertToDtoResposta(Usuario usuario) {
         UsuarioDtoResposta dto = new UsuarioDtoResposta();
 
@@ -43,6 +29,7 @@ public class UsuarioMapper {
         dto.setEmail(usuario.getEmail());
         dto.setDataNascimento(usuario.getDataNascimento());
         dto.setTreino(usuario.getTreino());
+        usuario.setNotificacoes(usuario.getNotificacoes());
 
         return dto;
     }
@@ -74,7 +61,7 @@ public class UsuarioMapper {
         usuario.setDescricao(usuarioDto.getDescricao());
         usuario.setSenha(usuarioDto.getSenha());
         usuario.setEstagio(usuarioDto.getEstagio());
-
+        usuario.setNotificacoes(new ArrayList<>());
 
         return usuario;
     }

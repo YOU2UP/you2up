@@ -1,6 +1,5 @@
 package school.sptech.loginormyou2up.service.usuario;
 
-import io.micrometer.core.instrument.step.StepRegistryConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,8 +14,8 @@ import school.sptech.loginormyou2up.repository.UsuarioRepository;
 import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoCriacao;
 import school.sptech.loginormyou2up.service.dto.mapper.UsuarioMapper;
 import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoResposta;
-import school.sptech.loginormyou2up.service.usuario.autenticacao.dto.UsuarioLoginDto;
-import school.sptech.loginormyou2up.service.usuario.autenticacao.dto.UsuarioTokenDto;
+import school.sptech.loginormyou2up.service.dto.usuario.UsuarioLoginDto;
+import school.sptech.loginormyou2up.service.dto.usuario.UsuarioTokenDto;
 
 @Service
 public class UsuarioService {

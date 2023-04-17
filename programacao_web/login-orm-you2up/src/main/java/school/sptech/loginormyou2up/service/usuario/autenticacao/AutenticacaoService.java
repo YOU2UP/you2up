@@ -7,8 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import school.sptech.loginormyou2up.domain.Usuario;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoResposta;
-import school.sptech.loginormyou2up.service.usuario.autenticacao.dto.UsuarioDetalhesDto;
+import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDetalhesDto;
 
 import java.util.Optional;
 

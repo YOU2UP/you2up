@@ -31,8 +31,9 @@ public class TreinoController {
     }
 
     @PostMapping
-    public ResponseEntity<TreinoDtoResposta> post(@RequestBody @Valid Treino Treino){
-        return ResponseEntity.status(201).body(TreinoMapper.convertToTreinoDtoResposta(treinoRepository.save(Treino)));
+    public ResponseEntity<TreinoDtoResposta> post(@RequestBody @Valid Treino treino){
+        treino.notificarUsuario();
+        return ResponseEntity.status(201).body(TreinoMapper.convertToTreinoDtoResposta(treinoRepository.save(treino)));
     }
 
     @GetMapping("/{id}")

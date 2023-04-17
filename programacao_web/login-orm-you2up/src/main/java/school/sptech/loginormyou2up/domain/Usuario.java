@@ -1,10 +1,15 @@
 package school.sptech.loginormyou2up.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import school.sptech.loginormyou2up.service.notificacao.NotificacaoService;
 import school.sptech.loginormyou2up.service.observer.Observador;
+import school.sptech.loginormyou2up.service.usuario.UsuarioService;
 
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Usuario implements Observador {
@@ -23,10 +28,25 @@ public class Usuario implements Observador {
     @ManyToOne
     private Treino treino;
 
+    @OneToMany(mappedBy = "usuario")
+    private List<Notificacao> notificacoes;
+
 
     @Override
     public void notificarTreino(Treino treino) {
+        Notificacao notificacao = new Notificacao();
+        notificacao.setConteudo("Seu treino foi agendado com sucesso para o dia " + treino.getInicioTreino());
+        notificacao.setDataHora(LocalDateTime.now());
 
+        notificacoes.add(notificacao);
+    }
+
+    public List<Notificacao> getNotificacoes() {
+        return notificacoes;
+    }
+
+    public void setNotificacoes(List<Notificacao> notificacoes) {
+        this.notificacoes = notificacoes;
     }
 
     public String getEstagio() {

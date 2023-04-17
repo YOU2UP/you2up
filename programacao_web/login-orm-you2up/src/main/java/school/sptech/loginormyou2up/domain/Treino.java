@@ -1,6 +1,8 @@
 package school.sptech.loginormyou2up.domain;
 
+import org.aspectj.weaver.ast.Not;
 import school.sptech.loginormyou2up.service.observer.Observado;
+import school.sptech.loginormyou2up.service.observer.Observador;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -24,10 +26,10 @@ public class Treino implements Observado {
 
     @Override
     public void notificarUsuario() {
-
+        for (Observador u: usuarios) {
+            u.notificarTreino(this);
+        }
     }
-
-
 
     public LocalDateTime getInicioTreino() {
         return inicioTreino;

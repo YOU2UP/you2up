@@ -1,6 +1,5 @@
 package school.sptech.loginormyou2up.api.controller;
 
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,8 +9,8 @@ import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoCriacao;
 import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoResposta;
 import school.sptech.loginormyou2up.service.dto.mapper.UsuarioMapper;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
-import school.sptech.loginormyou2up.service.usuario.autenticacao.dto.UsuarioLoginDto;
-import school.sptech.loginormyou2up.service.usuario.autenticacao.dto.UsuarioTokenDto;
+import school.sptech.loginormyou2up.service.dto.usuario.UsuarioLoginDto;
+import school.sptech.loginormyou2up.service.dto.usuario.UsuarioTokenDto;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -70,8 +69,8 @@ public class UsuarioController {
         Optional<Usuario> UsuarioOpt = usuarioRepository.findById(id);
 
         if(UsuarioOpt.isPresent()){
-            usuarioRepository.save(UsuarioMapper.convertToUsuario(usuario));
-            return ResponseEntity.status(200).body(UsuarioMapper.convertToDtoResposta(usuario));
+            Usuario usuarioCadastrado = usuarioRepository.save(UsuarioMapper.convertToUsuario(usuario));
+            return ResponseEntity.status(200).body(UsuarioMapper.convertToDtoResposta(usuarioCadastrado));
         }
 
         return ResponseEntity.status(404).build();

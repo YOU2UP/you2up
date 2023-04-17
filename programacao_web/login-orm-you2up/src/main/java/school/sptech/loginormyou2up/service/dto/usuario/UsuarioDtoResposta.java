@@ -1,10 +1,12 @@
 package school.sptech.loginormyou2up.service.dto.usuario;
 
+import school.sptech.loginormyou2up.domain.Notificacao;
 import school.sptech.loginormyou2up.domain.Treino;
 import school.sptech.loginormyou2up.service.dto.mapper.TreinoMapper;
 import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoJsonUsuario;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class UsuarioDtoResposta {
 
@@ -12,8 +14,17 @@ public class UsuarioDtoResposta {
     private String nome;
     private String email;
     private LocalDate dataNascimento;
-
     private Treino treino;
+    private List<Notificacao> notificacoes;
+
+
+    public List<Notificacao> getNotificacoes() {
+        return notificacoes;
+    }
+
+    public void setNotificacoes(List<Notificacao> notificacoes) {
+        this.notificacoes = notificacoes;
+    }
 
     public TreinoDtoJsonUsuario getTreino() {
         return TreinoMapper.convertToTreinoDtoJsonUsuario(treino);
