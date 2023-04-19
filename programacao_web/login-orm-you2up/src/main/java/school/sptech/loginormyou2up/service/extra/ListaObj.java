@@ -1,5 +1,7 @@
 package school.sptech.loginormyou2up.service.extra;
 
+import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoResposta;
+
 public class ListaObj <T> {
     private T[] vetor;
     private int nroElem; //quantidade de elementos na lista
@@ -88,4 +90,25 @@ public class ListaObj <T> {
 
         return qtdOcorrencias > 0;
     }
+
+    public boolean adicionaNoIndice(T elemento, int indice) {
+        if(indice >= 0 && indice< vetor.length) {
+            return false;
+        }
+        vetor[indice] = elemento;
+        return true;
+    }
+
+//    public void bubbleSortNota(ListaObj<UsuarioDtoResposta> userList) {
+//        for (int i = 0; i < userList.getTamanho(); i++) {
+//            for (int j = 1; j < userList.getTamanho(); j++) {
+//                if (userList.getElemento(j-1).getNotaMedia() > userList.getElemento(i).getNotaMedia()){
+//                    int aux = userList[j];
+//                    userList[j] = userList[j-1];
+//                    userList[j-1] = aux;
+//                }
+//            }
+//
+//        }
+//    }
 }

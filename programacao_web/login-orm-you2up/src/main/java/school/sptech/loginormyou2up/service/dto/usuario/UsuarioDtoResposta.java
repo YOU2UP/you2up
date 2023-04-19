@@ -3,6 +3,7 @@ package school.sptech.loginormyou2up.service.dto.usuario;
 import school.sptech.loginormyou2up.domain.Notificacao;
 import school.sptech.loginormyou2up.domain.Treino;
 import school.sptech.loginormyou2up.service.dto.mapper.TreinoMapper;
+import school.sptech.loginormyou2up.service.dto.notificacao.NotificacaoDtoResposta;
 import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoJsonUsuario;
 
 import java.time.LocalDate;
@@ -14,15 +15,17 @@ public class UsuarioDtoResposta {
     private String nome;
     private String email;
     private LocalDate dataNascimento;
+
+    private Double notaMedia;
     private Treino treino;
-    private List<Notificacao> notificacoes;
+    private List<NotificacaoDtoResposta> notificacoes;
 
 
-    public List<Notificacao> getNotificacoes() {
+    public List<NotificacaoDtoResposta> getNotificacoes() {
         return notificacoes;
     }
 
-    public void setNotificacoes(List<Notificacao> notificacoes) {
+    public void setNotificacoes(List<NotificacaoDtoResposta> notificacoes) {
         this.notificacoes = notificacoes;
     }
 
@@ -67,5 +70,11 @@ public class UsuarioDtoResposta {
         this.email = email;
     }
 
+    public Double getNotaMedia() {
+        return notaMedia;
+    }
 
+    public void setNotaMedia(Double notaMedia) {
+        this.notaMedia = notaMedia;
+    }
 }

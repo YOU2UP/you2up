@@ -1,21 +1,14 @@
-package school.sptech.loginormyou2up.domain;
+package school.sptech.loginormyou2up.service.dto.notificacao;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-public class Notificacao {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class NotificacaoDtoResposta {
+
     private Integer id;
 
     private String conteudo;
 
     private LocalDateTime dataHora;
-
-    @ManyToOne
-    private Usuario usuario;
-
 
     public Integer getId() {
         return id;
@@ -39,13 +32,5 @@ public class Notificacao {
 
     public void setDataHora(LocalDateTime dataHora) {
         this.dataHora = dataHora;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 }

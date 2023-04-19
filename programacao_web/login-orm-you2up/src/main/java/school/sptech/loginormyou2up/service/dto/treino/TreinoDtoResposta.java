@@ -1,8 +1,7 @@
 package school.sptech.loginormyou2up.service.dto.treino;
 
 import school.sptech.loginormyou2up.domain.Usuario;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoJsonTreino;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoResposta;
+import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoJson;
 import school.sptech.loginormyou2up.service.dto.mapper.UsuarioMapper;
 
 import java.time.LocalDateTime;
@@ -53,8 +52,8 @@ public class TreinoDtoResposta {
         this.inicioTreino = inicioTreino;
     }
 
-    public List<UsuarioDtoJsonTreino> getUsuarios() {
-        List<UsuarioDtoJsonTreino> listaRetorno = new ArrayList<>();
+    public List<UsuarioDtoJson> getUsuarios() {
+        List<UsuarioDtoJson> listaRetorno = new ArrayList<>();
 
         for (Usuario u: usuarios) {
             listaRetorno.add(UsuarioMapper.convertToUsuarioDtoJsonTreino(u));

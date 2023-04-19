@@ -1,6 +1,6 @@
 package school.sptech.loginormyou2up.service.dto.usuario;
 
-public class UsuarioDtoJsonTreino { // essa classe mostra o usuario sem mostrar o seu treino
+public class UsuarioDtoJson { // essa classe mostra o usuario sem mostrar o seu treino
     private Integer id;
 
     private String nome;

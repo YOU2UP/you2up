@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.loginormyou2up.domain.Usuario;
+import school.sptech.loginormyou2up.service.extra.ListaObj;
 import school.sptech.loginormyou2up.service.usuario.UsuarioService;
 import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoCriacao;
 import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoResposta;
@@ -81,4 +82,17 @@ public class UsuarioController {
         UsuarioTokenDto usuarioToken = usuarioService.autenticar(usuarioLoginDto);
         return ResponseEntity.status(200).body(usuarioToken);
     }
+
+//    @GetMapping("/ordenar-menor-maior")
+//    public ResponseEntity<ListaObj<UsuarioDtoResposta>> menorParaMaior() {
+//        if(usuarioRepository.findAll().isEmpty()){
+//            return ResponseEntity.status(204).build();
+//        }
+//        List<Usuario> lista = usuarioRepository.findAll();
+//        ListaObj<UsuarioDtoResposta> listaObj = new ListaObj<>(lista.size());
+//        for (int i = 0; i < listaObj.getTamanho(); i++) {
+//            listaObj.adicionaNoIndice(UsuarioMapper.convertToDtoResposta(lista.get(i)), i);
+//        }
+//
+//    }
 }
