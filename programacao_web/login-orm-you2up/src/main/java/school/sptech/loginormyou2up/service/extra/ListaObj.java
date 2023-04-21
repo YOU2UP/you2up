@@ -63,6 +63,18 @@ public class ListaObj <T> {
         return nroElem;
     }
 
+    public T[] getVetor() {
+        return vetor;
+    }
+
+    public void setVetor(T[] vetor) {
+        this.vetor = vetor;
+    }
+
+    public void setNroElem(int nroElem) {
+        this.nroElem = nroElem;
+    }
+
     public T getElemento(int indice) {
         if (indice >= 0 && indice < nroElem) {
             return vetor[indice];
@@ -93,22 +105,14 @@ public class ListaObj <T> {
 
     public boolean adicionaNoIndice(T elemento, int indice) {
         if(indice >= 0 && indice< vetor.length) {
-            return false;
+            if (vetor[indice] == null){
+                nroElem++;
+            }
+            vetor[indice] = elemento;
+            return true;
         }
-        vetor[indice] = elemento;
-        return true;
+        return false;
     }
 
-//    public void bubbleSortNota(ListaObj<UsuarioDtoResposta> userList) {
-//        for (int i = 0; i < userList.getTamanho(); i++) {
-//            for (int j = 1; j < userList.getTamanho(); j++) {
-//                if (userList.getElemento(j-1).getNotaMedia() > userList.getElemento(i).getNotaMedia()){
-//                    int aux = userList[j];
-//                    userList[j] = userList[j-1];
-//                    userList[j-1] = aux;
-//                }
-//            }
-//
-//        }
-//    }
+
 }
