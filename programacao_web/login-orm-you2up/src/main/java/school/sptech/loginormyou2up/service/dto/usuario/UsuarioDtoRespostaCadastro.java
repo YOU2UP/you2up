@@ -1,49 +1,13 @@
 package school.sptech.loginormyou2up.service.dto.usuario;
 
-import school.sptech.loginormyou2up.domain.Notificacao;
-import school.sptech.loginormyou2up.domain.Treino;
-import school.sptech.loginormyou2up.service.dto.mapper.TreinoMapper;
-import school.sptech.loginormyou2up.service.dto.notificacao.NotificacaoDtoResposta;
-import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoJsonUsuario;
-
 import java.time.LocalDate;
-import java.util.List;
 
-public class UsuarioDtoResposta {
-
+public class UsuarioDtoRespostaCadastro {
     private Integer id;
     private String nome;
     private String email;
     private LocalDate dataNascimento;
-
-    private Double notaMedia;
-    private Treino treino;
-    private List<NotificacaoDtoResposta> notificacoes;
-
-
-    public List<NotificacaoDtoResposta> getNotificacoes() {
-        return notificacoes;
-    }
-
-    public void setNotificacoes(List<NotificacaoDtoResposta> notificacoes) {
-        this.notificacoes = notificacoes;
-    }
-
-    public TreinoDtoJsonUsuario getTreino() {
-        return TreinoMapper.convertToTreinoDtoJsonUsuario(treino);
-    }
-
-    public void setTreino(Treino treino) {
-        this.treino = treino;
-    }
-
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
+    private String sexo;
 
     public Integer getId() {
         return id;
@@ -52,7 +16,6 @@ public class UsuarioDtoResposta {
     public void setId(Integer id) {
         this.id = id;
     }
-
 
     public String getNome() {
         return nome;
@@ -70,11 +33,19 @@ public class UsuarioDtoResposta {
         this.email = email;
     }
 
-    public Double getNotaMedia() {
-        return notaMedia;
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setNotaMedia(Double notaMedia) {
-        this.notaMedia = notaMedia;
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 }

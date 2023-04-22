@@ -16,36 +16,19 @@ public class Treino implements Observado {
 
     private String periodo;
 
-    private String preferencia;
-
-    private LocalDateTime inicioTreino;
-
-    @OneToMany(mappedBy = "treino")
-    private List<Usuario> usuarios;
+    @OneToMany(mappedBy = "treino", orphanRemoval = true)
+    private List<TreinoHasUsuario> usuarios;
 
 
     @Override
     public void notificarUsuario() {
-        for (Observador u: usuarios) {
+        return;
+
+     /*   for (Observador u : usuarios) {
             u.notificarTreino(this);
-        }
+        }*/
     }
 
-    public LocalDateTime getInicioTreino() {
-        return inicioTreino;
-    }
-
-    public void setInicioTreino(LocalDateTime inicioTreino) {
-        this.inicioTreino = inicioTreino;
-    }
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
 
     public Integer getId() {
         return id;
@@ -63,13 +46,11 @@ public class Treino implements Observado {
         this.periodo = periodo;
     }
 
-    public String getPreferencia() {
-        return preferencia;
+    public List<TreinoHasUsuario> getUsuarios() {
+        return usuarios;
     }
 
-    public void setPreferencia(String preferencia) {
-        this.preferencia = preferencia;
+    public void setUsuarios(List<TreinoHasUsuario> usuarios) {
+        this.usuarios = usuarios;
     }
-
-
 }

@@ -15,11 +15,37 @@ public class UsuarioDtoResposta {
     private String nome;
     private String email;
     private LocalDate dataNascimento;
-
     private Double notaMedia;
-    private Treino treino;
+    private String estagio;
+    private String sexo;
+    private int metaTreinos;
     private List<NotificacaoDtoResposta> notificacoes;
+    private List<TreinoDtoJsonUsuario> treinos;
 
+
+    public List<TreinoDtoJsonUsuario> getTreinos() {
+        return treinos;
+    }
+
+    public void setTreinos(List<TreinoDtoJsonUsuario> treinos) {
+        this.treinos = treinos;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public int getMetaTreinos() {
+        return metaTreinos;
+    }
+
+    public void setMetaTreinos(int metaTreinos) {
+        this.metaTreinos = metaTreinos;
+    }
 
     public List<NotificacaoDtoResposta> getNotificacoes() {
         return notificacoes;
@@ -27,14 +53,6 @@ public class UsuarioDtoResposta {
 
     public void setNotificacoes(List<NotificacaoDtoResposta> notificacoes) {
         this.notificacoes = notificacoes;
-    }
-
-    public TreinoDtoJsonUsuario getTreino() {
-        return TreinoMapper.convertToTreinoDtoJsonUsuario(treino);
-    }
-
-    public void setTreino(Treino treino) {
-        this.treino = treino;
     }
 
     public LocalDate getDataNascimento() {
@@ -76,5 +94,13 @@ public class UsuarioDtoResposta {
 
     public void setNotaMedia(Double notaMedia) {
         this.notaMedia = notaMedia;
+    }
+
+    public String getEstagio() {
+        return estagio;
+    }
+
+    public void setEstagio(String estagio) {
+        this.estagio = estagio;
     }
 }

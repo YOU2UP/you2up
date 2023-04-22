@@ -2,29 +2,21 @@ package school.sptech.loginormyou2up.service.dto.treino;
 
 import school.sptech.loginormyou2up.domain.Usuario;
 
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class TreinoDtoCriacao {
-    private Integer id;
 
+    @NotBlank
     private String periodo;
 
-    private String preferencia;
-
+    @FutureOrPresent
     private LocalDateTime inicioTreino;
 
     private List<Usuario> usuarios;
 
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getPeriodo() {
         return periodo;
@@ -32,14 +24,6 @@ public class TreinoDtoCriacao {
 
     public void setPeriodo(String periodo) {
         this.periodo = periodo;
-    }
-
-    public String getPreferencia() {
-        return preferencia;
-    }
-
-    public void setPreferencia(String preferencia) {
-        this.preferencia = preferencia;
     }
 
     public LocalDateTime getInicioTreino() {

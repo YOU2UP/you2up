@@ -11,11 +11,8 @@ import org.springframework.web.server.ResponseStatusException;
 import school.sptech.loginormyou2up.api.configuration.security.jwt.GerenciadorTokenJwt;
 import school.sptech.loginormyou2up.domain.Usuario;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoCriacao;
+import school.sptech.loginormyou2up.service.dto.usuario.*;
 import school.sptech.loginormyou2up.service.dto.mapper.UsuarioMapper;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoResposta;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioLoginDto;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioTokenDto;
 
 @Service
 public class UsuarioService {
@@ -32,17 +29,17 @@ public class UsuarioService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public UsuarioDtoResposta criar(UsuarioDtoCriacao usuarioDtoCriacao){
+    public UsuarioDtoRespostaCadastro criar(UsuarioDtoCriacao usuarioDtoCriacao){
         Usuario novoUsuario = UsuarioMapper.convertToUsuario(usuarioDtoCriacao);
 
         String senhaCriptografada = passwordEncoder.encode(novoUsuario.getSenha());
 
         novoUsuario.setSenha(senhaCriptografada);
 
-        return UsuarioMapper.convertToDtoResposta(usuarioRepository.save(novoUsuario));
+        return UsuarioMapper.convertToUsuarioDtoRespostaCadastro(usuarioRepository.save(novoUsuario));
     }
 
-    public UsuarioTokenDto  autenticar(UsuarioLoginDto usuarioLoginDto) {
+    public UsuarioTokenDto autenticar(UsuarioLoginDto usuarioLoginDto) {
 
         final UsernamePasswordAuthenticationToken credentials = new UsernamePasswordAuthenticationToken(
                 usuarioLoginDto.getEmail(), usuarioLoginDto.getSenha());

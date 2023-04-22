@@ -1,14 +1,10 @@
 package school.sptech.loginormyou2up.domain;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import school.sptech.loginormyou2up.service.notificacao.NotificacaoService;
 import school.sptech.loginormyou2up.service.observer.Observador;
-import school.sptech.loginormyou2up.service.usuario.UsuarioService;
 
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -25,8 +21,12 @@ public class Usuario implements Observador {
 
     private String estagio; // iniciante, intermediário, avançado
 
-    @ManyToOne
-    private Treino treino;
+    private String sexo;
+
+    private int metaTreinos;
+
+    @OneToMany(mappedBy = "usuario", orphanRemoval = true)
+    private List<TreinoHasUsuario> treinos;
 
     @OneToMany(mappedBy = "usuario")
     private List<Notificacao> notificacoes;
@@ -34,11 +34,37 @@ public class Usuario implements Observador {
 
     @Override
     public void notificarTreino(Treino treino) {
-        Notificacao notificacao = new Notificacao();
-        notificacao.setConteudo("Seu treino foi agendado com sucesso para o dia " + treino.getInicioTreino());
-        notificacao.setDataHora(LocalDateTime.now());
+        return;
 
-        notificacoes.add(notificacao);
+//        Notificacao notificacao = new Notificacao();
+//        notificacao.setConteudo("Seu treino foi agendado com sucesso para o dia " + treino.getInicioTreino());
+//        notificacao.setDataHora(LocalDateTime.now());
+//
+//        notificacoes.add(notificacao);
+    }
+
+    public int getMetaTreinos() {
+        return metaTreinos;
+    }
+
+    public void setMetaTreinos(int metaTreinos) {
+        this.metaTreinos = metaTreinos;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public List<TreinoHasUsuario> getTreinos() {
+        return treinos;
+    }
+
+    public void setTreinos(List<TreinoHasUsuario> treinos) {
+        this.treinos = treinos;
     }
 
     public List<Notificacao> getNotificacoes() {
@@ -55,14 +81,6 @@ public class Usuario implements Observador {
 
     public void setEstagio(String estagio) {
         this.estagio = estagio;
-    }
-
-    public Treino getTreino() {
-        return treino;
-    }
-
-    public void setTreino(Treino treino) {
-        this.treino = treino;
     }
 
     public Integer getId() {

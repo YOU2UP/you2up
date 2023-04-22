@@ -4,17 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.loginormyou2up.domain.Usuario;
+import school.sptech.loginormyou2up.service.dto.usuario.*;
 import school.sptech.loginormyou2up.service.extra.ListaObj;
 import school.sptech.loginormyou2up.service.usuario.UsuarioService;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoCriacao;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoResposta;
 import school.sptech.loginormyou2up.service.dto.mapper.UsuarioMapper;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioLoginDto;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioTokenDto;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +34,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioDtoResposta> post(@RequestBody @Valid UsuarioDtoCriacao usuarioDtoCriacao) {
+    public ResponseEntity<UsuarioDtoRespostaCadastro> post(@RequestBody @Valid UsuarioDtoCriacao usuarioDtoCriacao) {
 
         return ResponseEntity.status(201).body(usuarioService.criar(usuarioDtoCriacao));
     }
@@ -146,8 +142,6 @@ public class UsuarioController {
     }
 
     private UsuarioDtoResposta pesquisaBinariaPorNota(ListaObj<UsuarioDtoResposta> lista, Double nota) {
-
-        
 
         int inicio = 0;
         int fim = lista.getTamanho() - 1;

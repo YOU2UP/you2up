@@ -1,8 +1,9 @@
 package school.sptech.loginormyou2up.service.dto.treino;
 
 import school.sptech.loginormyou2up.domain.Usuario;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoJson;
 import school.sptech.loginormyou2up.service.dto.mapper.UsuarioMapper;
+import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoJson;
+import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoResposta;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,11 +14,9 @@ public class TreinoDtoResposta {
 
     private String periodo;
 
-    private String preferencia;
-
     private LocalDateTime inicioTreino;
 
-    private List<Usuario> usuarios;
+    private List<UsuarioDtoJson> usuarios;
 
 
     public Integer getId() {
@@ -36,14 +35,6 @@ public class TreinoDtoResposta {
         this.periodo = periodo;
     }
 
-    public String getPreferencia() {
-        return preferencia;
-    }
-
-    public void setPreferencia(String preferencia) {
-        this.preferencia = preferencia;
-    }
-
     public LocalDateTime getInicioTreino() {
         return inicioTreino;
     }
@@ -55,14 +46,14 @@ public class TreinoDtoResposta {
     public List<UsuarioDtoJson> getUsuarios() {
         List<UsuarioDtoJson> listaRetorno = new ArrayList<>();
 
-        for (Usuario u: usuarios) {
-            listaRetorno.add(UsuarioMapper.convertToUsuarioDtoJsonTreino(u));
+        for (UsuarioDtoJson u: usuarios) {
+            listaRetorno.add(u);
         }
 
         return listaRetorno;
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
+    public void setUsuarios(List<UsuarioDtoJson> usuarios) {
         this.usuarios = usuarios;
     }
 }

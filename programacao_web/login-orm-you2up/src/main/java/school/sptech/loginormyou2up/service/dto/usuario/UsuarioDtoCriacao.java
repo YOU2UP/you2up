@@ -6,6 +6,7 @@ import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class UsuarioDtoCriacao {
+
     private Integer id;
 
     @Size(min = 3)
@@ -15,28 +16,17 @@ public class UsuarioDtoCriacao {
     private String email;
     private String senha;
 
-    @DecimalMin(value = "0.0")
-    @DecimalMax(value = "5.0")
-    private Double notaMedia;
-
     @Past
     private LocalDate dataNascimento;
-
     private String descricao;
 
     @NotBlank
     private String estagio; // iniciante, intermediário, avançado
 
-    private Treino treino;
+    @Size(max = 1)
+    @NotBlank
+    private String sexo;
 
-
-    public String getEstagio() {
-        return estagio;
-    }
-
-    public void setEstagio(String estagio) {
-        this.estagio = estagio;
-    }
 
     public Integer getId() {
         return id;
@@ -46,12 +36,20 @@ public class UsuarioDtoCriacao {
         this.id = id;
     }
 
-    public Treino getTreino() {
-        return treino;
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setTreino(Treino treino) {
-        this.treino = treino;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getEstagio() {
+        return estagio;
+    }
+
+    public void setEstagio(String estagio) {
+        this.estagio = estagio;
     }
 
     public String getDescricao() {
@@ -68,14 +66,6 @@ public class UsuarioDtoCriacao {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public Double getNotaMedia() {
-        return notaMedia;
-    }
-
-    public void setNotaMedia(Double notaMedia) {
-        this.notaMedia = notaMedia;
     }
 
     public LocalDate getDataNascimento() {

@@ -1,9 +1,11 @@
 package school.sptech.loginormyou2up.service.dto.mapper;
 
+import school.sptech.loginormyou2up.domain.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.Usuario;
+import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoJsonUsuario;
 import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoCriacao;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoJson;
 import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoResposta;
+import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoRespostaCadastro;
 import school.sptech.loginormyou2up.service.dto.usuario.UsuarioTokenDto;
 
 import java.util.ArrayList;
@@ -11,8 +13,8 @@ import java.util.List;
 
 public class UsuarioMapper {
 
-    public static UsuarioDtoJson convertToUsuarioDtoJsonTreino(Usuario usuario){
-        UsuarioDtoJson dto = new UsuarioDtoJson();
+    public static school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoJson convertToUsuarioDtoJson(Usuario usuario){
+        school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoJson dto = new school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoJson();
 
         dto.setId(usuario.getId());
         dto.setNome(usuario.getNome());
@@ -27,16 +29,28 @@ public class UsuarioMapper {
         dto.setId(usuario.getId());
         dto.setNome(usuario.getNome());
         dto.setEmail(usuario.getEmail());
-        dto.setDataNascimento(usuario.getDataNascimento());
-        dto.setTreino(usuario.getTreino());
         dto.setNotaMedia(usuario.getNotaMedia());
+        dto.setDataNascimento(usuario.getDataNascimento());
         dto.setNotificacoes(NotificacaoMapper.convertToNotificacaoDtoResposta(usuario.getNotificacoes()));
+        dto.setSexo(usuario.getSexo());
+        dto.setMetaTreinos(usuario.getMetaTreinos());
+        dto.setEstagio(usuario.getEstagio());
+
+        List<TreinoDtoJsonUsuario> listaTreino = new ArrayList<>();
+
+        for (TreinoHasUsuario tu : usuario.getTreinos()){
+            listaTreino.add(TreinoMapper.convertToTreinoDtoJsonUsuario(tu.getTreino()));
+        }
+
+        dto.setTreinos(listaTreino);
 
         return dto;
     }
 
     public static List<UsuarioDtoResposta> convertToDtoResposta(List<Usuario> usuarios){
         List<UsuarioDtoResposta> listaRetorno =  new ArrayList<>();
+
+
         for (Usuario u: usuarios) {
             UsuarioDtoResposta dto = new UsuarioDtoResposta();
             dto.setId(u.getId());
@@ -44,13 +58,35 @@ public class UsuarioMapper {
             dto.setEmail(u.getEmail());
             dto.setNotaMedia(u.getNotaMedia());
             dto.setDataNascimento(u.getDataNascimento());
-            dto.setTreino(u.getTreino());
             dto.setNotificacoes(NotificacaoMapper.convertToNotificacaoDtoResposta(u.getNotificacoes()));
+            dto.setSexo(u.getSexo());
+            dto.setMetaTreinos(u.getMetaTreinos());
+            dto.setEstagio(u.getEstagio());
+
+            List<TreinoDtoJsonUsuario> listaTreino = new ArrayList<>();
+
+            for (TreinoHasUsuario tu : u.getTreinos()){
+                listaTreino.add(TreinoMapper.convertToTreinoDtoJsonUsuario(tu.getTreino()));
+            }
+
+            dto.setTreinos(listaTreino);
 
             listaRetorno.add(dto);
         }
 
         return listaRetorno;
+    }
+
+    public static UsuarioDtoRespostaCadastro convertToUsuarioDtoRespostaCadastro(Usuario usuario){
+        UsuarioDtoRespostaCadastro dto = new UsuarioDtoRespostaCadastro();
+
+        dto.setId(usuario.getId());
+        dto.setNome(usuario.getNome());
+        dto.setSexo(usuario.getSexo());
+        dto.setDataNascimento(usuario.getDataNascimento());
+        dto.setEmail(usuario.getEmail());
+
+        return dto;
     }
 
     public static Usuario convertToUsuario(UsuarioDtoCriacao usuarioDto) {
@@ -59,11 +95,12 @@ public class UsuarioMapper {
         usuario.setNome(usuarioDto.getNome());
         usuario.setEmail(usuarioDto.getEmail());
         usuario.setDataNascimento(usuarioDto.getDataNascimento());
-        usuario.setTreino(usuarioDto.getTreino());
-        usuario.setNotaMedia(usuarioDto.getNotaMedia());
+        usuario.setNotaMedia(0.0);
         usuario.setDescricao(usuarioDto.getDescricao());
         usuario.setSenha(usuarioDto.getSenha());
         usuario.setEstagio(usuarioDto.getEstagio());
+        usuario.setSexo(usuarioDto.getSexo());
+        usuario.setMetaTreinos(0);
         usuario.setNotificacoes(new ArrayList<>());
 
         return usuario;
