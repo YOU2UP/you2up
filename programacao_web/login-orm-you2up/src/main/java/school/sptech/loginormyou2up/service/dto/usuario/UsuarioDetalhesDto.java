@@ -1,5 +1,6 @@
 package school.sptech.loginormyou2up.service.dto.usuario;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import school.sptech.loginormyou2up.domain.Usuario;
@@ -8,8 +9,11 @@ import java.util.Collection;
 
 public class UsuarioDetalhesDto implements UserDetails {
 
+    @Schema(description = "Nome do usuário", example = "Natalia")
     private final String nome;
+    @Schema(description = "E-mail do usuário", example = "natalia@example.com")
     private final String email;
+    @Schema(description = "Senha do usuário", example = "mypassword")
     private final String senha;
 
     public UsuarioDetalhesDto(Usuario usuario) {

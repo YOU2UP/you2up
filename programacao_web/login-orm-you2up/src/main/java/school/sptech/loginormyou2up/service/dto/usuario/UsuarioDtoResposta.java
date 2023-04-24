@@ -1,5 +1,6 @@
 package school.sptech.loginormyou2up.service.dto.usuario;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import school.sptech.loginormyou2up.domain.Notificacao;
 import school.sptech.loginormyou2up.domain.Treino;
 import school.sptech.loginormyou2up.service.dto.mapper.TreinoMapper;
@@ -12,14 +13,32 @@ import java.util.List;
 public class UsuarioDtoResposta {
 
     private Integer id;
+
+    @Schema(description = "Nome do usuário", example = "Natalia")
     private String nome;
+
+    @Schema(description = "E-mail do usuário", example = "natalia@example.com")
     private String email;
+
+    @Schema(description = "Data de nascimento do usuário", example = "1990-01-01")
     private LocalDate dataNascimento;
+
+    @Schema(description = "Nota média do usuário", example = "7.5")
     private Double notaMedia;
+
+    @Schema(description = "Estágio do usuário (iniciante, intermediário, avançado)", example = "iniciante")
     private String estagio;
+
+    @Schema(description = "Sexo do usuário", example = "M")
     private String sexo;
+
+    @Schema(description = "Meta de treinos do usuário", example = "5")
     private int metaTreinos;
+
+    @Schema(description = "Lista de notificações do usuário")
     private List<NotificacaoDtoResposta> notificacoes;
+
+    @Schema(description = "Lista de treinos do usuário")
     private List<TreinoDtoJsonUsuario> treinos;
 
 

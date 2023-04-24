@@ -1,5 +1,6 @@
 package school.sptech.loginormyou2up.service.dto.usuario;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import school.sptech.loginormyou2up.domain.Treino;
 
 import javax.validation.constraints.*;
@@ -9,23 +10,32 @@ public class UsuarioDtoCriacao {
 
     private Integer id;
 
-    @Size(min = 3)
+    @Schema(description = "Nome do usuário", example = "Natalia")
     private String nome;
 
     @Email
+    @Schema(description = "E-mail do usuário", example = "natalia@example.com")
     private String email;
+
+    @Schema(description = "Senha do usuário", example = "mypassword")
     private String senha;
 
     @Past
+    @Schema(description = "Data de nascimento do usuário", example = "1990-01-01")
     private LocalDate dataNascimento;
+
+    @Schema(description = "Descrição do usuário", example = "Usuário ativo")
     private String descricao;
 
     @NotBlank
-    private String estagio; // iniciante, intermediário, avançado
+    @Schema(description = "Estágio do usuário (iniciante, intermediário, avançado)", example = "iniciante")
+    private String estagio;
 
     @Size(max = 1)
     @NotBlank
+    @Schema(description = "Sexo do usuário", example = "F")
     private String sexo;
+
 
 
     public Integer getId() {

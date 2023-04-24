@@ -1,5 +1,6 @@
 package school.sptech.loginormyou2up.service.dto.treino;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import school.sptech.loginormyou2up.domain.Usuario;
 import school.sptech.loginormyou2up.service.dto.mapper.UsuarioMapper;
 import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoJson;
@@ -12,10 +13,14 @@ import java.util.List;
 public class TreinoDtoResposta {
     private Integer id;
 
+    @Schema(description = "Período do treino", example = "Manhã")
     private String periodo;
 
+
+    @Schema(description = "Data e hora de início do treino")
     private LocalDateTime inicioTreino;
 
+    @Schema(description = "Lista de usuários associados ao treino")
     private List<UsuarioDtoJson> usuarios;
 
 

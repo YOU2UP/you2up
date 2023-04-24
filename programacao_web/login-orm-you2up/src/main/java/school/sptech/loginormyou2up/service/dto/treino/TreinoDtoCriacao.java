@@ -1,5 +1,6 @@
 package school.sptech.loginormyou2up.service.dto.treino;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import school.sptech.loginormyou2up.domain.Usuario;
 
 import javax.validation.constraints.FutureOrPresent;
@@ -10,11 +11,14 @@ import java.util.List;
 public class TreinoDtoCriacao {
 
     @NotBlank
+    @Schema(description = "Período do treino", example = "Manhã")
     private String periodo;
 
     @FutureOrPresent
+    @Schema(description = "Data e hora de início do treino", example = "2023-04-24T10:00:00")
     private LocalDateTime inicioTreino;
 
+    @Schema(description = "Lista de usuários associados ao treino")
     private List<Usuario> usuarios;
 
 

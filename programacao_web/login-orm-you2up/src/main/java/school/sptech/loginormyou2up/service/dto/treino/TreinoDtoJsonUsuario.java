@@ -1,15 +1,21 @@
 package school.sptech.loginormyou2up.service.dto.treino;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.time.LocalDateTime;
 
 public class TreinoDtoJsonUsuario { // essa classe mostra seu treino sem mostrar a lista de usuarios
     private Integer id;
+    @Schema(description = "Período do treino", example = "Manhã")
     private String periodo;
 
+    @Schema(description = "Data e hora do treino")
     private LocalDateTime dataHora;
 
+    @Schema(description = "Quantidade de treinos realizados", example = "10")
     private Integer quantidadeTreinos;
 
+    @Schema(description = "Indica se o treino foi realizado ou não", example = "true")
     private boolean isRealizado;
 
 

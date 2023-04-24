@@ -1,5 +1,6 @@
 package school.sptech.loginormyou2up.api.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,8 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-
+@Tag(name = "Treinos", description =
+        "gerencia a entidade treino")
 @RequestMapping("/treinos")
 @RestController
 public class TreinoController {

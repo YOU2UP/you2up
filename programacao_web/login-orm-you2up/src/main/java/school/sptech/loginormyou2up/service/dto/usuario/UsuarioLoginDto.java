@@ -1,7 +1,12 @@
 package school.sptech.loginormyou2up.service.dto.usuario;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class UsuarioLoginDto {
+    @Schema(description = "E-mail do usuário", example = "natalia@example.com")
     private String email;
+
+    @Schema(description = "Senha do usuário", example = "mypassword")
     private String senha;
 
     public String getEmail() {

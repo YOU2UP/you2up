@@ -1,14 +1,24 @@
 package school.sptech.loginormyou2up.service.dto.usuario;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.time.LocalDate;
 
 public class UsuarioDtoRespostaCadastro {
     private Integer id;
+    @Schema(description = "Nome do usuário", example = "Natalia")
     private String nome;
-    private String email;
-    private LocalDate dataNascimento;
-    private String sexo;
 
+
+    @Schema(description = "E-mail do usuário", example = "natalia@example.com")
+    private String email;
+
+
+    @Schema(description = "Data de nascimento do usuário", example = "1990-01-01")
+    private LocalDate dataNascimento;
+
+    @Schema(description = "Sexo do usuário", example = "F")
+    private String sexo;
     public Integer getId() {
         return id;
     }

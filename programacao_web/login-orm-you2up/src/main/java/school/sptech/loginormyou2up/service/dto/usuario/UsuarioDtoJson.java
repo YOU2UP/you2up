@@ -1,9 +1,12 @@
 package school.sptech.loginormyou2up.service.dto.usuario;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class UsuarioDtoJson { // essa classe mostra o usuario sem mostrar o seu treino
     private Integer id;
-
+    @Schema(description = "Nome do usuário", example = "Natalia")
     private String nome;
+    @Schema(description = "E-mail do usuário", example = "natalia@example.com")
     private String email;
 
     public Integer getId() {
