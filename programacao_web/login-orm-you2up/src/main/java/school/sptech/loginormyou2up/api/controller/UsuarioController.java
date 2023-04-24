@@ -120,11 +120,17 @@ public class UsuarioController {
             
         }
 
+        ListaObj<UsuarioDtoResposta> newEncontrados = new ListaObj<>(encontrados.getTamanho());
+        // nova lista para não haver retorno com vários nulls no json
 
-        if (encontrados.getTamanho() == 0) {
+        for (int i = 0; i < encontrados.getTamanho() ; i++) {
+            newEncontrados.adicionaNoIndice(encontrados.getElemento(i), i);
+        }
+
+        if (newEncontrados.getTamanho() == 0) {
             return ResponseEntity.status(404).build();
         } else {
-            return ResponseEntity.status(200).body(encontrados);
+            return ResponseEntity.status(200).body(newEncontrados);
         }
 
 
@@ -149,7 +155,7 @@ public class UsuarioController {
         int inicio = 0;
         int fim = lista.getTamanho() - 1;
 
-        for (int i = 0; fim >= 0; i++) {
+        while(inicio <= fim) {
             int meio = (inicio + fim) / 2;
 
             if (nota.equals(lista.getElemento(meio).getNotaMedia())) {
