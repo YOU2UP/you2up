@@ -1,7 +1,10 @@
 package school.sptech.loginormyou2up.service.treino;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import school.sptech.loginormyou2up.domain.Treino;
 import school.sptech.loginormyou2up.domain.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.TreinoHasUsuarioId;
@@ -70,42 +73,79 @@ public class TreinoService {
 
 
     public List<TreinoDtoResposta> findAll() {
+        if (treinoRepository.findAll().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+        } else {
+            deletaTreinosSemUsuarios(treinoRepository.findAll());
+            if (treinoRepository.findAll().isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+            }
+        }
+
         return TreinoMapper.convertToTreinoDtoResposta(treinoRepository.findAll());
     }
 
 
-    public boolean deleteById(Integer id) {
+    public TreinoDtoResposta findById(Integer id) {
         Optional<Treino> treinoOpt = treinoRepository.findById(id);
 
         if (treinoOpt.isPresent()) {
-            treinoRepository.deleteById(id);
-            return true;
+            if (treinoPossuiUsuarios(treinoOpt.get())) {
+                return TreinoMapper.convertToTreinoDtoResposta(treinoOpt.get());
+            } else {
+                deleteById(id);
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }
         } else {
-            return false;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+    public void deleteById(Integer id) {
+        Optional<Treino> treinoOpt = treinoRepository.findById(id);
+
+        if (treinoOpt.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } else {
+            treinoRepository.deleteById(id);
+            return;
         }
 
     }
 
-    public void delete(Treino treino){
-        treinoRepository.delete(treino);
-    }
-
-    public boolean treinoPossuiUsuarios(Treino treino){
-        return !treino.getUsuarios().isEmpty();
-    }
-
-    public boolean treinoPossuiUsuarios(TreinoDtoResposta treino){
-        return !treino.getUsuarios().isEmpty();
-    }
-
-    public void deletaTreinosSemUsuarios(List<Treino> treinos){
+    public void deletaTreinosSemUsuarios(List<Treino> treinos) {
 
         for (int i = 0; i < treinos.size(); i++) {
-            if (!treinoPossuiUsuarios(treinos.get(i))){
+            if (!treinoPossuiUsuarios(treinos.get(i))) {
                 deleteById(treinos.get(i).getId());
             }
         }
-        
+
     }
+
+    public TreinoDtoResposta putById(Integer id, Treino treino){
+        Optional<Treino> TreinoOpt = treinoRepository.findById(id);
+
+        if (TreinoOpt.isPresent()) {
+            treinoRepository.save(treino);
+            return TreinoMapper.convertToTreinoDtoResposta(treino);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public void delete(Treino treino) {
+        treinoRepository.delete(treino);
+    }
+
+    public boolean treinoPossuiUsuarios(Treino treino) {
+        return !treino.getUsuarios().isEmpty();
+    }
+
+    public boolean treinoPossuiUsuarios(TreinoDtoResposta treino) {
+        return !treino.getUsuarios().isEmpty();
+    }
+
 
 }

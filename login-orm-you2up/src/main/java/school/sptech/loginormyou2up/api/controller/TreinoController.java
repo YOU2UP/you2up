@@ -30,16 +30,6 @@ public class TreinoController {
 
     @GetMapping
     public ResponseEntity<List<TreinoDtoResposta>> getAll() {
-        if (treinoRepository.findAll().isEmpty()) {
-            return ResponseEntity.status(204).build();
-        }
-        else{
-            treinoService.deletaTreinosSemUsuarios(treinoRepository.findAll()   );
-            if (treinoRepository.findAll().isEmpty()) {
-                return ResponseEntity.status(204).build();
-            }
-        }
-
         return ResponseEntity.status(200).body(treinoService.findAll());
     }
 
@@ -50,41 +40,18 @@ public class TreinoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<TreinoDtoResposta> getById(@PathVariable int id) {
-        Optional<Treino> treinoOpt = treinoRepository.findById(id);
-
-        if (treinoOpt.isPresent()) {
-            if (treinoService.treinoPossuiUsuarios(treinoOpt.get())) {
-                return ResponseEntity.status(200).body(TreinoMapper.convertToTreinoDtoResposta(treinoOpt.get()));
-            }else{
-                treinoService.deleteById(id);
-            }
-        }
-
-        return ResponseEntity.status(404).build();
+        return ResponseEntity.status(200).body(treinoService.findById(id));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
-        Optional<Treino> treinoOpt = treinoRepository.findById(id);
-
-        if (treinoOpt.isPresent()) {
-            treinoService.delete(treinoOpt.get());
-            return ResponseEntity.status(200).build();
-        }
-
-        return ResponseEntity.status(404).build();
+        treinoService.deleteById(id);
+        return ResponseEntity.status(200).build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<TreinoDtoResposta> putById(@PathVariable Integer id, @RequestBody Treino treino) {
-        Optional<Treino> TreinoOpt = treinoRepository.findById(id);
-
-        if (TreinoOpt.isPresent()) {
-            treinoRepository.save(treino);
-            return ResponseEntity.status(200).body(TreinoMapper.convertToTreinoDtoResposta(treino));
-        }
-
-        return ResponseEntity.status(404).build();
+        return ResponseEntity.ok().body(treinoService.putById(id,treino));
     }
 
 }
