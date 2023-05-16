@@ -1,7 +1,5 @@
 package school.sptech.loginormyou2up.service.extra;
 
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoResposta;
-
 public class ListaObj <T> {
     private T[] vetor;
     private int nroElem; //quantidade de elementos na lista

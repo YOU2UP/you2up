@@ -1,8 +1,8 @@
-package school.sptech.loginormyou2up.service.dto.mapper;
+package school.sptech.loginormyou2up.dto.mapper;
 
 import school.sptech.loginormyou2up.domain.Notificacao;
-import school.sptech.loginormyou2up.service.dto.notificacao.NotificacaoDtoCriacao;
-import school.sptech.loginormyou2up.service.dto.notificacao.NotificacaoDtoResposta;
+import school.sptech.loginormyou2up.dto.notificacao.NotificacaoDtoCriacao;
+import school.sptech.loginormyou2up.dto.notificacao.NotificacaoDtoResposta;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

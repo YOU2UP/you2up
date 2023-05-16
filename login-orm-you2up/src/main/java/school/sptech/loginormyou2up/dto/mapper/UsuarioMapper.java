@@ -1,20 +1,21 @@
-package school.sptech.loginormyou2up.service.dto.mapper;
+package school.sptech.loginormyou2up.dto.mapper;
 
 import school.sptech.loginormyou2up.domain.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.Usuario;
-import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoJsonUsuario;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoCriacao;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoResposta;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoRespostaCadastro;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioTokenDto;
+import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;
+import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoJson;
+import school.sptech.loginormyou2up.dto.usuario.UsuarioTokenDto;
+import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoCriacao;
+import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoResposta;
+import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoRespostaCadastro;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioMapper {
 
-    public static school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoJson convertToUsuarioDtoJson(Usuario usuario){
-        school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoJson dto = new school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoJson();
+    public static UsuarioDtoJson convertToUsuarioDtoJson(Usuario usuario){
+        UsuarioDtoJson dto = new UsuarioDtoJson();
 
         dto.setId(usuario.getId());
         dto.setNome(usuario.getNome());

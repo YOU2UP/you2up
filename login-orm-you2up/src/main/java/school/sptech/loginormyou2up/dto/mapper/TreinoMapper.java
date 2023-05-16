@@ -1,12 +1,11 @@
-package school.sptech.loginormyou2up.service.dto.mapper;
+package school.sptech.loginormyou2up.dto.mapper;
 
 import school.sptech.loginormyou2up.domain.Treino;
 import school.sptech.loginormyou2up.domain.TreinoHasUsuario;
-import school.sptech.loginormyou2up.domain.Usuario;
-import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoCriacao;
-import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoJsonUsuario;
-import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoResposta;
-import school.sptech.loginormyou2up.service.dto.usuario.UsuarioDtoJson;
+import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
+import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;
+import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
+import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoJson;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,14 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.loginormyou2up.domain.Treino;
 import school.sptech.loginormyou2up.repository.TreinoRepository;
-import school.sptech.loginormyou2up.service.dto.mapper.TreinoMapper;
-import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoCriacao;
-import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoResposta;
+import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
+import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
 import school.sptech.loginormyou2up.service.treino.TreinoService;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Tag(name = "Treinos", description =
         "gerencia a entidade treino")

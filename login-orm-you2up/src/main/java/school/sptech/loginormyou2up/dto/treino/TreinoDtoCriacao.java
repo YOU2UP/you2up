@@ -1,4 +1,4 @@
-package school.sptech.loginormyou2up.service.dto.treino;
+package school.sptech.loginormyou2up.dto.treino;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import school.sptech.loginormyou2up.domain.Usuario;

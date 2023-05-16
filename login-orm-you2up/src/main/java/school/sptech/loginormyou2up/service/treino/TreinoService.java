@@ -2,7 +2,6 @@ package school.sptech.loginormyou2up.service.treino;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import school.sptech.loginormyou2up.domain.Treino;
@@ -12,11 +11,9 @@ import school.sptech.loginormyou2up.domain.Usuario;
 import school.sptech.loginormyou2up.repository.TreinoHasUsuarioRepository;
 import school.sptech.loginormyou2up.repository.TreinoRepository;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
-import school.sptech.loginormyou2up.service.dto.mapper.TreinoMapper;
-import school.sptech.loginormyou2up.service.dto.mapper.UsuarioMapper;
-import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoCriacao;
-import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoJsonUsuario;
-import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoResposta;
+import school.sptech.loginormyou2up.dto.mapper.TreinoMapper;
+import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
+import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,15 +122,15 @@ public class TreinoService {
     }
 
     public TreinoDtoResposta putById(Integer id, Treino treino){
-        Optional<Treino> TreinoOpt = treinoRepository.findById(id);
+        Optional<Treino> treinoOpt = treinoRepository.findById(id);
 
-        if (TreinoOpt.isPresent()) {
-            treinoRepository.save(treino);
-            return TreinoMapper.convertToTreinoDtoResposta(treino);
+        if (treinoOpt.isPresent()) {
+            return TreinoMapper.convertToTreinoDtoResposta(treinoRepository.save(treino));
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
+
 
     public void delete(Treino treino) {
         treinoRepository.delete(treino);
