@@ -1,14 +1,11 @@
 package school.sptech.loginormyou2up.domain;
 
-import school.sptech.loginormyou2up.service.observer.Observador;
-
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-public class Usuario implements Observador {
+public class Usuario{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -31,18 +28,7 @@ public class Usuario implements Observador {
     @OneToMany(mappedBy = "usuario")
     private List<Notificacao> notificacoes;
 
-
-    @Override
-    public void notificarTreino(Treino treino) {
-        return;
-
-//        Notificacao notificacao = new Notificacao();
-//        notificacao.setConteudo("Seu treino foi agendado com sucesso para o dia " + treino.getInicioTreino());
-//        notificacao.setDataHora(LocalDateTime.now());
-//
-//        notificacoes.add(notificacao);
-    }
-
+    
     public int getMetaTreinos() {
         return metaTreinos;
     }

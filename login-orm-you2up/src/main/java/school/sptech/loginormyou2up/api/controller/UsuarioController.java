@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.loginormyou2up.domain.Usuario;
-import school.sptech.loginormyou2up.service.dto.usuario.*;
+import school.sptech.loginormyou2up.dto.usuario.*;
 import school.sptech.loginormyou2up.service.extra.ListaObj;
 import school.sptech.loginormyou2up.service.usuario.UsuarioService;
-import school.sptech.loginormyou2up.service.dto.mapper.UsuarioMapper;
+import school.sptech.loginormyou2up.dto.mapper.UsuarioMapper;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
 
 import javax.validation.Valid;
@@ -29,40 +29,23 @@ public class UsuarioController {
 
     @GetMapping
     public ResponseEntity<List<UsuarioDtoResposta>> getAll() {
-        if (usuarioRepository.findAll().isEmpty()) {
-            return ResponseEntity.status(204).build();
-        }
-
-        return ResponseEntity.status(200).body(UsuarioMapper.convertToDtoResposta(usuarioRepository.findAll()));
+        return ResponseEntity.ok().body(usuarioService.getAll());
     }
 
     @PostMapping
     public ResponseEntity<UsuarioDtoRespostaCadastro> post(@RequestBody @Valid UsuarioDtoCriacao usuarioDtoCriacao) {
-
-        return ResponseEntity.status(201).body(usuarioService.criar(usuarioDtoCriacao));
+        return ResponseEntity.created(null).body(usuarioService.criar(usuarioDtoCriacao));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioDtoResposta> getById(@PathVariable int id) {
-        Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
-
-        if (usuarioOpt.isPresent()) {
-            return ResponseEntity.status(200).body(UsuarioMapper.convertToDtoResposta(usuarioOpt.get()));
-        }
-
-        return ResponseEntity.status(404).build();
+        return ResponseEntity.ok().body(usuarioService.getById(id));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
-        Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
-
-        if (usuarioOpt.isPresent()) {
-            usuarioRepository.deleteById(id);
-            return ResponseEntity.status(200).build();
-        }
-
-        return ResponseEntity.status(404).build();
+        usuarioService.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
@@ -85,95 +68,14 @@ public class UsuarioController {
 
     @GetMapping("/ordenar-menor-maior")
     public ResponseEntity<ListaObj<UsuarioDtoResposta>> menorParaMaior() {
-        if (usuarioRepository.findAll().isEmpty()) {
-            return ResponseEntity.status(204).build();
-        }
-        List<Usuario> lista = usuarioRepository.findAll();
-        ListaObj<UsuarioDtoResposta> listaUser = new ListaObj<>(lista.size());
-        for (int i = 0; i < lista.size(); i++) {
-            listaUser.adicionaNoIndice(UsuarioMapper.convertToDtoResposta(lista.get(i)), i);
-        }
-        listaUser = bubbleSortNota(listaUser);
-        return ResponseEntity.status(200).body(listaUser);
-
+        return ResponseEntity.ok().body(usuarioService.menorParaMaior());
     }
 
     @GetMapping("/notas")
     public ResponseEntity<ListaObj<UsuarioDtoResposta>> buscarPorNota(@RequestParam Double nota) {
-        if (usuarioRepository.findAll().isEmpty()) {
-            return ResponseEntity.status(204).build();
-        }
-        List<Usuario> lista = usuarioRepository.findAll();
-        ListaObj<UsuarioDtoResposta> listaUser = new ListaObj<>(lista.size());
-        for (int i = 0; i < lista.size(); i++) {
-            listaUser.adicionaNoIndice(UsuarioMapper.convertToDtoResposta(lista.get(i)), i);
-        }
-        listaUser = bubbleSortNota(listaUser);
-
-        ListaObj<UsuarioDtoResposta> encontrados = new ListaObj<>(lista.size());
-
-        for (int i = 0; i < lista.size(); i++) {
-            UsuarioDtoResposta encontrado = pesquisaBinariaPorNota(listaUser, nota);
-            if (encontrado != null) {
-                encontrados.adicionaNoIndice(encontrado, encontrados.getTamanho());
-            }
-            
-        }
-
-        ListaObj<UsuarioDtoResposta> newEncontrados = new ListaObj<>(encontrados.getTamanho());
-        // nova lista para não haver retorno com vários nulls no json
-
-        for (int i = 0; i < encontrados.getTamanho() ; i++) {
-            newEncontrados.adicionaNoIndice(encontrados.getElemento(i), i);
-        }
-
-        if (newEncontrados.getTamanho() == 0) {
-            return ResponseEntity.status(404).build();
-        } else {
-            return ResponseEntity.status(200).body(newEncontrados);
-        }
-
-
+        return ResponseEntity.ok().body(usuarioService.buscarPorNota(nota));
     }
 
-    private ListaObj<UsuarioDtoResposta> bubbleSortNota(ListaObj<UsuarioDtoResposta> lista) {
-        ListaObj<UsuarioDtoResposta> userList = lista;
-        for (int i = 0; i < userList.getTamanho(); i++) {
-            for (int j = 1; j < userList.getTamanho(); j++) {
-                if (userList.getElemento(j - 1).getNotaMedia() > userList.getElemento(j).getNotaMedia()) {
-                    UsuarioDtoResposta aux = userList.getElemento(j);
-                    userList.adicionaNoIndice(userList.getElemento(j - 1), j);
-                    userList.adicionaNoIndice(aux, j - 1);
-                }
-            }
-        }
-        return userList;
-    }
-
-    private UsuarioDtoResposta pesquisaBinariaPorNota(ListaObj<UsuarioDtoResposta> lista, Double nota) {
-
-        int inicio = 0;
-        int fim = lista.getTamanho() - 1;
-
-        while(inicio <= fim) {
-            int meio = (inicio + fim) / 2;
-
-            if (nota.equals(lista.getElemento(meio).getNotaMedia())) {
-                UsuarioDtoResposta encontrado = lista.getElemento(meio);
-                lista.removePeloIndice(meio);
-                return encontrado;
-
-
-                } else if (nota > lista.getElemento(meio).getNotaMedia()) {
-                    inicio = meio + 1;
-                } else {
-                    fim = meio - 1;
-                }
-            }
-
-            
-        return null;
-        }
-    }
+}
 
 

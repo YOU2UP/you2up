@@ -1,11 +1,8 @@
-package school.sptech.loginormyou2up.service.dto.usuario;
+package school.sptech.loginormyou2up.dto.usuario;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import school.sptech.loginormyou2up.domain.Notificacao;
-import school.sptech.loginormyou2up.domain.Treino;
-import school.sptech.loginormyou2up.service.dto.mapper.TreinoMapper;
-import school.sptech.loginormyou2up.service.dto.notificacao.NotificacaoDtoResposta;
-import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoJsonUsuario;
+import school.sptech.loginormyou2up.dto.notificacao.NotificacaoDtoResposta;
+import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;
 
 import java.time.LocalDate;
 import java.util.List;
