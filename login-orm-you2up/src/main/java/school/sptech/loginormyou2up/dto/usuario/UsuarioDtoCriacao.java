@@ -1,6 +1,7 @@
 package school.sptech.loginormyou2up.dto.usuario;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import school.sptech.loginormyou2up.domain.LocalTreinoUsuario;
 import school.sptech.loginormyou2up.domain.Treino;
 
 import javax.validation.constraints.*;
@@ -35,6 +36,8 @@ public class UsuarioDtoCriacao {
     @NotBlank
     @Schema(description = "Sexo do usuário", example = "F")
     private String sexo;
+
+    private LocalTreinoUsuario localTreino;
 
 
 

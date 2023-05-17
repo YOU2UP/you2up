@@ -28,6 +28,9 @@ public class Usuario{
     @OneToMany(mappedBy = "usuario")
     private List<Notificacao> notificacoes;
 
+    @OneToOne
+    private LocalTreinoUsuario locaTreino;
+
     
     public int getMetaTreinos() {
         return metaTreinos;
@@ -123,5 +126,13 @@ public class Usuario{
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public LocalTreinoUsuario getLocaTreino() {
+        return locaTreino;
+    }
+
+    public void setLocaTreino(LocalTreinoUsuario locaTreino) {
+        this.locaTreino = locaTreino;
     }
 }
