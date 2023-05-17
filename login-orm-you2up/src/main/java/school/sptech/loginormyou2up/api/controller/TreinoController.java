@@ -9,8 +9,11 @@ import school.sptech.loginormyou2up.repository.TreinoRepository;
 import school.sptech.loginormyou2up.service.dto.mapper.TreinoMapper;
 import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoCriacao;
 import school.sptech.loginormyou2up.service.dto.treino.TreinoDtoResposta;
+import school.sptech.loginormyou2up.service.extra.ListaObj;
+import school.sptech.loginormyou2up.service.extra.PilhaObj;
 import school.sptech.loginormyou2up.service.treino.TreinoService;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +30,8 @@ public class TreinoController {
     @Autowired
     private TreinoService treinoService;
 
+    private PilhaObj<Integer> pilhaDesfazer= new PilhaObj<>(10);
+
 
     @GetMapping
     public ResponseEntity<List<TreinoDtoResposta>> getAll() {
@@ -34,7 +39,7 @@ public class TreinoController {
             return ResponseEntity.status(204).build();
         }
         else{
-            treinoService.deletaTreinosSemUsuarios(treinoRepository.findAll()   );
+            treinoService.deletaTreinosSemUsuarios(treinoRepository.findAll());
             if (treinoRepository.findAll().isEmpty()) {
                 return ResponseEntity.status(204).build();
             }
@@ -45,7 +50,9 @@ public class TreinoController {
 
     @PostMapping
     public ResponseEntity<TreinoDtoResposta> post(@RequestBody @Valid TreinoDtoCriacao treino) {
-        return ResponseEntity.status(201).body(treinoService.criar(treino));
+        TreinoDtoResposta t = treinoService.criar(treino);
+        pilhaDesfazer.push(t.getId());
+        return ResponseEntity.status(201).body(t);
     }
 
     @GetMapping("/{id}")
@@ -87,4 +94,13 @@ public class TreinoController {
         return ResponseEntity.status(404).build();
     }
 
+    @DeleteMapping("/desfazer")
+    public boolean desfazer() {
+        if (!pilhaDesfazer.isEmpty()) {
+            treinoService.deleteById(pilhaDesfazer.pop());
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
