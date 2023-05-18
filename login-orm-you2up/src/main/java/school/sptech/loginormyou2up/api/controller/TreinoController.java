@@ -95,12 +95,12 @@ public class TreinoController {
     }
 
     @DeleteMapping("/desfazer")
-    public boolean desfazer() {
+    public ResponseEntity<Void> desfazer() {
         if (!pilhaDesfazer.isEmpty()) {
             treinoService.deleteById(pilhaDesfazer.pop());
-            return true;
+            return ResponseEntity.status(204).build();
         } else {
-            return false;
+            return ResponseEntity.status(400).build();
         }
     }
 }
