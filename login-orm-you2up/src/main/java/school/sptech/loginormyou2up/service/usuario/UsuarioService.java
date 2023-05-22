@@ -10,8 +10,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import school.sptech.loginormyou2up.api.configuration.security.jwt.GerenciadorTokenJwt;
+import school.sptech.loginormyou2up.domain.LocalTreinoUsuario;
 import school.sptech.loginormyou2up.domain.Usuario;
 import school.sptech.loginormyou2up.dto.usuario.*;
+import school.sptech.loginormyou2up.repository.LocalTreinoUsuarioRepository;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
 import school.sptech.loginormyou2up.dto.mapper.UsuarioMapper;
 import school.sptech.loginormyou2up.service.extra.ListaObj;
@@ -34,12 +36,18 @@ public class UsuarioService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private LocalTreinoUsuarioRepository localTreinoUsuarioRepository;
+
     public UsuarioDtoRespostaCadastro criar(UsuarioDtoCriacao usuarioDtoCriacao){
         Usuario novoUsuario = UsuarioMapper.convertToUsuario(usuarioDtoCriacao);
 
         String senhaCriptografada = passwordEncoder.encode(novoUsuario.getSenha());
 
         novoUsuario.setSenha(senhaCriptografada);
+
+        LocalTreinoUsuario localTreinoCadastrado = localTreinoUsuarioRepository.save(novoUsuario.getLocalTreino());
+        novoUsuario.getLocalTreino().setIdLocalTreino(localTreinoCadastrado.getIdLocalTreino());
 
         return UsuarioMapper.convertToUsuarioDtoRespostaCadastro(usuarioRepository.save(novoUsuario));
     }

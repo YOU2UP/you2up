@@ -1,13 +1,6 @@
-package school.sptech.loginormyou2up.domain;
+package school.sptech.loginormyou2up.dto.treino;
 
-import javax.persistence.*;
-
-@Entity
-public class LocalTreinoUsuario {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idLocalTreino;
+public class LocalTreinoCriacaoDto {
     private String nome;
     private String rua;
     private int numero;
@@ -16,22 +9,6 @@ public class LocalTreinoUsuario {
     private String uf;
     private boolean isAcademia;
 
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public Integer getIdLocalTreino() {
-        return idLocalTreino;
-    }
-
-    public void setIdLocalTreino(Integer idLocalTreino) {
-        this.idLocalTreino = idLocalTreino;
-    }
 
     public String getNome() {
         return nome;
@@ -47,6 +24,14 @@ public class LocalTreinoUsuario {
 
     public void setRua(String rua) {
         this.rua = rua;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     public String getBairro() {
@@ -80,5 +65,4 @@ public class LocalTreinoUsuario {
     public void setAcademia(boolean academia) {
         isAcademia = academia;
     }
-
 }

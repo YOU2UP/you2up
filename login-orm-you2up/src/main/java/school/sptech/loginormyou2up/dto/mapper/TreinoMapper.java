@@ -1,7 +1,9 @@
 package school.sptech.loginormyou2up.dto.mapper;
 
+import school.sptech.loginormyou2up.domain.LocalTreinoUsuario;
 import school.sptech.loginormyou2up.domain.Treino;
 import school.sptech.loginormyou2up.domain.TreinoHasUsuario;
+import school.sptech.loginormyou2up.dto.treino.LocalTreinoCriacaoDto;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
@@ -97,6 +99,20 @@ public class TreinoMapper {
 
 
         return listaRetorno;
+    }
+
+    public static LocalTreinoUsuario convertToLocalTreinoUsuario(LocalTreinoCriacaoDto localTreinoCriacaoDto) {
+        LocalTreinoUsuario localTreinoUsuario = new LocalTreinoUsuario();
+
+        localTreinoUsuario.setNome(localTreinoCriacaoDto.getNome());
+        localTreinoUsuario.setNumero(localTreinoCriacaoDto.getNumero());
+        localTreinoUsuario.setRua(localTreinoCriacaoDto.getRua());
+        localTreinoUsuario.setBairro(localTreinoCriacaoDto.getBairro());
+        localTreinoUsuario.setCidade(localTreinoCriacaoDto.getCidade());
+        localTreinoUsuario.setUf(localTreinoCriacaoDto.getUf());
+        localTreinoUsuario.setAcademia(localTreinoCriacaoDto.isAcademia());
+
+        return localTreinoUsuario;
     }
 
 }

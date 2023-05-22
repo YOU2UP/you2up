@@ -20,9 +20,6 @@ import java.util.List;
 public class TreinoController {
 
     @Autowired
-    private TreinoRepository treinoRepository;
-
-    @Autowired
     private TreinoService treinoService;
 
 

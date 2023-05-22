@@ -1,6 +1,7 @@
 package school.sptech.loginormyou2up.dto.usuario;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import school.sptech.loginormyou2up.domain.LocalTreinoUsuario;
 import school.sptech.loginormyou2up.dto.notificacao.NotificacaoDtoResposta;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;
 
@@ -38,6 +39,16 @@ public class UsuarioDtoResposta {
     @Schema(description = "Lista de treinos do usuário")
     private List<TreinoDtoJsonUsuario> treinos;
 
+    private LocalTreinoUsuario localTreino;
+
+
+    public LocalTreinoUsuario getLocalTreino() {
+        return localTreino;
+    }
+
+    public void setLocalTreino(LocalTreinoUsuario localTreino) {
+        this.localTreino = localTreino;
+    }
 
     public List<TreinoDtoJsonUsuario> getTreinos() {
         return treinos;

@@ -29,7 +29,14 @@ public class Usuario{
     private List<Notificacao> notificacoes;
 
     @OneToOne
-    private LocalTreinoUsuario locaTreino;
+    private LocalTreinoUsuario localTreino;
+
+    @OneToMany(mappedBy = "avaliado")
+    private List<Avaliacao> avaliacoesRecebidas;
+
+    @OneToMany(mappedBy = "avaliador")
+    private List<Avaliacao> avaliacoesDadas;
+
 
     
     public int getMetaTreinos() {
@@ -128,11 +135,11 @@ public class Usuario{
         this.descricao = descricao;
     }
 
-    public LocalTreinoUsuario getLocaTreino() {
-        return locaTreino;
+    public LocalTreinoUsuario getLocalTreino() {
+        return localTreino;
     }
 
-    public void setLocaTreino(LocalTreinoUsuario locaTreino) {
-        this.locaTreino = locaTreino;
+    public void setLocalTreino(LocalTreinoUsuario locaTreino) {
+        this.localTreino = locaTreino;
     }
 }
