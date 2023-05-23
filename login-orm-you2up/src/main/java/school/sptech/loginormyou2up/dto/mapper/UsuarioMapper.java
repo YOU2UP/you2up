@@ -1,9 +1,12 @@
 package school.sptech.loginormyou2up.dto.mapper;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import school.sptech.loginormyou2up.domain.Avaliacao;
 import school.sptech.loginormyou2up.domain.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.Usuario;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;
 import school.sptech.loginormyou2up.dto.usuario.*;
+import school.sptech.loginormyou2up.service.avaliacao.AvaliacaoService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +29,6 @@ public class UsuarioMapper {
         dto.setId(usuario.getId());
         dto.setNome(usuario.getNome());
         dto.setEmail(usuario.getEmail());
-        dto.setNotaMedia(usuario.getNotaMedia());
         dto.setDataNascimento(usuario.getDataNascimento());
         dto.setNotificacoes(NotificacaoMapper.convertToNotificacaoDtoResposta(usuario.getNotificacoes()));
         dto.setSexo(usuario.getSexo());
@@ -55,7 +57,6 @@ public class UsuarioMapper {
             dto.setId(u.getId());
             dto.setNome(u.getNome());
             dto.setEmail(u.getEmail());
-            dto.setNotaMedia(u.getNotaMedia());
             dto.setDataNascimento(u.getDataNascimento());
             dto.setNotificacoes(NotificacaoMapper.convertToNotificacaoDtoResposta(u.getNotificacoes()));
             dto.setSexo(u.getSexo());
@@ -95,7 +96,6 @@ public class UsuarioMapper {
         usuario.setNome(usuarioDto.getNome());
         usuario.setEmail(usuarioDto.getEmail());
         usuario.setDataNascimento(usuarioDto.getDataNascimento());
-        usuario.setNotaMedia(0.0);
         usuario.setDescricao(usuarioDto.getDescricao());
         usuario.setSenha(usuarioDto.getSenha());
         usuario.setEstagio(usuarioDto.getEstagio());

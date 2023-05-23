@@ -16,6 +16,7 @@ import school.sptech.loginormyou2up.dto.usuario.*;
 import school.sptech.loginormyou2up.repository.LocalTreinoUsuarioRepository;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
 import school.sptech.loginormyou2up.dto.mapper.UsuarioMapper;
+import school.sptech.loginormyou2up.service.avaliacao.AvaliacaoService;
 import school.sptech.loginormyou2up.service.extra.ListaObj;
 
 import java.util.List;
@@ -38,6 +39,9 @@ public class UsuarioService {
 
     @Autowired
     private LocalTreinoUsuarioRepository localTreinoUsuarioRepository;
+
+    @Autowired
+    private AvaliacaoService avaliacaoService;
 
     public UsuarioDtoRespostaCadastro criar(UsuarioDtoCriacao usuarioDtoCriacao){
         Usuario novoUsuario = UsuarioMapper.convertToUsuario(usuarioDtoCriacao);

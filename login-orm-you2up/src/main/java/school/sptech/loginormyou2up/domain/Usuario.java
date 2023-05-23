@@ -13,7 +13,6 @@ public class Usuario{
     private String email;
     private String senha;
     private LocalDate dataNascimento;
-    private Double notaMedia;
     private String descricao;
 
     private String estagio; // iniciante, intermediário, avançado
@@ -117,14 +116,6 @@ public class Usuario{
 
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
-    }
-
-    public Double getNotaMedia() {
-        return notaMedia;
-    }
-
-    public void setNotaMedia(Double notaMedia) {
-        this.notaMedia = notaMedia;
     }
 
     public String getDescricao() {

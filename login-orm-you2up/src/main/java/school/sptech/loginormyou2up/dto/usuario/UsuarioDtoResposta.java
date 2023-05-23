@@ -41,6 +41,25 @@ public class UsuarioDtoResposta {
 
     private LocalTreinoUsuario localTreino;
 
+    public UsuarioDtoResposta(Integer id, String nome, String email, LocalDate dataNascimento,
+                              Double notaMedia, String estagio, String sexo, int metaTreinos,
+                              List<NotificacaoDtoResposta> notificacoes, List<TreinoDtoJsonUsuario> treinos,
+                              LocalTreinoUsuario localTreino) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.dataNascimento = dataNascimento;
+        this.notaMedia = notaMedia;
+        this.estagio = estagio;
+        this.sexo = sexo;
+        this.metaTreinos = metaTreinos;
+        this.notificacoes = notificacoes;
+        this.treinos = treinos;
+        this.localTreino = localTreino;
+    }
+
+    public UsuarioDtoResposta() {
+    }
 
     public LocalTreinoUsuario getLocalTreino() {
         return localTreino;
