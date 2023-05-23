@@ -1,15 +1,17 @@
 package school.sptech.loginormyou2up.api.controller;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.loginormyou2up.domain.Usuario;
-import school.sptech.loginormyou2up.service.dto.usuario.*;
+import school.sptech.loginormyou2up.dto.mapper.UsuarioMapper;
+import school.sptech.loginormyou2up.dto.usuario.*;
+import school.sptech.loginormyou2up.repository.UsuarioRepository;
 import school.sptech.loginormyou2up.service.extra.ListaObj;
 import school.sptech.loginormyou2up.service.usuario.UsuarioService;
-import school.sptech.loginormyou2up.service.dto.mapper.UsuarioMapper;
-import school.sptech.loginormyou2up.repository.UsuarioRepository;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -19,53 +21,80 @@ import java.util.Optional;
         "gerencia a entidade usuario")
 @RequestMapping("/usuarios")
 @RestController
-public class UsuarioController {
+public class UsuarioController<UsuarioService> {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private UsuarioService usuarioService;
+    private school.sptech.loginormyou2up.service.usuario.UsuarioService usuarioService;
 
     @GetMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - Lista com todos usuários " +
+                    "retornada"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
+                    "ao retornar a lista de usuários"),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
+                    "você não está autenticado no sistema")
+    })
     public ResponseEntity<List<UsuarioDtoResposta>> getAll() {
-        if (usuarioRepository.findAll().isEmpty()) {
-            return ResponseEntity.status(204).build();
-        }
-
-        return ResponseEntity.status(200).body(UsuarioMapper.convertToDtoResposta(usuarioRepository.findAll()));
+        return ResponseEntity.ok().body(usuarioService.getAll());
     }
 
     @PostMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - Usuário cadastrado " +
+                    "com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro ao tentar " +
+                    "cadastrar o usuário")
+    })
     public ResponseEntity<UsuarioDtoRespostaCadastro> post(@RequestBody @Valid UsuarioDtoCriacao usuarioDtoCriacao) {
-
-        return ResponseEntity.status(201).body(usuarioService.criar(usuarioDtoCriacao));
+        return ResponseEntity.created(null).body(usuarioService.criar(usuarioDtoCriacao));
     }
 
     @GetMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - Usuário com id escolhido " +
+                    "encontrado"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
+                    "ao retornar o usuário com o id especificado"),
+            @ApiResponse(responseCode = "404", description = "Não existe usuário cadastrado" +
+                    "com esse id"),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
+                    "você não está autenticado no sistema")
+    })
     public ResponseEntity<UsuarioDtoResposta> getById(@PathVariable int id) {
-        Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
-
-        if (usuarioOpt.isPresent()) {
-            return ResponseEntity.status(200).body(UsuarioMapper.convertToDtoResposta(usuarioOpt.get()));
-        }
-
-        return ResponseEntity.status(404).build();
+        return ResponseEntity.ok().body(usuarioService.getById(id));
     }
 
     @DeleteMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Ok - Usuário com id escolhido " +
+                    "deletado"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
+                    "ao retornar o usuário com o id especificado"),
+            @ApiResponse(responseCode = "404", description = "Não existe usuário cadastrado" +
+                    "com esse id"),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
+                    "você não está autenticado no sistema")
+    })
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
-        Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
-
-        if (usuarioOpt.isPresent()) {
-            usuarioRepository.deleteById(id);
-            return ResponseEntity.status(200).build();
-        }
-
-        return ResponseEntity.status(404).build();
+        usuarioService.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - Usuário com id escolhido " +
+                    "foi atualizado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
+                    "para atualizar o usuário com o id especificado"),
+            @ApiResponse(responseCode = "404", description = "Não existe usuário cadastrado" +
+                    "com esse id"),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
+                    "você não está autenticado no sistema")
+    })
     public ResponseEntity<UsuarioDtoResposta> putById(@PathVariable Integer id, @RequestBody @Valid UsuarioDtoCriacao usuario) {
         Optional<Usuario> UsuarioOpt = usuarioRepository.findById(id);
 
@@ -78,102 +107,48 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - Usuário autenticado " +
+                    "com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro na requisição, " +
+                    "verifique se todos os campos foram preenchidos"),
+            @ApiResponse(responseCode = "404", description = "Não existe usuário cadastrado" +
+                    "com esse email"),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação, credenciais" +
+                    "incorretas")
+    })
     public ResponseEntity<UsuarioTokenDto> login(@RequestBody UsuarioLoginDto usuarioLoginDto) {
         UsuarioTokenDto usuarioToken = usuarioService.autenticar(usuarioLoginDto);
         return ResponseEntity.status(200).body(usuarioToken);
     }
 
     @GetMapping("/ordenar-menor-maior")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - Notas dos usuários " +
+                    "ordenadas"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro na requisição"),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
+                    "você não está autenticado no sistema")
+    })
     public ResponseEntity<ListaObj<UsuarioDtoResposta>> menorParaMaior() {
-        if (usuarioRepository.findAll().isEmpty()) {
-            return ResponseEntity.status(204).build();
-        }
-        List<Usuario> lista = usuarioRepository.findAll();
-        ListaObj<UsuarioDtoResposta> listaUser = new ListaObj<>(lista.size());
-        for (int i = 0; i < lista.size(); i++) {
-            listaUser.adicionaNoIndice(UsuarioMapper.convertToDtoResposta(lista.get(i)), i);
-        }
-        listaUser = bubbleSortNota(listaUser);
-        return ResponseEntity.status(200).body(listaUser);
-
+        return ResponseEntity.ok().body(usuarioService.menorParaMaior());
     }
 
     @GetMapping("/notas")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - Usuários com notas foram " +
+                    "retornados"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro na requisição, " +
+                    "verifique a nota digitada"),
+            @ApiResponse(responseCode = "404", description = "Não existem usuários cadastrado, " +
+                    "com essa nota"),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
+                    "você não está autenticado no sistema")
+    })
     public ResponseEntity<ListaObj<UsuarioDtoResposta>> buscarPorNota(@RequestParam Double nota) {
-        if (usuarioRepository.findAll().isEmpty()) {
-            return ResponseEntity.status(204).build();
-        }
-        List<Usuario> lista = usuarioRepository.findAll();
-        ListaObj<UsuarioDtoResposta> listaUser = new ListaObj<>(lista.size());
-        for (int i = 0; i < lista.size(); i++) {
-            listaUser.adicionaNoIndice(UsuarioMapper.convertToDtoResposta(lista.get(i)), i);
-        }
-        listaUser = bubbleSortNota(listaUser);
-
-        ListaObj<UsuarioDtoResposta> encontrados = new ListaObj<>(lista.size());
-
-        for (int i = 0; i < lista.size(); i++) {
-            UsuarioDtoResposta encontrado = pesquisaBinariaPorNota(listaUser, nota);
-            if (encontrado != null) {
-                encontrados.adicionaNoIndice(encontrado, encontrados.getTamanho());
-            }
-            
-        }
-
-        ListaObj<UsuarioDtoResposta> newEncontrados = new ListaObj<>(encontrados.getTamanho());
-        // nova lista para não haver retorno com vários nulls no json
-
-        for (int i = 0; i < encontrados.getTamanho() ; i++) {
-            newEncontrados.adicionaNoIndice(encontrados.getElemento(i), i);
-        }
-
-        if (newEncontrados.getTamanho() == 0) {
-            return ResponseEntity.status(404).build();
-        } else {
-            return ResponseEntity.status(200).body(newEncontrados);
-        }
-
-
+        return ResponseEntity.ok().body(usuarioService.buscarPorNota(nota));
     }
 
-    private ListaObj<UsuarioDtoResposta> bubbleSortNota(ListaObj<UsuarioDtoResposta> lista) {
-        ListaObj<UsuarioDtoResposta> userList = lista;
-        for (int i = 0; i < userList.getTamanho(); i++) {
-            for (int j = 1; j < userList.getTamanho(); j++) {
-                if (userList.getElemento(j - 1).getNotaMedia() > userList.getElemento(j).getNotaMedia()) {
-                    UsuarioDtoResposta aux = userList.getElemento(j);
-                    userList.adicionaNoIndice(userList.getElemento(j - 1), j);
-                    userList.adicionaNoIndice(aux, j - 1);
-                }
-            }
-        }
-        return userList;
-    }
-
-    private UsuarioDtoResposta pesquisaBinariaPorNota(ListaObj<UsuarioDtoResposta> lista, Double nota) {
-
-        int inicio = 0;
-        int fim = lista.getTamanho() - 1;
-
-        while(inicio <= fim) {
-            int meio = (inicio + fim) / 2;
-
-            if (nota.equals(lista.getElemento(meio).getNotaMedia())) {
-                UsuarioDtoResposta encontrado = lista.getElemento(meio);
-                lista.removePeloIndice(meio);
-                return encontrado;
-
-
-                } else if (nota > lista.getElemento(meio).getNotaMedia()) {
-                    inicio = meio + 1;
-                } else {
-                    fim = meio - 1;
-                }
-            }
-
-            
-        return null;
-        }
-    }
+}
 
 

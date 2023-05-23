@@ -1,15 +1,11 @@
 package school.sptech.loginormyou2up.domain;
 
-import org.aspectj.weaver.ast.Not;
-import school.sptech.loginormyou2up.service.observer.Observado;
-import school.sptech.loginormyou2up.service.observer.Observador;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-public class Treino implements Observado {
+public class Treino{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,17 +14,6 @@ public class Treino implements Observado {
 
     @OneToMany(mappedBy = "treino", orphanRemoval = true)
     private List<TreinoHasUsuario> usuarios;
-
-
-    @Override
-    public void notificarUsuario() {
-        return;
-
-     /*   for (Observador u : usuarios) {
-            u.notificarTreino(this);
-        }*/
-    }
-
 
     public Integer getId() {
         return id;
