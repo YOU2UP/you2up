@@ -1,0 +1,38 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+#Menu{
+    background-color: #1c1c1c;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 5rem;
+}
+#Menu img{
+    width: 8rem;
+}
+#Menu ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#Menu ul li{
+    margin-left: 2rem;
+    color: #fff;
+    font-size: 1.2rem;
+}
+#Menu ul li a{
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+}
