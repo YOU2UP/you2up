@@ -15,7 +15,7 @@ public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Integer> {
     @Query("SELECT a FROM Avaliacao a WHERE a.avaliado.id = :id")
     List<Avaliacao> findByIdAvaliado(int id);
 
-    @Query("SELECT AVG(a.   nota) from Avaliacao a WHERE a.avaliado.id = :id")
+    @Query("SELECT AVG(a.nota) from Avaliacao a WHERE a.avaliado.id = :id")
     double getMediaAvaliacaoUsuarioById(int id);
 
 }

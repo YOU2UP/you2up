@@ -22,10 +22,10 @@ public class AvaliacaoMapper {
     }
 
     public static List<AvaliacaoRespostaDto> convertToAvaliacaoRespostaDto(List<Avaliacao> avaliacoes) {
-        AvaliacaoRespostaDto avaliacaoRespostaDto = new AvaliacaoRespostaDto();
         List<AvaliacaoRespostaDto> listaRetorno = new ArrayList<>();
 
-        for (Avaliacao avaliacao: avaliacoes) {
+        for (Avaliacao avaliacao : avaliacoes) {
+            AvaliacaoRespostaDto avaliacaoRespostaDto = new AvaliacaoRespostaDto();
             avaliacaoRespostaDto.setId(avaliacao.getId());
             avaliacaoRespostaDto.setAvaliador(UsuarioMapper.convertToUsuarioResumoDto(avaliacao.getAvaliador()));
             avaliacaoRespostaDto.setAvaliado(UsuarioMapper.convertToUsuarioResumoDto(avaliacao.getAvaliado()));

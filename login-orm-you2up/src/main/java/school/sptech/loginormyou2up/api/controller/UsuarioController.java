@@ -71,7 +71,7 @@ public class UsuarioController {
         return ResponseEntity.ok().body(usuarioService.menorParaMaior());
     }
 
-    @GetMapping("/notas")
+    @GetMapping("/nota")
     public ResponseEntity<ListaObj<UsuarioDtoResposta>> buscarPorNota(@RequestParam Double nota) {
         return ResponseEntity.ok().body(usuarioService.buscarPorNota(nota));
     }

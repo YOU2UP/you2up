@@ -19,6 +19,7 @@ import school.sptech.loginormyou2up.dto.mapper.UsuarioMapper;
 import school.sptech.loginormyou2up.service.avaliacao.AvaliacaoService;
 import school.sptech.loginormyou2up.service.extra.ListaObj;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +44,7 @@ public class UsuarioService {
     @Autowired
     private AvaliacaoService avaliacaoService;
 
-    public UsuarioDtoRespostaCadastro criar(UsuarioDtoCriacao usuarioDtoCriacao){
+    public UsuarioDtoRespostaCadastro criar(UsuarioDtoCriacao usuarioDtoCriacao) {
         Usuario novoUsuario = UsuarioMapper.convertToUsuario(usuarioDtoCriacao);
 
         String senhaCriptografada = passwordEncoder.encode(novoUsuario.getSenha());
@@ -58,16 +59,11 @@ public class UsuarioService {
 
     public UsuarioTokenDto autenticar(UsuarioLoginDto usuarioLoginDto) {
 
-        final UsernamePasswordAuthenticationToken credentials = new UsernamePasswordAuthenticationToken(
-                usuarioLoginDto.getEmail(), usuarioLoginDto.getSenha());
+        final UsernamePasswordAuthenticationToken credentials = new UsernamePasswordAuthenticationToken(usuarioLoginDto.getEmail(), usuarioLoginDto.getSenha());
 
         final Authentication authentication = this.authenticationManager.authenticate(credentials);
 
-        Usuario usuarioAutenticado =
-                usuarioRepository.findByEmail(usuarioLoginDto.getEmail())
-                        .orElseThrow(
-                                () -> new ResponseStatusException(404, "Email do usuário não cadastrado", null)
-                        );
+        Usuario usuarioAutenticado = usuarioRepository.findByEmail(usuarioLoginDto.getEmail()).orElseThrow(() -> new ResponseStatusException(404, "Email do usuário não cadastrado", null));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -76,39 +72,46 @@ public class UsuarioService {
         return UsuarioMapper.of(usuarioAutenticado, token);
     }
 
-    public List<UsuarioDtoResposta> getAll(){
+    public List<UsuarioDtoResposta> getAll() {
         List<Usuario> usuarios = usuarioRepository.findAll();
 
-        if (usuarios.isEmpty()){
+        if (usuarios.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT);
-        } else {
-            return UsuarioMapper.convertToDtoResposta(usuarios);
         }
+
+        List<UsuarioDtoResposta> listaRetorno = usuarios.stream().map(UsuarioMapper::convertToDtoResposta).toList();
+        listaRetorno.forEach(usuarioDtoResposta -> {
+            usuarioDtoResposta.setNotaMedia(avaliacaoService.getMediaAvaliacaoUsuario(usuarioDtoResposta.getId()));
+        });
+
+        return listaRetorno;
     }
 
-    public UsuarioDtoResposta getById(Integer id){
+    public UsuarioDtoResposta getById(Integer id) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
 
-        if (usuarioOpt.isEmpty()){
+        if (usuarioOpt.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } else {
-            return UsuarioMapper.convertToDtoResposta(usuarioOpt.get());
         }
+
+        UsuarioDtoResposta dto = UsuarioMapper.convertToDtoResposta(usuarioOpt.get());
+        dto.setNotaMedia(avaliacaoService.getMediaAvaliacaoUsuario(id));
+        return dto;
     }
 
-    public void deleteById(Integer id){
+    public void deleteById(Integer id) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
 
-        if (usuarioOpt.isEmpty()){
+        if (usuarioOpt.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } else {
-            usuarioRepository.deleteById(id);
-            return;
         }
+
+        usuarioRepository.deleteById(id);
+
     }
 
 
-    public UsuarioDtoResposta putById(Integer id, Usuario usuario){
+    public UsuarioDtoResposta putById(Integer id, Usuario usuario) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
 
         if (usuarioOpt.isPresent()) {
@@ -118,29 +121,39 @@ public class UsuarioService {
         }
     }
 
-    public ListaObj<UsuarioDtoResposta> menorParaMaior(){
+    public ListaObj<UsuarioDtoResposta> menorParaMaior() {
         if (usuarioRepository.findAll().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT);
         } else {
             List<Usuario> lista = usuarioRepository.findAll();
             ListaObj<UsuarioDtoResposta> listaUser = new ListaObj<>(lista.size());
+
             for (int i = 0; i < lista.size(); i++) {
                 listaUser.adicionaNoIndice(UsuarioMapper.convertToDtoResposta(lista.get(i)), i);
             }
+
             listaUser = bubbleSortNota(listaUser);
+
+            for (int i = 0; i < listaUser.getTamanho(); i++) {
+                listaUser.getElemento(i).setNotaMedia(avaliacaoService.getMediaAvaliacaoUsuario(listaUser.getElemento(i).getId()));
+            }
+
             return listaUser;
         }
     }
 
-    public ListaObj<UsuarioDtoResposta> buscarPorNota(Double nota){
+    public ListaObj<UsuarioDtoResposta> buscarPorNota(Double nota) {
         if (usuarioRepository.findAll().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+
         List<Usuario> lista = usuarioRepository.findAll();
         ListaObj<UsuarioDtoResposta> listaUser = new ListaObj<>(lista.size());
+
         for (int i = 0; i < lista.size(); i++) {
             listaUser.adicionaNoIndice(UsuarioMapper.convertToDtoResposta(lista.get(i)), i);
         }
+
         listaUser = bubbleSortNota(listaUser);
 
         ListaObj<UsuarioDtoResposta> encontrados = new ListaObj<>(lista.size());
@@ -160,6 +173,7 @@ public class UsuarioService {
             newEncontrados.adicionaNoIndice(encontrados.getElemento(i), i);
         }
 
+
         if (newEncontrados.getTamanho() == 0) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         } else {
@@ -170,6 +184,8 @@ public class UsuarioService {
 
     private ListaObj<UsuarioDtoResposta> bubbleSortNota(ListaObj<UsuarioDtoResposta> lista) {
         ListaObj<UsuarioDtoResposta> userList = lista;
+        userList = adicionaMedias(userList);
+
         for (int i = 0; i < userList.getTamanho(); i++) {
             for (int j = 1; j < userList.getTamanho(); j++) {
                 if (userList.getElemento(j - 1).getNotaMedia() > userList.getElemento(j).getNotaMedia()) {
@@ -179,7 +195,16 @@ public class UsuarioService {
                 }
             }
         }
+
         return userList;
+    }
+
+    private ListaObj<UsuarioDtoResposta> adicionaMedias(ListaObj<UsuarioDtoResposta> lista) {
+        for (int i = 0; i < lista.getTamanho(); i++) {
+            lista.getElemento(i).setNotaMedia(avaliacaoService.getMediaAvaliacaoUsuario(lista.getElemento(i).getId()));
+        }
+
+        return lista;
     }
 
     private UsuarioDtoResposta pesquisaBinariaPorNota(ListaObj<UsuarioDtoResposta> lista, Double nota) {
@@ -187,7 +212,7 @@ public class UsuarioService {
         int inicio = 0;
         int fim = lista.getTamanho() - 1;
 
-        while(inicio <= fim) {
+        while (inicio <= fim) {
             int meio = (inicio + fim) / 2;
 
             if (nota.equals(lista.getElemento(meio).getNotaMedia())) {

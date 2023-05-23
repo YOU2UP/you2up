@@ -133,6 +133,7 @@ public class UsuarioMapper {
     public static UsuarioResumoDto convertToUsuarioResumoDto(Usuario usuario) {
         UsuarioResumoDto dto = new UsuarioResumoDto();
 
+        dto.setId(usuario.getId());
         dto.setNome(usuario.getNome());
         dto.setEmail(usuario.getEmail());
 
