@@ -1,3 +1,4 @@
+
 package school.sptech.loginormyou2up.api.controller;
 
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -26,6 +27,8 @@ public class TreinoController {
 
     @Autowired
     private TreinoService treinoService;
+  
+    private PilhaObj<Integer> pilhaDesfazer= new PilhaObj<>(10);
 
 
     @GetMapping
@@ -49,7 +52,9 @@ public class TreinoController {
                     "cadastrar o treino")
     })
     public ResponseEntity<TreinoDtoResposta> post(@RequestBody @Valid TreinoDtoCriacao treino) {
-        return ResponseEntity.status(201).body(treinoService.criar(treino));
+        TreinoDtoResposta t = treinoService.criar(treino);
+        pilhaDesfazer.push(t.getId());
+        return ResponseEntity.status(201).body(t);
     }
 
     @GetMapping("/{id}")
@@ -97,5 +102,16 @@ public class TreinoController {
     public ResponseEntity<TreinoDtoResposta> putById(@PathVariable Integer id, @RequestBody Treino treino) {
         return ResponseEntity.ok().body(treinoService.putById(id,treino));
     }
+  
+    @DeleteMapping("/desfazer")
+    public ResponseEntity<Void> desfazer() {
+        if (!pilhaDesfazer.isEmpty()) {
+            treinoService.deleteById(pilhaDesfazer.pop());
+            return ResponseEntity.status(204).build();
+        } else {
+            return ResponseEntity.status(400).build();
+        }
+    }
 
 }
+
