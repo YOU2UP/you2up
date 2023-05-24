@@ -50,6 +50,7 @@ public class UsuarioController<UsuarioService> {
                     "cadastrar o usuário")
     })
     public ResponseEntity<UsuarioDtoRespostaCadastro> post(@RequestBody @Valid UsuarioDtoCriacao usuarioDtoCriacao) {
+        System.out.println(usuarioDtoCriacao.getEmail());
         return ResponseEntity.created(null).body(usuarioService.criar(usuarioDtoCriacao));
     }
 

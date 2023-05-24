@@ -1,11 +1,10 @@
-import Login from "./pages/Login";
 import "./html/css/reset.css";
 import "./html/css/style.css";
-
+import Cadastro from "./pages/Cadastro";
 
 function App() {
   return (
-    <Login />
+    <Cadastro />
   );
 }
 

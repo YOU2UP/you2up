@@ -100,7 +100,6 @@ public class UsuarioMapper {
         usuario.setDescricao(usuarioDto.getDescricao());
         usuario.setSenha(usuarioDto.getSenha());
         usuario.setEstagio(usuarioDto.getEstagio());
-        usuario.setSexo(usuarioDto.getSexo());
         usuario.setMetaTreinos(0);
         usuario.setNotificacoes(new ArrayList<>());
 
