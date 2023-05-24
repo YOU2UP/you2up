@@ -32,7 +32,7 @@ public class UsuarioController {
         return ResponseEntity.ok().body(usuarioService.getAll());
     }
 
-    @PostMapping
+    @PostMapping("/cadastro")
     public ResponseEntity<UsuarioDtoRespostaCadastro> post(@RequestBody @Valid UsuarioDtoCriacao usuarioDtoCriacao) {
         return ResponseEntity.created(null).body(usuarioService.criar(usuarioDtoCriacao));
     }
