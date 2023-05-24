@@ -27,9 +27,6 @@ public class UsuarioDtoResposta {
     @Schema(description = "Estágio do usuário (iniciante, intermediário, avançado)", example = "iniciante")
     private String estagio;
 
-    @Schema(description = "Sexo do usuário", example = "M")
-    private String sexo;
-
     @Schema(description = "Meta de treinos do usuário", example = "5")
     private int metaTreinos;
 
@@ -51,7 +48,6 @@ public class UsuarioDtoResposta {
         this.dataNascimento = dataNascimento;
         this.notaMedia = notaMedia;
         this.estagio = estagio;
-        this.sexo = sexo;
         this.metaTreinos = metaTreinos;
         this.notificacoes = notificacoes;
         this.treinos = treinos;
@@ -75,14 +71,6 @@ public class UsuarioDtoResposta {
 
     public void setTreinos(List<TreinoDtoJsonUsuario> treinos) {
         this.treinos = treinos;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
     }
 
     public int getMetaTreinos() {

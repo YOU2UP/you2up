@@ -12,13 +12,13 @@ VALUES
     ('Praça dos alunos', 112, 'Rua dos Bobos', 'Centro', 'São Paulo', 'SP', false);
 
 INSERT INTO usuario
-(nome, email, senha, data_nascimento, descricao, sexo, meta_treinos, estagio, local_treino_id_local_treino)
+(nome, email, senha, data_nascimento, descricao, meta_treinos, estagio, local_treino_id_local_treino)
 VALUES
-    ('Steven Spielberg', 'steven@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '2000-11-03', 'Sou um usuário legal', 'm', 100, 'iniciante', 1),
-    ('Christopher Nolan', 'christopher@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1999-05-21',  'Sou um usuário legal', 'm', 70, 'intermediario', 2),
-    ('Quentin Tarantino', 'quaentin@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1945-02-11',  'Sou um usuário legal', 'm', 80, 'avancado', 3),
-    ('Alfred Hitchcock', 'alfred@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1998-07-03',  'Sou um usuário legal', 'm', 110, 'intermediario', 4),
-    ('Martin Scorsese', 'martin@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1998-11-30',  'Sou um usuário legal', 'm', 60, 'iniciante', 5);
+    ('Steven Spielberg', 'steven@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '2000-11-03', 'Sou um usuário legal', 100, 'iniciante', 1),
+    ('Christopher Nolan', 'christopher@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1999-05-21',  'Sou um usuário legal', 70, 'intermediario', 2),
+    ('Quentin Tarantino', 'quaentin@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1945-02-11',  'Sou um usuário legal', 80, 'avancado', 3),
+    ('Alfred Hitchcock', 'alfred@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1998-07-03',  'Sou um usuário legal', 110, 'intermediario', 4),
+    ('Martin Scorsese', 'martin@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1998-11-30',  'Sou um usuário legal', 60, 'iniciante', 5);
 
 INSERT INTO notificacao
     (conteudo,data_hora, usuario_id)
@@ -66,4 +66,4 @@ VALUES
     ('2023-12-03 20:00:00', true, 3, 5),
     ('2023-09-04 20:00:00', true, 4, 2),
     ('2023-09-23 20:00:00', true, 1, 4),
-    ('2023-08-22 20:00:00', true, 3, 2);
+    ('2023-08-22 20:00:00', true, 5, 3);

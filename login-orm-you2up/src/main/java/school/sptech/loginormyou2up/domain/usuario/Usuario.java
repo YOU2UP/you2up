@@ -22,8 +22,6 @@ public class Usuario{
 
     private String estagio; // iniciante, intermediário, avançado
 
-    private String sexo;
-
     private int metaTreinos;
 
     @OneToMany(mappedBy = "usuario", orphanRemoval = true)
@@ -49,14 +47,6 @@ public class Usuario{
 
     public void setMetaTreinos(int metaTreinos) {
         this.metaTreinos = metaTreinos;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
     }
 
     public List<TreinoHasUsuario> getTreinos() {

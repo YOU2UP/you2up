@@ -78,6 +78,12 @@ public class AvaliacaoService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
-        return avaliacaoRepository.getMediaAvaliacaoUsuarioById(id);
+        Double media = avaliacaoRepository.getMediaAvaliacaoUsuarioById(id);
+
+        if (Objects.isNull(media)){
+           return 0;
+        }
+
+        return media;
     }
 }

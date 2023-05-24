@@ -31,10 +31,6 @@ public class UsuarioDtoCriacao {
     @Schema(description = "Estágio do usuário (iniciante, intermediário, avançado)", example = "iniciante")
     private String estagio;
 
-    @Size(max = 1)
-    @NotBlank
-    @Schema(description = "Sexo do usuário", example = "F")
-    private String sexo;
 
     private LocalTreinoCriacaoDto localTreino;
 
@@ -53,14 +49,6 @@ public class UsuarioDtoCriacao {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
     }
 
     public String getEstagio() {

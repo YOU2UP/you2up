@@ -28,7 +28,6 @@ public class UsuarioMapper {
         dto.setEmail(usuario.getEmail());
         dto.setDataNascimento(usuario.getDataNascimento());
         dto.setNotificacoes(NotificacaoMapper.convertToNotificacaoDtoResposta(usuario.getNotificacoes()));
-        dto.setSexo(usuario.getSexo());
         dto.setMetaTreinos(usuario.getMetaTreinos());
         dto.setEstagio(usuario.getEstagio());
         dto.setLocalTreino(usuario.getLocalTreino());
@@ -56,7 +55,6 @@ public class UsuarioMapper {
             dto.setEmail(u.getEmail());
             dto.setDataNascimento(u.getDataNascimento());
             dto.setNotificacoes(NotificacaoMapper.convertToNotificacaoDtoResposta(u.getNotificacoes()));
-            dto.setSexo(u.getSexo());
             dto.setMetaTreinos(u.getMetaTreinos());
             dto.setEstagio(u.getEstagio());
             dto.setLocalTreino(u.getLocalTreino());
@@ -80,7 +78,6 @@ public class UsuarioMapper {
 
         dto.setId(usuario.getId());
         dto.setNome(usuario.getNome());
-        dto.setSexo(usuario.getSexo());
         dto.setDataNascimento(usuario.getDataNascimento());
         dto.setEmail(usuario.getEmail());
 
@@ -96,7 +93,6 @@ public class UsuarioMapper {
         usuario.setDescricao(usuarioDto.getDescricao());
         usuario.setSenha(usuarioDto.getSenha());
         usuario.setEstagio(usuarioDto.getEstagio());
-        usuario.setSexo(usuarioDto.getSexo());
         usuario.setMetaTreinos(0);
         usuario.setNotificacoes(new ArrayList<>());
         usuario.setLocalTreino(TreinoMapper.convertToLocalTreinoUsuario(usuarioDto.getLocalTreino()));
