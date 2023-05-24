@@ -4,11 +4,10 @@ package school.sptech.loginormyou2up.api.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import school.sptech.loginormyou2up.domain.Avaliacao;
+import school.sptech.loginormyou2up.domain.avaliacao.Avaliacao;
 import school.sptech.loginormyou2up.dto.avaliacao.AvaliacaoRespostaDto;
 import school.sptech.loginormyou2up.service.avaliacao.AvaliacaoService;
 
-import java.io.DataOutput;
 import java.util.List;
 
 @RestController

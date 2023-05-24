@@ -1,12 +1,9 @@
 package school.sptech.loginormyou2up.dto.mapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import school.sptech.loginormyou2up.domain.Avaliacao;
-import school.sptech.loginormyou2up.domain.TreinoHasUsuario;
-import school.sptech.loginormyou2up.domain.Usuario;
+import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
+import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;
 import school.sptech.loginormyou2up.dto.usuario.*;
-import school.sptech.loginormyou2up.service.avaliacao.AvaliacaoService;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package school.sptech.loginormyou2up.domain;
+package school.sptech.loginormyou2up.domain.treinoHasUsuario;
 
 import school.sptech.loginormyou2up.service.usuario.UsuarioService;
 

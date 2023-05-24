@@ -1,4 +1,4 @@
-package school.sptech.loginormyou2up.domain;
+package school.sptech.loginormyou2up.domain.localTreino;
 
 import javax.persistence.*;
 

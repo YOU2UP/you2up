@@ -1,4 +1,9 @@
-package school.sptech.loginormyou2up.domain;
+package school.sptech.loginormyou2up.domain.usuario;
+
+import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
+import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
+import school.sptech.loginormyou2up.domain.avaliacao.Avaliacao;
+import school.sptech.loginormyou2up.domain.notificacao.Notificacao;
 
 import javax.persistence.*;
 import java.time.LocalDate;

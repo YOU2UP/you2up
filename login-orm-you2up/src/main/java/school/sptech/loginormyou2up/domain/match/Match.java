@@ -1,4 +1,6 @@
-package school.sptech.loginormyou2up.domain;
+package school.sptech.loginormyou2up.domain.match;
+
+import school.sptech.loginormyou2up.domain.usuario.Usuario;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,7 +16,7 @@ public class Match {
     @ManyToOne
     private Usuario usuario1;
     @ManyToOne
-    private Usuario usuario2;;
+    private Usuario usuario2;
 
     public Integer getId() {
         return id;

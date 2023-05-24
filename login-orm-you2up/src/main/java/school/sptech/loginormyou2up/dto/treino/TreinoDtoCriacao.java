@@ -1,7 +1,7 @@
 package school.sptech.loginormyou2up.dto.treino;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import school.sptech.loginormyou2up.domain.Usuario;
+import school.sptech.loginormyou2up.domain.usuario.Usuario;
 
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;

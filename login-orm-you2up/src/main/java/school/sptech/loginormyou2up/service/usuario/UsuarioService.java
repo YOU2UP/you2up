@@ -10,8 +10,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import school.sptech.loginormyou2up.api.configuration.security.jwt.GerenciadorTokenJwt;
-import school.sptech.loginormyou2up.domain.LocalTreinoUsuario;
-import school.sptech.loginormyou2up.domain.Usuario;
+import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
+import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.dto.usuario.*;
 import school.sptech.loginormyou2up.repository.LocalTreinoUsuarioRepository;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
@@ -19,7 +19,6 @@ import school.sptech.loginormyou2up.dto.mapper.UsuarioMapper;
 import school.sptech.loginormyou2up.service.avaliacao.AvaliacaoService;
 import school.sptech.loginormyou2up.service.extra.ListaObj;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

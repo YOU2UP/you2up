@@ -1,4 +1,6 @@
-package school.sptech.loginormyou2up.domain;
+package school.sptech.loginormyou2up.domain.notificacao;
+
+import school.sptech.loginormyou2up.domain.usuario.Usuario;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

@@ -1,9 +1,8 @@
 package school.sptech.loginormyou2up.repository;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import school.sptech.loginormyou2up.domain.Avaliacao;
+import school.sptech.loginormyou2up.domain.avaliacao.Avaliacao;
 
 import java.util.List;
 

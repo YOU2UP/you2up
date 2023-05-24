@@ -1,8 +1,8 @@
 package school.sptech.loginormyou2up.dto.mapper;
 
-import school.sptech.loginormyou2up.domain.LocalTreinoUsuario;
-import school.sptech.loginormyou2up.domain.Treino;
-import school.sptech.loginormyou2up.domain.TreinoHasUsuario;
+import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
+import school.sptech.loginormyou2up.domain.treino.Treino;
+import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.dto.treino.LocalTreinoCriacaoDto;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;

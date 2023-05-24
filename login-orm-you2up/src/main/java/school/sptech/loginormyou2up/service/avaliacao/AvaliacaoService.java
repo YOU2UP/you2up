@@ -3,10 +3,9 @@ package school.sptech.loginormyou2up.service.avaliacao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import school.sptech.loginormyou2up.domain.Avaliacao;
+import school.sptech.loginormyou2up.domain.avaliacao.Avaliacao;
 import school.sptech.loginormyou2up.dto.avaliacao.AvaliacaoRespostaDto;
 import school.sptech.loginormyou2up.dto.mapper.AvaliacaoMapper;
 import school.sptech.loginormyou2up.repository.AvaliacaoRepository;

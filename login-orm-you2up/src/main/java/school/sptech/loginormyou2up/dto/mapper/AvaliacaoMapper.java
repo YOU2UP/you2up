@@ -1,8 +1,6 @@
 package school.sptech.loginormyou2up.dto.mapper;
 
-import org.apache.catalina.mapper.Mapper;
-import school.sptech.loginormyou2up.domain.Avaliacao;
-import school.sptech.loginormyou2up.domain.Usuario;
+import school.sptech.loginormyou2up.domain.avaliacao.Avaliacao;
 import school.sptech.loginormyou2up.dto.avaliacao.AvaliacaoRespostaDto;
 
 import java.util.ArrayList;
