@@ -1,7 +1,7 @@
 package school.sptech.loginormyou2up.dto.usuario;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import school.sptech.loginormyou2up.domain.Treino;
+import school.sptech.loginormyou2up.dto.treino.LocalTreinoCriacaoDto;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
@@ -32,14 +32,15 @@ public class UsuarioDtoCriacao {
     private String estagio;
 
 
-    private String academia;
+    private LocalTreinoCriacaoDto localTreino;
 
-    public String getAcademia() {
-        return academia;
+
+    public LocalTreinoCriacaoDto getLocalTreino() {
+        return localTreino;
     }
 
-    public void setAcademia(String academia) {
-        this.academia = academia;
+    public void setLocalTreino(LocalTreinoCriacaoDto localTreino) {
+        this.localTreino = localTreino;
     }
 
     public Integer getId() {

@@ -1,6 +1,6 @@
 package school.sptech.loginormyou2up.dto.mapper;
 
-import school.sptech.loginormyou2up.domain.Notificacao;
+import school.sptech.loginormyou2up.domain.notificacao.Notificacao;
 import school.sptech.loginormyou2up.dto.notificacao.NotificacaoDtoCriacao;
 import school.sptech.loginormyou2up.dto.notificacao.NotificacaoDtoResposta;
 

@@ -1,4 +1,9 @@
-package school.sptech.loginormyou2up.domain;
+package school.sptech.loginormyou2up.domain.usuario;
+
+import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
+import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
+import school.sptech.loginormyou2up.domain.avaliacao.Avaliacao;
+import school.sptech.loginormyou2up.domain.notificacao.Notificacao;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,12 +18,9 @@ public class Usuario{
     private String email;
     private String senha;
     private LocalDate dataNascimento;
-    private Double notaMedia;
     private String descricao;
 
     private String estagio; // iniciante, intermediário, avançado
-
-    private String sexo;
 
     private int metaTreinos;
 
@@ -28,6 +30,16 @@ public class Usuario{
     @OneToMany(mappedBy = "usuario")
     private List<Notificacao> notificacoes;
 
+    @OneToOne
+    private LocalTreinoUsuario localTreino;
+
+    @OneToMany(mappedBy = "avaliado")
+    private List<Avaliacao> avaliacoesRecebidas;
+
+    @OneToMany(mappedBy = "avaliador")
+    private List<Avaliacao> avaliacoesDadas;
+
+
     
     public int getMetaTreinos() {
         return metaTreinos;
@@ -35,14 +47,6 @@ public class Usuario{
 
     public void setMetaTreinos(int metaTreinos) {
         this.metaTreinos = metaTreinos;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
     }
 
     public List<TreinoHasUsuario> getTreinos() {
@@ -109,19 +113,19 @@ public class Usuario{
         this.dataNascimento = dataNascimento;
     }
 
-    public Double getNotaMedia() {
-        return notaMedia;
-    }
-
-    public void setNotaMedia(Double notaMedia) {
-        this.notaMedia = notaMedia;
-    }
-
     public String getDescricao() {
         return descricao;
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public LocalTreinoUsuario getLocalTreino() {
+        return localTreino;
+    }
+
+    public void setLocalTreino(LocalTreinoUsuario locaTreino) {
+        this.localTreino = locaTreino;
     }
 }

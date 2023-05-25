@@ -7,8 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import school.sptech.loginormyou2up.domain.Treino;
-import school.sptech.loginormyou2up.repository.TreinoRepository;
+import school.sptech.loginormyou2up.domain.treino.Treino;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
 import school.sptech.loginormyou2up.service.treino.TreinoService;
@@ -21,9 +20,6 @@ import java.util.List;
 @RequestMapping("/treinos")
 @RestController
 public class TreinoController {
-
-    @Autowired
-    private TreinoRepository treinoRepository;
 
     @Autowired
     private TreinoService treinoService;

@@ -1,5 +1,7 @@
-package school.sptech.loginormyou2up.domain;
+package school.sptech.loginormyou2up.domain.treino;
 
+
+import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 
 import javax.persistence.*;
 import java.util.List;
