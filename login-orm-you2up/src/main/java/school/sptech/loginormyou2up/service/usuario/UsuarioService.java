@@ -49,6 +49,10 @@ public class UsuarioService {
     private MatchService matchService;
 
     public UsuarioDtoRespostaCadastro criar(UsuarioDtoCriacao usuarioDtoCriacao) {
+        if (usuarioRepository.findByEmail(usuarioDtoCriacao.getEmail()).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email já cadastrado");
+        }
+
         Usuario novoUsuario = UsuarioMapper.convertToUsuario(usuarioDtoCriacao);
 
         String senhaCriptografada = passwordEncoder.encode(novoUsuario.getSenha());
@@ -208,7 +212,11 @@ public class UsuarioService {
 
     private ListaObj<UsuarioDtoResposta> adicionaMatches(ListaObj<UsuarioDtoResposta> lista) {
         for (int i = 0; i < lista.getTamanho(); i++) {
-            lista.getElemento(i).setMatches(matchService.getByIdUsuario(lista.getElemento(i).getId()));
+            try {
+                lista.getElemento(i).setMatches(matchService.getByIdUsuario(lista.getElemento(i).getId()));
+            } catch (ResponseStatusException e) {
+                lista.getElemento(i).setMatches(new ArrayList<>());
+            }
         }
 
         return lista;
