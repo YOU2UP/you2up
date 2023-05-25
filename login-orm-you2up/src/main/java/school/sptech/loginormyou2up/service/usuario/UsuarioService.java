@@ -18,7 +18,9 @@ import school.sptech.loginormyou2up.repository.UsuarioRepository;
 import school.sptech.loginormyou2up.dto.mapper.UsuarioMapper;
 import school.sptech.loginormyou2up.service.avaliacao.AvaliacaoService;
 import school.sptech.loginormyou2up.service.extra.ListaObj;
+import school.sptech.loginormyou2up.service.match.MatchService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +44,9 @@ public class UsuarioService {
 
     @Autowired
     private AvaliacaoService avaliacaoService;
+
+    @Autowired
+    private MatchService matchService;
 
     public UsuarioDtoRespostaCadastro criar(UsuarioDtoCriacao usuarioDtoCriacao) {
         Usuario novoUsuario = UsuarioMapper.convertToUsuario(usuarioDtoCriacao);
@@ -78,10 +83,17 @@ public class UsuarioService {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT);
         }
 
+        //transformando a lista de usuários em uma lista de DTOs
         List<UsuarioDtoResposta> listaRetorno = usuarios.stream().map(UsuarioMapper::convertToDtoResposta).toList();
+
+
+        //setando a média em todos os usuários
         listaRetorno.forEach(usuarioDtoResposta -> {
             usuarioDtoResposta.setNotaMedia(avaliacaoService.getMediaAvaliacaoUsuario(usuarioDtoResposta.getId()));
         });
+
+        //adicionando os matches em todos os usuários
+        listaRetorno = listaRetorno.stream().map(this::adicionaMatches).toList();
 
         return listaRetorno;
     }
@@ -95,6 +107,9 @@ public class UsuarioService {
 
         UsuarioDtoResposta dto = UsuarioMapper.convertToDtoResposta(usuarioOpt.get());
         dto.setNotaMedia(avaliacaoService.getMediaAvaliacaoUsuario(id));
+
+        dto = adicionaMatches(dto);
+
         return dto;
     }
 
@@ -181,9 +196,28 @@ public class UsuarioService {
 
     }
 
+    private UsuarioDtoResposta adicionaMatches(UsuarioDtoResposta usuarioDtoResposta) {
+        try {
+            usuarioDtoResposta.setMatches(matchService.getByIdUsuario(usuarioDtoResposta.getId()));
+        } catch (ResponseStatusException e) {
+            usuarioDtoResposta.setMatches(new ArrayList<>());
+        }
+
+        return usuarioDtoResposta;
+    }
+
+    private ListaObj<UsuarioDtoResposta> adicionaMatches(ListaObj<UsuarioDtoResposta> lista) {
+        for (int i = 0; i < lista.getTamanho(); i++) {
+            lista.getElemento(i).setMatches(matchService.getByIdUsuario(lista.getElemento(i).getId()));
+        }
+
+        return lista;
+    }
+
     private ListaObj<UsuarioDtoResposta> bubbleSortNota(ListaObj<UsuarioDtoResposta> lista) {
         ListaObj<UsuarioDtoResposta> userList = lista;
         userList = adicionaMedias(userList);
+        userList = adicionaMatches(userList);
 
         for (int i = 0; i < userList.getTamanho(); i++) {
             for (int j = 1; j < userList.getTamanho(); j++) {

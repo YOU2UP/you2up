@@ -35,7 +35,7 @@ public class MatchController {
     }
 
     @PostMapping
-    public ResponseEntity<MatchDtoResposta> criarMatch(MatchDtoCriacao dto){
+    public ResponseEntity<MatchDtoResposta> criarMatch(@RequestBody MatchDtoCriacao dto){
         return ResponseEntity.ok(matchService.criarMatch(dto));
     }
 

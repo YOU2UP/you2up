@@ -2,6 +2,7 @@ package school.sptech.loginormyou2up.dto.usuario;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
+import school.sptech.loginormyou2up.dto.match.MatchDtoResposta;
 import school.sptech.loginormyou2up.dto.notificacao.NotificacaoDtoResposta;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;
 
@@ -38,10 +39,9 @@ public class UsuarioDtoResposta {
 
     private LocalTreinoUsuario localTreino;
 
-    public UsuarioDtoResposta(Integer id, String nome, String email, LocalDate dataNascimento,
-                              Double notaMedia, String estagio, String sexo, int metaTreinos,
-                              List<NotificacaoDtoResposta> notificacoes, List<TreinoDtoJsonUsuario> treinos,
-                              LocalTreinoUsuario localTreino) {
+    private List<MatchDtoResposta> matches;
+
+    public UsuarioDtoResposta(Integer id, String nome, String email, LocalDate dataNascimento, Double notaMedia, String estagio, int metaTreinos, List<NotificacaoDtoResposta> notificacoes, List<TreinoDtoJsonUsuario> treinos, LocalTreinoUsuario localTreino, List<MatchDtoResposta> matches) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -52,6 +52,7 @@ public class UsuarioDtoResposta {
         this.notificacoes = notificacoes;
         this.treinos = treinos;
         this.localTreino = localTreino;
+        this.matches = matches;
     }
 
     public UsuarioDtoResposta() {
@@ -136,5 +137,13 @@ public class UsuarioDtoResposta {
 
     public void setEstagio(String estagio) {
         this.estagio = estagio;
+    }
+
+    public List<MatchDtoResposta> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<MatchDtoResposta> matches) {
+        this.matches = matches;
     }
 }

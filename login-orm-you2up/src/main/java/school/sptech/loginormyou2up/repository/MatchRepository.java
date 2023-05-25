@@ -15,4 +15,7 @@ public interface MatchRepository extends JpaRepository<Match, Integer> {
 
     @Query("SELECT m FROM Match m WHERE (m.usuario1.id = :id1 OR m.usuario2.id = :id1) AND (m.usuario1.id = :id2 OR m.usuario2.id = :id2)")
     List<Match> getMatchEntreUsuarios(Integer id1, Integer id2);
+
+    @Query("SELECT COUNT(m) FROM Match m WHERE (m.usuario1.id = :id1 OR m.usuario2.id = :id1) AND (m.usuario1.id = :id2 OR m.usuario2.id = :id2)")
+    int countMatches(int id1, int id2);
 }

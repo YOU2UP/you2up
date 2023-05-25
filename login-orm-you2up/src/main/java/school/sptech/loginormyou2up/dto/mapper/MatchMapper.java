@@ -10,9 +10,9 @@ public class MatchMapper {
 
     public static Match convertToMatch(MatchDtoCriacao dto){
         Match match = new Match();
+        match.setDataMatch(LocalDateTime.now());
         match.setUsuario1(dto.getUsuario1());
         match.setUsuario2(dto.getUsuario2());
-        match.setDataMatch(LocalDateTime.now());
         match.setAtivo(true);
 
         return match;

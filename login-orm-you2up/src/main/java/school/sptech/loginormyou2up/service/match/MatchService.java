@@ -26,8 +26,12 @@ public class MatchService {
 
 
     public MatchDtoResposta criarMatch(MatchDtoCriacao dto) {
-        if (dto.getUsuario1().getId().equals(dto.getUsuario2().getId())) {
+        if (dto.getUsuario1().getId() == dto.getUsuario2().getId()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não é possível criar um match com o mesmo usuário");
+        }
+
+        if (matchExiste(dto.getUsuario1().getId(), dto.getUsuario2().getId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Match já existe");
         }
 
         if (usuarioRepository.findById(dto.getUsuario1().getId()).isEmpty()) {
@@ -38,7 +42,8 @@ public class MatchService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário 2 não encontrado");
         }
 
-        return MatchMapper.convertToMatchDto(matchRepository.save(MatchMapper.convertToMatch(dto)));
+        Match match = MatchMapper.convertToMatch(dto);
+        return MatchMapper.convertToMatchDto(matchRepository.save(match));
     }
 
     public MatchDtoResposta getById(Integer id) {
@@ -86,7 +91,7 @@ public class MatchService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Match não encontrado");
         }
 
-        if (dto.getUsuario1().getId().equals(dto.getUsuario2().getId())) {
+        if (dto.getUsuario1().getId() == dto.getUsuario2().getId()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não é possível criar um match com o mesmo usuário");
         }
 
@@ -105,6 +110,10 @@ public class MatchService {
     }
 
     public List<MatchDtoResposta> getMatchEntreUsuarios(int id1, int id2) {
+        if (id1 == id2) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não há matches entre o mesmo usuário");
+        }
+
         List<Match> listaRetorno = matchRepository.getMatchEntreUsuarios(id1, id2);
 
         if (listaRetorno.isEmpty()) {
@@ -113,4 +122,9 @@ public class MatchService {
 
         return listaRetorno.stream().map(MatchMapper::convertToMatchDto).toList();
     }
+
+    private boolean matchExiste(int id1, int id2){
+        return matchRepository.countMatches(id1, id2) > 0;
+    }
+
 }
