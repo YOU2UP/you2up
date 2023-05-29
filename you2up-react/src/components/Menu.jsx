@@ -15,8 +15,8 @@ return(
                 <li><a href="#">Sobre</a></li>
                 <li><a href="#">Ajuda</a></li>
                 <li><a href="#">Contato</a></li>
-                <li><a href="/login"><button>Login</button></a></li>
-                <li><a href="/cadastro"><button>Cadastro</button></a></li>
+                <li><a href="/login"><button className="buttonLogin">Login</button></a></li>
+                <li><a href="/cadastro"><button className="buttonCadastro">Cadastro</button></a></li>
             </ul>
         </nav>
     </header>

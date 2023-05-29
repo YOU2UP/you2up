@@ -21,6 +21,26 @@ li{
 #Menu img{
     width: 8rem;
 }
+.buttonLogin{
+    background-color: #1c1c1c;
+    border: solid 2px #ff9200;
+    padding: .1rem 1.2rem;
+    outline: none;
+    color: white;
+    border-radius: 20px;
+    font: 1rem 'Nunito', sans-serif;
+
+}
+.buttonCadastro{
+    background-color: #ff9200;
+    border: solid 2px #ff9200;
+    padding: .1rem 1.2rem;
+    outline: none;
+    color: #1c1c1c;
+    border-radius: 20px;
+    font: 700 1rem 'Nunito', sans-serif;
+    margin-left: -15px;
+}
 #Menu ul{
     display: flex;
     flex-direction: row;
@@ -48,6 +68,20 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+#Login{
+    margin-top:5rem;
+    background-image: url("../img/loginImg.jpg");
+    background-size: cover;
+   
+}
+#Login .container{
+    width: 80vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
 }
 #cadastro .cadastro1 {
     background-color: #dfdfdf;
