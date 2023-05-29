@@ -10,6 +10,12 @@ function Cadastro() {
     const [email, setEmail] = useState("");
     const [dataNascimento, setDataNascimento] = useState("");
     const [estagio, setEstagio] = useState("");
+    const [academia, setAcademia] = useState("");
+    const [rua, setRua] = useState("");
+    const [numero, setNumero] = useState("");
+    const [bairro, setBairro] = useState("");
+    const [cidade, setCidade] = useState("");
+    const [uf, setUf] = useState("");
 
 
 
@@ -26,12 +32,12 @@ function Cadastro() {
             treinos: [],
             localTreino: {
                 idLocalTreino: 6,
-                nome: "smart fit",
-                rua: "professor Antônio Silva, 106",
-                numero: 106,
-                bairro: "planalto",
-                cidade: "São bernardo do campo",
-                uf: "SP",
+                nome: academia,
+                rua: rua,
+                numero: numero,
+                bairro: bairro,
+                cidade: cidade,
+                uf: uf,
                 academia: false
             }
 
@@ -90,7 +96,43 @@ function Cadastro() {
                             <button onClick={() => mostrarCadastro3()}> -- </button>
                         </div>
                         <div className="cadastro3">
-                            <input type="text" placeholder="Nome da academia" />
+                            <input type="text" placeholder="Nome da academia" onInput={(e) => setAcademia(e.target.value)} />
+                            <input type="text" placeholder="CEP" />
+                            <input type="text" placeholder="Rua" onInput={(e)=> setRua(e.target.value)} />
+                            <input type="text" placeholder="Numero" onInput={(e)=>setNumero(e.taget.value)}/>
+                            <input type="text" placeholder="Bairro" onInput={(e) => setBairro(e.target.value)} />
+                            <input type="text" placeholder="Cidade" onInput={(e) => setCidade(e.target.value)} />
+                            <select name="UF" id="" placeholder="UF" onChange={(e)=>setUf(e.target.value)}>
+                            <option value="AC">AC</option>
+<option value="AL">AL</option>
+<option value="AM">AM</option>
+<option value="AP">AP</option>
+<option value="BA">BA</option>
+<option value="CE">CE</option>
+<option value="DF">DF</option>
+<option value="ES">ES</option>
+<option value="GO">GO</option>
+<option value="MA">MA</option>
+<option value="MG">MG</option>
+<option value="MS">MS</option>
+<option value="MT">MT</option>
+<option value="PA">PA</option>
+<option value="PB">PB</option>
+<option value="PE">PE</option>
+<option value="PI">PI</option>
+<option value="PR">PR</option>
+<option value="RJ">RJ</option>
+<option value="RN">RN</option>
+<option value="RO">RO</option>
+<option value="RR">RR</option>
+<option value="RS">RS</option>
+<option value="SC">SC</option>
+<option value="SE">SE</option>
+<option value="SP">SP</option>
+<option value="TO">TO</option>
+
+                            </select>
+
                             <button onClick={() => cadastrar()}>Cadastrar</button>
                         </div>
                     </div>
