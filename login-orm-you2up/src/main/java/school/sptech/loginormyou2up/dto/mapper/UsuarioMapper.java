@@ -1,13 +1,9 @@
 package school.sptech.loginormyou2up.dto.mapper;
 
-import school.sptech.loginormyou2up.domain.TreinoHasUsuario;
-import school.sptech.loginormyou2up.domain.Usuario;
+import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
+import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;
-import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoJson;
-import school.sptech.loginormyou2up.dto.usuario.UsuarioTokenDto;
-import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoCriacao;
-import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoResposta;
-import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoRespostaCadastro;
+import school.sptech.loginormyou2up.dto.usuario.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +26,12 @@ public class UsuarioMapper {
         dto.setId(usuario.getId());
         dto.setNome(usuario.getNome());
         dto.setEmail(usuario.getEmail());
-        dto.setNotaMedia(usuario.getNotaMedia());
         dto.setDataNascimento(usuario.getDataNascimento());
         dto.setNotificacoes(NotificacaoMapper.convertToNotificacaoDtoResposta(usuario.getNotificacoes()));
-        dto.setSexo(usuario.getSexo());
         dto.setMetaTreinos(usuario.getMetaTreinos());
         dto.setEstagio(usuario.getEstagio());
+        dto.setLocalTreino(usuario.getLocalTreino());
+
 
         List<TreinoDtoJsonUsuario> listaTreino = new ArrayList<>();
 
@@ -57,12 +53,11 @@ public class UsuarioMapper {
             dto.setId(u.getId());
             dto.setNome(u.getNome());
             dto.setEmail(u.getEmail());
-            dto.setNotaMedia(u.getNotaMedia());
             dto.setDataNascimento(u.getDataNascimento());
             dto.setNotificacoes(NotificacaoMapper.convertToNotificacaoDtoResposta(u.getNotificacoes()));
-            dto.setSexo(u.getSexo());
             dto.setMetaTreinos(u.getMetaTreinos());
             dto.setEstagio(u.getEstagio());
+            dto.setLocalTreino(u.getLocalTreino());
 
             List<TreinoDtoJsonUsuario> listaTreino = new ArrayList<>();
 
@@ -83,7 +78,6 @@ public class UsuarioMapper {
 
         dto.setId(usuario.getId());
         dto.setNome(usuario.getNome());
-        dto.setSexo(usuario.getSexo());
         dto.setDataNascimento(usuario.getDataNascimento());
         dto.setEmail(usuario.getEmail());
 
@@ -96,12 +90,12 @@ public class UsuarioMapper {
         usuario.setNome(usuarioDto.getNome());
         usuario.setEmail(usuarioDto.getEmail());
         usuario.setDataNascimento(usuarioDto.getDataNascimento());
-        usuario.setNotaMedia(0.0);
         usuario.setDescricao(usuarioDto.getDescricao());
         usuario.setSenha(usuarioDto.getSenha());
         usuario.setEstagio(usuarioDto.getEstagio());
         usuario.setMetaTreinos(0);
         usuario.setNotificacoes(new ArrayList<>());
+        usuario.setLocalTreino(TreinoMapper.convertToLocalTreinoUsuario(usuarioDto.getLocalTreino()));
 
         return usuario;
     }
@@ -129,4 +123,13 @@ public class UsuarioMapper {
     }
 
 
+    public static UsuarioResumoDto convertToUsuarioResumoDto(Usuario usuario) {
+        UsuarioResumoDto dto = new UsuarioResumoDto();
+
+        dto.setId(usuario.getId());
+        dto.setNome(usuario.getNome());
+        dto.setEmail(usuario.getEmail());
+
+        return dto;
+    }
 }

@@ -1,6 +1,8 @@
 package school.sptech.loginormyou2up.dto.usuario;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
+import school.sptech.loginormyou2up.dto.match.MatchDtoResposta;
 import school.sptech.loginormyou2up.dto.notificacao.NotificacaoDtoResposta;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;
 
@@ -26,9 +28,6 @@ public class UsuarioDtoResposta {
     @Schema(description = "Estágio do usuário (iniciante, intermediário, avançado)", example = "iniciante")
     private String estagio;
 
-    @Schema(description = "Sexo do usuário", example = "M")
-    private String sexo;
-
     @Schema(description = "Meta de treinos do usuário", example = "5")
     private int metaTreinos;
 
@@ -39,19 +38,33 @@ public class UsuarioDtoResposta {
     private List<TreinoDtoJsonUsuario> treinos;
 
     public UsuarioDtoResposta(Integer id, String nome, String email, LocalDate dataNascimento, Double notaMedia, String estagio, String sexo, int metaTreinos, List<NotificacaoDtoResposta> notificacoes, List<TreinoDtoJsonUsuario> treinos) {
+    private LocalTreinoUsuario localTreino;
+
+    private List<MatchDtoResposta> matches;
+
+    public UsuarioDtoResposta(Integer id, String nome, String email, LocalDate dataNascimento, Double notaMedia, String estagio, int metaTreinos, List<NotificacaoDtoResposta> notificacoes, List<TreinoDtoJsonUsuario> treinos, LocalTreinoUsuario localTreino, List<MatchDtoResposta> matches) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.dataNascimento = dataNascimento;
         this.notaMedia = notaMedia;
         this.estagio = estagio;
-        this.sexo = sexo;
         this.metaTreinos = metaTreinos;
         this.notificacoes = notificacoes;
         this.treinos = treinos;
+        this.localTreino = localTreino;
+        this.matches = matches;
     }
 
     public UsuarioDtoResposta() {
+    }
+
+    public LocalTreinoUsuario getLocalTreino() {
+        return localTreino;
+    }
+
+    public void setLocalTreino(LocalTreinoUsuario localTreino) {
+        this.localTreino = localTreino;
     }
 
     public List<TreinoDtoJsonUsuario> getTreinos() {
@@ -60,14 +73,6 @@ public class UsuarioDtoResposta {
 
     public void setTreinos(List<TreinoDtoJsonUsuario> treinos) {
         this.treinos = treinos;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
     }
 
     public int getMetaTreinos() {
@@ -133,5 +138,13 @@ public class UsuarioDtoResposta {
 
     public void setEstagio(String estagio) {
         this.estagio = estagio;
+    }
+
+    public List<MatchDtoResposta> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<MatchDtoResposta> matches) {
+        this.matches = matches;
     }
 }

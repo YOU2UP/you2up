@@ -4,7 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDate;
 
-public class UsuarioDtoRespostaCadastro {
+public class
+UsuarioDtoRespostaCadastro {
     private Integer id;
     @Schema(description = "Nome do usuário", example = "Natalia")
     private String nome;
@@ -62,12 +63,5 @@ public class UsuarioDtoRespostaCadastro {
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
 }
+
