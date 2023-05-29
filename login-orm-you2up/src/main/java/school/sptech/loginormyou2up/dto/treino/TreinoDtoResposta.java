@@ -20,6 +20,15 @@ public class TreinoDtoResposta {
     @Schema(description = "Lista de usuários associados ao treino")
     private List<UsuarioDtoJson> usuarios;
 
+    public TreinoDtoResposta(Integer id, String periodo, LocalDateTime inicioTreino, List<UsuarioDtoJson> usuarios) {
+        this.id = id;
+        this.periodo = periodo;
+        this.inicioTreino = inicioTreino;
+        this.usuarios = usuarios;
+    }
+
+    public TreinoDtoResposta() {
+    }
 
     public Integer getId() {
         return id;

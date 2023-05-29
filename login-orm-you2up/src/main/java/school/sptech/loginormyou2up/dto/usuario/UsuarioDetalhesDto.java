@@ -22,6 +22,12 @@ public class UsuarioDetalhesDto implements UserDetails {
         senha = usuario.getSenha();
     }
 
+    public UsuarioDetalhesDto(String nome, String email, String senha) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+    }
+
     public String getNome() {
         return nome;
     }

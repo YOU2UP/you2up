@@ -21,6 +21,14 @@ public class TreinoDtoCriacao {
     @Schema(description = "Lista de usuários associados ao treino")
     private List<Usuario> usuarios;
 
+    public TreinoDtoCriacao(String periodo, LocalDateTime inicioTreino, List<Usuario> usuarios) {
+        this.periodo = periodo;
+        this.inicioTreino = inicioTreino;
+        this.usuarios = usuarios;
+    }
+
+    public TreinoDtoCriacao() {
+    }
 
     public String getPeriodo() {
         return periodo;

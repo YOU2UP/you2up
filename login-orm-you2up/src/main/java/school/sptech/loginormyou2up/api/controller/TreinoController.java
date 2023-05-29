@@ -11,6 +11,7 @@ import school.sptech.loginormyou2up.domain.Treino;
 import school.sptech.loginormyou2up.repository.TreinoRepository;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
+import school.sptech.loginormyou2up.service.extra.PilhaObj;
 import school.sptech.loginormyou2up.service.treino.TreinoService;
 
 import javax.validation.Valid;

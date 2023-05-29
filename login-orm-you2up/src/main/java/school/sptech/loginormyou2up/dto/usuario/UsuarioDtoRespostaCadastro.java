@@ -19,6 +19,18 @@ public class UsuarioDtoRespostaCadastro {
 
     @Schema(description = "Sexo do usuário", example = "F")
     private String sexo;
+
+    public UsuarioDtoRespostaCadastro(Integer id, String nome, String email, LocalDate dataNascimento, String sexo) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.dataNascimento = dataNascimento;
+        this.sexo = sexo;
+    }
+
+    public UsuarioDtoRespostaCadastro() {
+    }
+
     public Integer getId() {
         return id;
     }

@@ -10,7 +10,13 @@ public class NotificacaoDtoCriacao {
     @Schema(description = "Usuário associado à notificação")
     private Usuario usuario;
 
+    public NotificacaoDtoCriacao(String conteudo, Usuario usuario) {
+        this.conteudo = conteudo;
+        this.usuario = usuario;
+    }
 
+    public NotificacaoDtoCriacao() {
+    }
 
     public String getConteudo() {
         return conteudo;

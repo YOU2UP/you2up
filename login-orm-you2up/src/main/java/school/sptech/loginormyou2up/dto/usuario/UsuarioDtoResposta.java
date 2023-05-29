@@ -38,6 +38,21 @@ public class UsuarioDtoResposta {
     @Schema(description = "Lista de treinos do usuário")
     private List<TreinoDtoJsonUsuario> treinos;
 
+    public UsuarioDtoResposta(Integer id, String nome, String email, LocalDate dataNascimento, Double notaMedia, String estagio, String sexo, int metaTreinos, List<NotificacaoDtoResposta> notificacoes, List<TreinoDtoJsonUsuario> treinos) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.dataNascimento = dataNascimento;
+        this.notaMedia = notaMedia;
+        this.estagio = estagio;
+        this.sexo = sexo;
+        this.metaTreinos = metaTreinos;
+        this.notificacoes = notificacoes;
+        this.treinos = treinos;
+    }
+
+    public UsuarioDtoResposta() {
+    }
 
     public List<TreinoDtoJsonUsuario> getTreinos() {
         return treinos;

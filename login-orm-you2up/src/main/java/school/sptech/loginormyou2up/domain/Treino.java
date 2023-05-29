@@ -15,6 +15,15 @@ public class Treino{
     @OneToMany(mappedBy = "treino", orphanRemoval = true)
     private List<TreinoHasUsuario> usuarios;
 
+    public Treino(Integer id, String periodo, List<TreinoHasUsuario> usuarios) {
+        this.id = id;
+        this.periodo = periodo;
+        this.usuarios = usuarios;
+    }
+
+    public Treino() {
+    }
+
     public Integer getId() {
         return id;
     }
