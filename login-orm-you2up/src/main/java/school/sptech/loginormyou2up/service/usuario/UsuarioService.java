@@ -1,5 +1,6 @@
 package school.sptech.loginormyou2up.service.usuario;
 
+import org.hibernate.hql.internal.ast.tree.TableReferenceNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,7 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import school.sptech.loginormyou2up.api.configuration.security.jwt.GerenciadorTokenJwt;
 import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
+import school.sptech.loginormyou2up.domain.treino.Treino;
+import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
+import school.sptech.loginormyou2up.dto.treino.QuantidadeTreinosPorDiaSemanaDto;
 import school.sptech.loginormyou2up.dto.usuario.*;
 import school.sptech.loginormyou2up.repository.LocalTreinoUsuarioRepository;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
@@ -20,9 +24,13 @@ import school.sptech.loginormyou2up.service.avaliacao.AvaliacaoService;
 import school.sptech.loginormyou2up.service.extra.ListaObj;
 import school.sptech.loginormyou2up.service.match.MatchService;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService {
@@ -100,6 +108,33 @@ public class UsuarioService {
         listaRetorno = listaRetorno.stream().map(this::adicionaMatches).toList();
 
         return listaRetorno;
+    }
+
+    public QuantidadeTreinosPorDiaSemanaDto getQuantidadeTreinosPorDiaSemana(int id) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario não encontrado");
+        }
+
+        Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
+        List<TreinoHasUsuario> treinos = usuarioOpt.get().getTreinos();
+        List<LocalDateTime> horarioTreinos = treinos.stream().map(TreinoHasUsuario::getInicioTreino).toList();
+        List<DayOfWeek> diasDaSemana = horarioTreinos.stream().map(LocalDateTime::getDayOfWeek).toList();
+
+        QuantidadeTreinosPorDiaSemanaDto dto = new QuantidadeTreinosPorDiaSemanaDto();
+
+        for (DayOfWeek dia : diasDaSemana) {
+            switch (dia) {
+                case SUNDAY -> dto.incrementaDomingo();
+                case MONDAY -> dto.incrementaSegunda();
+                case TUESDAY -> dto.incrementaTerca();
+                case WEDNESDAY -> dto.incrementaQuarta();
+                case THURSDAY -> dto.incrementaQuinta();
+                case FRIDAY -> dto.incrementaSexta();
+                case SATURDAY -> dto.incrementaSabado();
+            }
+        }
+
+        return dto;
     }
 
     public UsuarioDtoResposta getById(Integer id) {

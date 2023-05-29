@@ -6,8 +6,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import school.sptech.loginormyou2up.domain.Usuario;
+import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.dto.mapper.UsuarioMapper;
+import school.sptech.loginormyou2up.dto.treino.QuantidadeTreinosPorDiaSemanaDto;
 import school.sptech.loginormyou2up.dto.usuario.*;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
 import school.sptech.loginormyou2up.service.extra.ListaObj;
@@ -21,13 +22,13 @@ import java.util.Optional;
         "gerencia a entidade usuario")
 @RequestMapping("/usuarios")
 @RestController
-public class UsuarioController<UsuarioService> {
+public class UsuarioController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private school.sptech.loginormyou2up.service.usuario.UsuarioService usuarioService;
+    private UsuarioService usuarioService;
 
     @GetMapping
     @ApiResponses(value = {
@@ -42,7 +43,7 @@ public class UsuarioController<UsuarioService> {
         return ResponseEntity.ok().body(usuarioService.getAll());
     }
 
-    @PostMapping
+    @PostMapping("/cadastro")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - Usuário cadastrado " +
                     "com sucesso"),
@@ -148,6 +149,11 @@ public class UsuarioController<UsuarioService> {
     })
     public ResponseEntity<ListaObj<UsuarioDtoResposta>> buscarPorNota(@RequestParam Double nota) {
         return ResponseEntity.ok().body(usuarioService.buscarPorNota(nota));
+    }
+
+    @GetMapping("/quantidade-treinos-semana/{id}")
+    public ResponseEntity<QuantidadeTreinosPorDiaSemanaDto> getQuantidadeTreinosSemanaById(@PathVariable int id){
+        return ResponseEntity.ok().body(usuarioService.getQuantidadeTreinosPorDiaSemana(id));
     }
 
 }
