@@ -132,6 +132,19 @@ public class TreinoService {
         }
     }
 
+    public List<Integer> buscarIdsTreino(int idUsuario) {
+        List<TreinoHasUsuario> t = treinoHasUsuarioRepository.findAllByUsuarioIdAndRealizadoIsFalse(idUsuario);
+        List<Integer> ids = new ArrayList<>();
+        if (t.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } else {
+            for (int i = 0; i < t.size(); i++) {
+                ids.add(t.get(i).getTreino().getId());
+            }
+            return ids;
+        }
+    }
+
     @Transactional
     public int realizaTreinoNaFila(int idTreino) {
         Integer rowAffected = treinoHasUsuarioRepository.realizarTreino(idTreino);
