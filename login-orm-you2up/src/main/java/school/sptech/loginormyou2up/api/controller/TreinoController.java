@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import school.sptech.loginormyou2up.domain.treino.Treino;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
+import school.sptech.loginormyou2up.service.extra.FilaObj;
+import school.sptech.loginormyou2up.service.extra.PilhaObj;
 import school.sptech.loginormyou2up.service.treino.TreinoService;
 
 import javax.validation.Valid;
@@ -25,6 +27,8 @@ public class TreinoController {
     private TreinoService treinoService;
   
     private PilhaObj<Integer> pilhaDesfazer= new PilhaObj<>(10);
+
+    private FilaObj<Integer> naoRealizados = new FilaObj<>(10);
 
 
     @GetMapping
@@ -50,6 +54,7 @@ public class TreinoController {
     public ResponseEntity<TreinoDtoResposta> post(@RequestBody @Valid TreinoDtoCriacao treino) {
         TreinoDtoResposta t = treinoService.criar(treino);
         pilhaDesfazer.push(t.getId());
+        naoRealizados.insert(t.getId());
         return ResponseEntity.status(201).body(t);
     }
 
@@ -108,6 +113,17 @@ public class TreinoController {
             return ResponseEntity.status(400).build();
         }
     }
+
+    @PatchMapping
+    public ResponseEntity<Void> realizarTreino() {
+        if (!naoRealizados.isEmpty()) {
+            treinoService.realizaTreinoNaFila(naoRealizados.poll());
+            return ResponseEntity.status(204).build();
+        } else {
+            return ResponseEntity.status(400).build();
+        }
+    }
+
 
 }
 

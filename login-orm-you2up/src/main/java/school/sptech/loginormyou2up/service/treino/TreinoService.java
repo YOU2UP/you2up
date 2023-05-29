@@ -15,6 +15,7 @@ import school.sptech.loginormyou2up.dto.mapper.TreinoMapper;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -129,6 +130,12 @@ public class TreinoService {
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @Transactional
+    public int realizaTreinoNaFila(int idTreino) {
+        Integer rowAffected = treinoHasUsuarioRepository.realizarTreino(idTreino);
+        return rowAffected;
     }
 
 
