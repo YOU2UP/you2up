@@ -38,6 +38,7 @@ public class UsuarioDtoResposta {
     private List<TreinoDtoJsonUsuario> treinos;
 
     public UsuarioDtoResposta(Integer id, String nome, String email, LocalDate dataNascimento, Double notaMedia, String estagio, String sexo, int metaTreinos, List<NotificacaoDtoResposta> notificacoes, List<TreinoDtoJsonUsuario> treinos) {
+    }
     private LocalTreinoUsuario localTreino;
 
     private List<MatchDtoResposta> matches;

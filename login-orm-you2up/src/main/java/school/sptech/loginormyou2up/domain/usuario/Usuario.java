@@ -30,16 +30,14 @@ public class Usuario{
     @OneToMany(mappedBy = "usuario")
     private List<Notificacao> notificacoes;
 
-    public Usuario(Integer id, String nome, String email, String senha, LocalDate dataNascimento, Double notaMedia, String descricao, String estagio, String sexo, int metaTreinos, List<TreinoHasUsuario> treinos, List<Notificacao> notificacoes) {
+    public Usuario(Integer id, String nome, String email, String senha, LocalDate dataNascimento, String descricao, String estagio, int metaTreinos, List<TreinoHasUsuario> treinos, List<Notificacao> notificacoes) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.dataNascimento = dataNascimento;
-        this.notaMedia = notaMedia;
         this.descricao = descricao;
         this.estagio = estagio;
-        this.sexo = sexo;
         this.metaTreinos = metaTreinos;
         this.treinos = treinos;
         this.notificacoes = notificacoes;

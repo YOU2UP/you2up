@@ -49,6 +49,7 @@ public class UsuarioDtoCriacao {
 
     public String getAcademia() {
         return academia;
+    }
 
     private LocalTreinoCriacaoDto localTreino;
 

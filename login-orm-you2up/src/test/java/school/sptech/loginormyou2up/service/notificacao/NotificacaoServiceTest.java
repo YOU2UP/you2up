@@ -7,8 +7,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import school.sptech.loginormyou2up.domain.Notificacao;
-import school.sptech.loginormyou2up.domain.Usuario;
+import school.sptech.loginormyou2up.domain.notificacao.Notificacao;
+import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.repository.NotificacaoRepository;
 
 import java.time.LocalDate;
