@@ -9,6 +9,14 @@ public class UsuarioLoginDto {
     @Schema(description = "Senha do usuário", example = "mypassword")
     private String senha;
 
+    public UsuarioLoginDto(String email, String senha) {
+        this.email = email;
+        this.senha = senha;
+    }
+
+    public UsuarioLoginDto() {
+    }
+
     public String getEmail() {
         return email;
     }

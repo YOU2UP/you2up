@@ -14,6 +14,14 @@ public class NotificacaoDtoResposta {
     @Schema(description = "Data e hora da notificação")
     private LocalDateTime dataHora;
 
+    public NotificacaoDtoResposta(Integer id, String conteudo, LocalDateTime dataHora) {
+        this.id = id;
+        this.conteudo = conteudo;
+        this.dataHora = dataHora;
+    }
+
+    public NotificacaoDtoResposta() {
+    }
 
     public Integer getId() {
         return id;

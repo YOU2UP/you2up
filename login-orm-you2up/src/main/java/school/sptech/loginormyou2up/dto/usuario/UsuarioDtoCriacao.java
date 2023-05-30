@@ -31,6 +31,25 @@ public class UsuarioDtoCriacao {
     @Schema(description = "Estágio do usuário (iniciante, intermediário, avançado)", example = "iniciante")
     private String estagio;
 
+    private String academia;
+
+    public UsuarioDtoCriacao(Integer id, String nome, String email, String senha, LocalDate dataNascimento, String descricao, String estagio, String academia) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.dataNascimento = dataNascimento;
+        this.descricao = descricao;
+        this.estagio = estagio;
+        this.academia = academia;
+    }
+
+    public UsuarioDtoCriacao() {
+    }
+
+    public String getAcademia() {
+        return academia;
+    }
 
     private LocalTreinoCriacaoDto localTreino;
 

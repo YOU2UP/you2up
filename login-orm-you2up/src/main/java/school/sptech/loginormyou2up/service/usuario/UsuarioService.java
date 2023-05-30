@@ -235,7 +235,7 @@ public class UsuarioService {
 
     }
 
-    private UsuarioDtoResposta adicionaMatches(UsuarioDtoResposta usuarioDtoResposta) {
+    public UsuarioDtoResposta adicionaMatches(UsuarioDtoResposta usuarioDtoResposta) {
         try {
             usuarioDtoResposta.setMatches(matchService.getByIdUsuario(usuarioDtoResposta.getId()));
         } catch (ResponseStatusException e) {
@@ -245,7 +245,7 @@ public class UsuarioService {
         return usuarioDtoResposta;
     }
 
-    private ListaObj<UsuarioDtoResposta> adicionaMatches(ListaObj<UsuarioDtoResposta> lista) {
+    public ListaObj<UsuarioDtoResposta> adicionaMatches(ListaObj<UsuarioDtoResposta> lista) {
         for (int i = 0; i < lista.getTamanho(); i++) {
             try {
                 lista.getElemento(i).setMatches(matchService.getByIdUsuario(lista.getElemento(i).getId()));

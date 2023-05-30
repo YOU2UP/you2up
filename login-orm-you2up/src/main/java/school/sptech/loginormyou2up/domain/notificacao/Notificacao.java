@@ -18,6 +18,15 @@ public class Notificacao {
     @ManyToOne
     private Usuario usuario;
 
+    public Notificacao(Integer id, String conteudo, LocalDateTime dataHora, Usuario usuario) {
+        this.id = id;
+        this.conteudo = conteudo;
+        this.dataHora = dataHora;
+        this.usuario = usuario;
+    }
+
+    public Notificacao() {
+    }
 
     public Integer getId() {
         return id;

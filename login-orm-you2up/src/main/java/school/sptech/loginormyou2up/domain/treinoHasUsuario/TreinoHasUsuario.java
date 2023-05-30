@@ -24,6 +24,18 @@ public class TreinoHasUsuario  {
     private Integer quantidadeTreinos;
     private boolean isRealizado;
 
+    public TreinoHasUsuario(TreinoHasUsuarioId treinoHasUsuarioId, Treino treino, Usuario usuario, LocalDateTime inicioTreino, Integer quantidadeTreinos, boolean isRealizado) {
+        this.treinoHasUsuarioId = treinoHasUsuarioId;
+        this.treino = treino;
+        this.usuario = usuario;
+        this.inicioTreino = inicioTreino;
+        this.quantidadeTreinos = quantidadeTreinos;
+        this.isRealizado = isRealizado;
+    }
+
+    public TreinoHasUsuario() {
+    }
+
     public Treino getTreino() {
         return treino;
     }
