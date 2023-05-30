@@ -16,6 +16,8 @@ import school.sptech.loginormyou2up.dto.mapper.TreinoMapper;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
 
+
+import javax.transaction.Transactional;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
@@ -133,6 +135,25 @@ public class TreinoService {
         }
     }
 
+
+    public List<Integer> buscarIdsTreino(int idUsuario) {
+        List<TreinoHasUsuario> t = treinoHasUsuarioRepository.encontrarTreinosPeloIdUsuario(idUsuario);
+        List<Integer> ids = new ArrayList<>();
+        if (t.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } else {
+            for (int i = 0; i < t.size(); i++) {
+                ids.add(t.get(i).getTreino().getId());
+            }
+            return ids;
+        }
+    }
+
+    @Transactional
+    public int realizaTreinoNaFila(int idTreino) {
+        Integer rowAffected = treinoHasUsuarioRepository.realizarTreino(idTreino);
+        return rowAffected;
+
     public List<TreinoDtoResposta> findTreinosByUsuarioId(int idUsuario) {
         List<TreinoHasUsuario> treinoHasUsuarios = treinoHasUsuarioRepository.contagemDeTreinosPorUsuario(idUsuario);
         List<Treino> treinos = new ArrayList<>();
@@ -169,6 +190,7 @@ public class TreinoService {
         }
 
         return nomes;
+
     }
 
 
