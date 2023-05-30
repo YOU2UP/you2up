@@ -11,6 +11,14 @@ public class TreinoHasUsuarioId implements Serializable {
     private Integer treinoId;
     private Integer usuarioId;
 
+    public TreinoHasUsuarioId(Integer treinoId, Integer usuarioId) {
+        this.treinoId = treinoId;
+        this.usuarioId = usuarioId;
+    }
+
+    public TreinoHasUsuarioId() {
+    }
+
     public Integer getTreinoId() {
         return treinoId;
     }

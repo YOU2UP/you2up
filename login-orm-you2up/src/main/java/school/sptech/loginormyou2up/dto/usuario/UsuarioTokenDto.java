@@ -14,6 +14,16 @@ public class UsuarioTokenDto {
     @Schema(description = "Token de autenticação do usuário", example = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c")
     private String token;
 
+    public UsuarioTokenDto(Integer userId, String nome, String email, String token) {
+        this.userId = userId;
+        this.nome = nome;
+        this.email = email;
+        this.token = token;
+    }
+
+    public UsuarioTokenDto() {
+    }
+
     public Integer getUserId() {
         return userId;
     }
