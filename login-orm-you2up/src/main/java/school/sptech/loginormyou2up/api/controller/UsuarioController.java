@@ -35,9 +35,9 @@ public class UsuarioController {
             @ApiResponse(responseCode = "200", description = "Ok - Lista com todos usuários " +
                     "retornada"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
-                    "ao retornar a lista de usuários"),
+                    "ao retornar a lista de usuários", useReturnTypeSchema = false),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", useReturnTypeSchema = true)
     })
     public ResponseEntity<List<UsuarioDtoResposta>> getAll() {
         return ResponseEntity.ok().body(usuarioService.getAll());
@@ -151,15 +151,22 @@ public class UsuarioController {
         return ResponseEntity.ok().body(usuarioService.buscarPorNota(nota));
     }
 
+
     @GetMapping("/quantidade-treinos-semana/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - Quantidae de treinos + " +
+                    "por dia da semana retornados"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro na requisição, " +
+                    "verifique o corpo da requisição", useReturnTypeSchema = false),
+            @ApiResponse(responseCode = "404", description = "Não existem usuários cadastrado, " +
+                    "com esse id", useReturnTypeSchema = false),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
+                    "você não está autenticado no sistema, é necessário passar um token válido " +
+                    "no corpo da requisição", useReturnTypeSchema = false)
+    })
     public ResponseEntity<QuantidadeTreinosPorDiaSemanaDto> getQuantidadeTreinosSemanaById(@PathVariable int id){
         return ResponseEntity.ok().body(usuarioService.getQuantidadeTreinosPorDiaSemana(id));
     }
-
-
-
-
-
 
 }
 

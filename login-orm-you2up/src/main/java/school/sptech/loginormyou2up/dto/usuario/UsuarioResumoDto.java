@@ -1,8 +1,14 @@
 package school.sptech.loginormyou2up.dto.usuario;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public class UsuarioResumoDto {
     private int id;
+
+    @Schema(description = "Nome do usuário", example = "João")
     private String nome;
+
+    @Schema(description = "Email do usuário", example = "joao@email.com")
     private String email;
 
 
