@@ -8,6 +8,7 @@ import school.sptech.loginormyou2up.domain.treino.Treino;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuarioId;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
+import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoJson;
 import school.sptech.loginormyou2up.repository.TreinoHasUsuarioRepository;
 import school.sptech.loginormyou2up.repository.TreinoRepository;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
@@ -15,6 +16,7 @@ import school.sptech.loginormyou2up.dto.mapper.TreinoMapper;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -129,6 +131,44 @@ public class TreinoService {
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+    }
+
+    public List<TreinoDtoResposta> findTreinosByUsuarioId(int idUsuario) {
+        List<TreinoHasUsuario> treinoHasUsuarios = treinoHasUsuarioRepository.contagemDeTreinosPorUsuario(idUsuario);
+        List<Treino> treinos = new ArrayList<>();
+
+        for (TreinoHasUsuario tu: treinoHasUsuarios) {
+            treinos.add(treinoRepository.findById(tu.getTreino().getId()).get());
+        }
+
+        return TreinoMapper.convertToTreinoDtoResposta(treinos);
+    }
+
+    public List<String> getUsuariosTreinados(int idUsuario){
+        if(usuarioRepository.findById(idUsuario).isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
+        }
+
+        return getUsuariosTreino(findTreinosByUsuarioId(idUsuario), idUsuario);
+    }
+
+    public List<String> getUsuariosTreino(List<TreinoDtoResposta> treinos, int idUsuario){
+
+        String nomeUsuario = usuarioRepository.findById(idUsuario).get().getNome();
+
+        List<String> nomes = new ArrayList<>();
+
+        for (TreinoDtoResposta t: treinos ) {
+            List<UsuarioDtoJson> usuarios = t.getUsuarios();
+
+            for (UsuarioDtoJson u: usuarios) {
+                if (!u.getNome().equalsIgnoreCase(nomeUsuario)){
+                    nomes.add(u.getNome());
+                }
+            }
+        }
+
+        return nomes;
     }
 
 

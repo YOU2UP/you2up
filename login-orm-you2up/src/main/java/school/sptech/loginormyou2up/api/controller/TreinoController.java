@@ -110,5 +110,10 @@ public class TreinoController {
         }
     }
 
+    @GetMapping("/contagem-treinos/{id}")
+    public ResponseEntity<List<String>> getNomesParceirosDeTreino(@PathVariable int id){
+        return ResponseEntity.ok().body(treinoService.getUsuariosTreinados(id));
+    }
+
 }
 
