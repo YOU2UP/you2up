@@ -26,10 +26,10 @@ public class TreinoController {
 
     @Autowired
     private TreinoService treinoService;
-  
+
     private PilhaObj<Integer> pilhaDesfazer= new PilhaObj<>(10);
 
-    private FilaObj<Integer> naoRealizados = new FilaObj<>(treinoService.findAll().size());
+    private FilaObj<Integer> naoRealizados = new FilaObj<>(90);
 
 
     @GetMapping
@@ -104,7 +104,7 @@ public class TreinoController {
     public ResponseEntity<TreinoDtoResposta> putById(@PathVariable Integer id, @RequestBody Treino treino) {
         return ResponseEntity.ok().body(treinoService.putById(id,treino));
     }
-  
+
     @DeleteMapping("/desfazer")
     public ResponseEntity<Void> desfazer() {
         if (!pilhaDesfazer.isEmpty()) {
@@ -115,19 +115,30 @@ public class TreinoController {
         }
     }
 
-    @PatchMapping
-    public ResponseEntity<Void> realizarTreino(@RequestParam int idUsuario) {
+
+
+    @PatchMapping("/realizar/{idUsuario}")
+    public ResponseEntity<Void> realizarTreino(@PathVariable int idUsuario) {
+
+
+        if (!naoRealizados.isEmpty()) {
+            while (!naoRealizados.isEmpty()) {
+                naoRealizados.poll();
+            }
+
+        }
         List<Integer> ids = treinoService.buscarIdsTreino(idUsuario);
-        for (Integer id :
-                ids) {
+        for (Integer id : ids) {
             naoRealizados.insert(id);
         }
-        if (!naoRealizados.isEmpty()) {
+        if (naoRealizados.isEmpty()) {
+            return ResponseEntity.status(404).build();
+        } else {
             treinoService.realizaTreinoNaFila(naoRealizados.poll());
             return ResponseEntity.status(204).build();
-        } else {
-            return ResponseEntity.status(400).build();
         }
+
+
     }
 
 

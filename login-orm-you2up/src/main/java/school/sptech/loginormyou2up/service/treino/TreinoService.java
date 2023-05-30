@@ -133,7 +133,7 @@ public class TreinoService {
     }
 
     public List<Integer> buscarIdsTreino(int idUsuario) {
-        List<TreinoHasUsuario> t = treinoHasUsuarioRepository.findAllByUsuarioIdAndRealizadoIsFalse(idUsuario);
+        List<TreinoHasUsuario> t = treinoHasUsuarioRepository.encontrarTreinosPeloIdUsuario(idUsuario);
         List<Integer> ids = new ArrayList<>();
         if (t.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);

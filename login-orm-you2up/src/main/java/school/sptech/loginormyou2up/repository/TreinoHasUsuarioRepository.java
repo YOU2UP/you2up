@@ -13,5 +13,6 @@ public interface TreinoHasUsuarioRepository extends JpaRepository<TreinoHasUsuar
     @Query("UPDATE from TreinoHasUsuario t SET t.isRealizado = true WHERE t.treino.id = :idTreino")
     public Integer realizarTreino(int idTreino);
 
-    List<TreinoHasUsuario> findAllByUsuarioIdAndRealizadoIsFalse(int idUsuario);
+    @Query("SELECT t FROM TreinoHasUsuario t WHERE t.usuario.id = :idUsuario AND t.isRealizado = false")
+    List<TreinoHasUsuario> encontrarTreinosPeloIdUsuario(int idUsuario);
 }

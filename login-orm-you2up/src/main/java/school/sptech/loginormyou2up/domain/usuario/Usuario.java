@@ -4,6 +4,7 @@ import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.avaliacao.Avaliacao;
 import school.sptech.loginormyou2up.domain.notificacao.Notificacao;
+import school.sptech.loginormyou2up.service.extra.FilaObj;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,6 +12,8 @@ import java.util.List;
 
 @Entity
 public class Usuario{
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,6 +26,7 @@ public class Usuario{
     private String estagio; // iniciante, intermediário, avançado
 
     private int metaTreinos;
+
 
     @OneToMany(mappedBy = "usuario", orphanRemoval = true)
     private List<TreinoHasUsuario> treinos;
