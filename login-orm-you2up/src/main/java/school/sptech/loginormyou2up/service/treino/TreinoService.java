@@ -152,7 +152,8 @@ public class TreinoService {
     @Transactional
     public int realizaTreinoNaFila(int idTreino) {
         Integer rowAffected = treinoHasUsuarioRepository.realizarTreino(idTreino);
-        return rowAffected;
+        return rowAffected;   
+    }
 
     public List<TreinoDtoResposta> findTreinosByUsuarioId(int idUsuario) {
         List<TreinoHasUsuario> treinoHasUsuarios = treinoHasUsuarioRepository.contagemDeTreinosPorUsuario(idUsuario);
