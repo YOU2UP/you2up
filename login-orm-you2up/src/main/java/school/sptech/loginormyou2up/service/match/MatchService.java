@@ -123,7 +123,7 @@ public class MatchService {
         return listaRetorno.stream().map(MatchMapper::convertToMatchDto).toList();
     }
 
-    private boolean matchExiste(int id1, int id2){
+    public boolean matchExiste(int id1, int id2){
         return matchRepository.countMatches(id1, id2) > 0;
     }
 
