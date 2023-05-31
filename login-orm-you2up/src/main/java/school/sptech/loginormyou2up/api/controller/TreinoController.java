@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import school.sptech.loginormyou2up.domain.treino.Treino;
+import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
+import school.sptech.loginormyou2up.service.extra.FilaObj;
+
 import school.sptech.loginormyou2up.service.extra.PilhaObj;
 import school.sptech.loginormyou2up.service.treino.TreinoService;
 
@@ -26,8 +29,10 @@ public class TreinoController {
 
     @Autowired
     private TreinoService treinoService;
-  
+
     private PilhaObj<Integer> pilhaDesfazer= new PilhaObj<>(10);
+
+    private FilaObj<Integer> naoRealizados = new FilaObj<>(90);
 
 
     @GetMapping
@@ -59,6 +64,7 @@ public class TreinoController {
     public ResponseEntity<TreinoDtoResposta> post(@RequestBody @Valid TreinoDtoCriacao treino) {
         TreinoDtoResposta t = treinoService.criar(treino);
         pilhaDesfazer.push(t.getId());
+        naoRealizados.insert(t.getId());
         return ResponseEntity.status(201).body(t);
     }
 
@@ -125,7 +131,7 @@ public class TreinoController {
     public ResponseEntity<TreinoDtoResposta> putById(@PathVariable Integer id, @RequestBody Treino treino) {
         return ResponseEntity.ok().body(treinoService.putById(id,treino));
     }
-  
+
     @DeleteMapping("/desfazer")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - última ação desfeita"),
@@ -149,7 +155,7 @@ public class TreinoController {
                     "para atualizar o treino com o id especificado", content = {
                     @Content( )
             }),
-            @ApiResponse(responseCode = "404", description = "Não existe treino cadastrado" +
+            @ApiResponse(responseCode = "404", description = "Não existe treino cadastrado " +
                     "com esse id", content = {
                     @Content( )
             }),
@@ -161,6 +167,43 @@ public class TreinoController {
     @GetMapping("/contagem-treinos/{id}")
     public ResponseEntity<List<String>> getNomesParceirosDeTreino(@PathVariable int id){
         return ResponseEntity.ok().body(treinoService.getUsuariosTreinados(id));
+    }
+  
+
+  
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - ação refeita"),
+            @ApiResponse(responseCode = "404", description = "Não existe um usuário cadastrado " +
+                    "com esse id", content = {
+                    @Content( )
+            }),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
+    })
+    @PatchMapping("/realizar/{idUsuario}")
+    public ResponseEntity<Void> realizarTreino(@PathVariable int idUsuario) {
+
+
+        if (!naoRealizados.isEmpty()) {
+            while (!naoRealizados.isEmpty()) {
+                naoRealizados.poll();
+            }
+
+        }
+        List<Integer> ids = treinoService.buscarIdsTreino(idUsuario);
+        for (Integer id : ids) {
+            naoRealizados.insert(id);
+        }
+        if (naoRealizados.isEmpty()) {
+            return ResponseEntity.status(404).build();
+        } else {
+            treinoService.realizaTreinoNaFila(naoRealizados.poll());
+            return ResponseEntity.status(204).build();
+        }
+
+
     }
 
 }
