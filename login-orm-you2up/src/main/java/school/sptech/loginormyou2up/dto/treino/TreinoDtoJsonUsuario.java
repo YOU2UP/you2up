@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 
 public class TreinoDtoJsonUsuario { // essa classe mostra seu treino sem mostrar a lista de usuarios
+    @Schema(description = "Id do treino", example = "10")
     private Integer id;
     @Schema(description = "Período do treino", example = "Manhã")
     private String periodo;

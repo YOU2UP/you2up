@@ -182,6 +182,7 @@ class UsuarioServiceTest {
         assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());
     }
 
+
     @Test
     @DisplayName("deveRetornarResponseStatusExceptionQuandoNaoExistirUsuariosNotaMenorMaior")
     void deveRetornarResponseStatusExceptionQuandoNaoExistirUsuariosNotaMenorMaior() {

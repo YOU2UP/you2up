@@ -1,15 +1,26 @@
 package school.sptech.loginormyou2up.dto.match;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.dto.usuario.UsuarioResumoDto;
 
 import java.time.LocalDateTime;
 
 public class MatchDtoResposta {
+
+    @Schema(description = "Id do match", example = "5")
     private Integer id;
+
+    @Schema(description = "Data do match", example = "2021-01-01T00:00:00")
     private LocalDateTime dataMatch;
+
+    @Schema(description = "Status do match", example = "true")
     private boolean isAtivo;
+
+    @Schema(description = "Usuário 1 do match")
     private UsuarioResumoDto usuario1;
+
+    @Schema(description = "Usuário 2 do match")
     private UsuarioResumoDto usuario2;
 
    public Integer getId() {
