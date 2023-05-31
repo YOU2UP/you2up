@@ -257,7 +257,7 @@ public class UsuarioService {
         return lista;
     }
 
-    private ListaObj<UsuarioDtoResposta> bubbleSortNota(ListaObj<UsuarioDtoResposta> lista) {
+    public ListaObj<UsuarioDtoResposta> bubbleSortNota(ListaObj<UsuarioDtoResposta> lista) {
         ListaObj<UsuarioDtoResposta> userList = lista;
         userList = adicionaMedias(userList);
         userList = adicionaMatches(userList);
@@ -283,7 +283,7 @@ public class UsuarioService {
         return lista;
     }
 
-    private UsuarioDtoResposta pesquisaBinariaPorNota(ListaObj<UsuarioDtoResposta> lista, Double nota) {
+    public UsuarioDtoResposta pesquisaBinariaPorNota(ListaObj<UsuarioDtoResposta> lista, Double nota) {
 
         int inicio = 0;
         int fim = lista.getTamanho() - 1;
