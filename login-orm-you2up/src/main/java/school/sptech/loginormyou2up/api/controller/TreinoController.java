@@ -1,6 +1,8 @@
 
 package school.sptech.loginormyou2up.api.controller;
 
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,9 +35,13 @@ public class TreinoController {
             @ApiResponse(responseCode = "200", description = "Ok - Lista com todos os treinos " +
                     "retornada"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
-                    "ao retornar a lista de treinos"),
+                    "ao retornar a lista de treinos", content = {
+                    @Content( )
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
     })
     public ResponseEntity<List<TreinoDtoResposta>> getAll() {
         return ResponseEntity.status(200).body(treinoService.findAll());
@@ -46,7 +52,9 @@ public class TreinoController {
             @ApiResponse(responseCode = "200", description = "Ok - Treino cadastrado " +
                     "com sucesso"),
             @ApiResponse(responseCode = "400", description = "Houve um erro ao tentar " +
-                    "cadastrar o treino")
+                    "cadastrar o treino", content = {
+                    @Content( )
+            })
     })
     public ResponseEntity<TreinoDtoResposta> post(@RequestBody @Valid TreinoDtoCriacao treino) {
         TreinoDtoResposta t = treinoService.criar(treino);
@@ -59,11 +67,17 @@ public class TreinoController {
             @ApiResponse(responseCode = "200", description = "Ok - Treino com id escolhido " +
                     "encontrado"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
-                    "ao retornar o treino com o id especificado"),
+                    "ao retornar o treino com o id especificado", content = {
+                    @Content( )
+            }),
             @ApiResponse(responseCode = "404", description = "Não existe treino cadastrado" +
-                    "com esse id"),
+                    "com esse id", content = {
+                    @Content()
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
     })
     public ResponseEntity<TreinoDtoResposta> getById(@PathVariable int id) {
         return ResponseEntity.status(200).body(treinoService.findById(id));
@@ -74,11 +88,17 @@ public class TreinoController {
             @ApiResponse(responseCode = "204", description = "Ok - Treino com id escolhido " +
                     "deletado"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
-                    "ao retornar o treino com o id especificado"),
+                    "ao retornar o treino com o id especificado", content = {
+                    @Content( )
+            }),
             @ApiResponse(responseCode = "404", description = "Não existe treino cadastrado" +
-                    "com esse id"),
+                    "com esse id", content = {
+                    @Content( )
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
     })
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
         treinoService.deleteById(id);
@@ -90,17 +110,30 @@ public class TreinoController {
             @ApiResponse(responseCode = "200", description = "Ok - Treino com id escolhido " +
                     "foi atualizado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
-                    "para atualizar o treino com o id especificado"),
+                    "para atualizar o treino com o id especificado", content = {
+                    @Content( )
+            }),
             @ApiResponse(responseCode = "404", description = "Não existe treino cadastrado" +
-                    "com esse id"),
+                    "com esse id", content = {
+                    @Content()
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content()
+            })
     })
     public ResponseEntity<TreinoDtoResposta> putById(@PathVariable Integer id, @RequestBody Treino treino) {
         return ResponseEntity.ok().body(treinoService.putById(id,treino));
     }
   
     @DeleteMapping("/desfazer")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - última ação desfeita"),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
+    })
     public ResponseEntity<Void> desfazer() {
         if (!pilhaDesfazer.isEmpty()) {
             treinoService.deleteById(pilhaDesfazer.pop());
@@ -110,6 +143,21 @@ public class TreinoController {
         }
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - contagem de treinos realizada com sucessoo"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
+                    "para atualizar o treino com o id especificado", content = {
+                    @Content( )
+            }),
+            @ApiResponse(responseCode = "404", description = "Não existe treino cadastrado" +
+                    "com esse id", content = {
+                    @Content( )
+            }),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
+    })
     @GetMapping("/contagem-treinos/{id}")
     public ResponseEntity<List<String>> getNomesParceirosDeTreino(@PathVariable int id){
         return ResponseEntity.ok().body(treinoService.getUsuariosTreinados(id));

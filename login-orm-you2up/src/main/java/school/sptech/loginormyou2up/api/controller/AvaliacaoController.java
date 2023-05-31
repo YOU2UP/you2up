@@ -1,6 +1,8 @@
 package school.sptech.loginormyou2up.api.controller;
 
 
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,9 +27,13 @@ public class AvaliacaoController {
     @GetMapping
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - requisição realizada com sucesso"),
-            @ApiResponse(responseCode = "204", description = "Não há avaliacoes cadastrados no sistema"),
+            @ApiResponse(responseCode = "204", description = "Não há avaliacoes cadastrados no sistema", content = {
+                    @Content()
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content()
+            })
     } )
     public ResponseEntity<List<AvaliacaoRespostaDto>> getAll() {
         return ResponseEntity.status(200).body(avaliacaoService.findAll());
@@ -36,9 +42,13 @@ public class AvaliacaoController {
     @PostMapping
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Avaliacao criada com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Erro na requisição"),
+            @ApiResponse(responseCode = "400", description = "Erro na requisição", content = {
+                    @Content( )
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
     })
     public ResponseEntity<AvaliacaoRespostaDto> post(@RequestBody Avaliacao avaliacao) {
         return ResponseEntity.status(201).body(avaliacaoService.save(avaliacao));
@@ -47,9 +57,13 @@ public class AvaliacaoController {
     @GetMapping("/{id}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - requisição realizada com sucesso"),
-            @ApiResponse(responseCode = "404", description = "avaliação não encontrada"),
+            @ApiResponse(responseCode = "404", description = "avaliação não encontrada", content = {
+                    @Content( )
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
     } )
     public ResponseEntity<AvaliacaoRespostaDto> getById(@PathVariable int id) {
         return ResponseEntity.status(200).body(avaliacaoService.findById(id));
@@ -58,9 +72,13 @@ public class AvaliacaoController {
     @DeleteMapping("/{id}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - requisição realizada com sucesso"),
-            @ApiResponse(responseCode = "404", description = "avaliação não encontrada"),
+            @ApiResponse(responseCode = "404", description = "avaliação não encontrada", content = {
+                    @Content( )
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
     } )
     public ResponseEntity<Void> deleteById(@PathVariable int id) {
         avaliacaoService.deleteById(id);
@@ -70,9 +88,13 @@ public class AvaliacaoController {
     @GetMapping("/avaliador/{id}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - requisição realizada com sucesso"),
-            @ApiResponse(responseCode = "404", description = "avaliador não encontrado"),
+            @ApiResponse(responseCode = "404", description = "avaliador não encontrado", content = {
+                    @Content( )
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
     } )
     public ResponseEntity<List<AvaliacaoRespostaDto>> findByIdAvaliador(@PathVariable int id){
         return ResponseEntity.ok().body(avaliacaoService.findByIdAvaliador(id));
@@ -81,9 +103,13 @@ public class AvaliacaoController {
     @GetMapping("/avaliado/{id}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - requisição realizada com sucesso"),
-            @ApiResponse(responseCode = "404", description = "avaliado não encontrado"),
+            @ApiResponse(responseCode = "404", description = "avaliado não encontrado", content = {
+                    @Content( )
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
     } )
     public ResponseEntity<List<AvaliacaoRespostaDto>> findByIdAvaliado(@PathVariable int id){
         return ResponseEntity.ok().body(avaliacaoService.findByIdAvaliado(id));
@@ -93,9 +119,13 @@ public class AvaliacaoController {
     @GetMapping("/media/{id}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - requisição realizada com sucesso"),
-            @ApiResponse(responseCode = "404", description = "avaliado não encontrado"),
+            @ApiResponse(responseCode = "404", description = "avaliado não encontrado", content = {
+                    @Content( )
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
     } )
     public ResponseEntity<Double> getMediaByIdAvalido(@PathVariable int id){
         return ResponseEntity.ok().body(avaliacaoService.getMediaAvaliacaoUsuario(id));

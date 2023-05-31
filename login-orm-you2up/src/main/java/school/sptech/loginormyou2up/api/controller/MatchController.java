@@ -1,5 +1,7 @@
 package school.sptech.loginormyou2up.api.controller;
 
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,9 +29,13 @@ public class MatchController {
     @GetMapping
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - requisição realizada com sucesso"),
-            @ApiResponse(responseCode = "204", description = "Não há matches cadastrados no sistema"),
+            @ApiResponse(responseCode = "204", description = "Não há matches cadastrados no sistema", content = {
+                    @Content()
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
     })
     public ResponseEntity<List<MatchDtoResposta>> getAll(){
         return ResponseEntity.ok(matchService.getAll());
@@ -38,9 +44,13 @@ public class MatchController {
     @GetMapping("/{id}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - requisição realizada com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Match não encontrado"),
+            @ApiResponse(responseCode = "404", description = "Match não encontrado", content = {
+                    @Content( )
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
     })
     public ResponseEntity<MatchDtoResposta> getById(Integer id){
         return ResponseEntity.ok(matchService.getById(id));
@@ -50,9 +60,13 @@ public class MatchController {
     @GetMapping("/usuario/{id}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - requisição realizada com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado", content = {
+                    @Content()
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content()
+            })
     })
     public ResponseEntity<List<MatchDtoResposta>> getByIdUsuario(@PathVariable Integer id){
         return ResponseEntity.ok(matchService.getByIdUsuario(id));
@@ -62,9 +76,13 @@ public class MatchController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Ok - requisição realizada com sucesso "),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
-                    "ao retornar o usuário com id escolhido"),
+                    "ao retornar o usuário com id escolhido", content = {
+                    @Content( )
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
     })
     public ResponseEntity<MatchDtoResposta> criarMatch(@RequestBody MatchDtoCriacao dto){
         return ResponseEntity.ok(matchService.criarMatch(dto));
@@ -73,10 +91,16 @@ public class MatchController {
     @PutMapping("/{id}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - requisição realizada com sucesso"),
-            @ApiResponse(responseCode = "400", description = "Erro na requisição"),
-            @ApiResponse(responseCode = "404", description = "Match não encontrado"),
+            @ApiResponse(responseCode = "400", description = "Erro na requisição", content = {
+                    @Content( )
+            }),
+            @ApiResponse(responseCode = "404", description = "Match não encontrado", content = {
+                    @Content( )
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
     })
     public ResponseEntity<MatchDtoResposta> atualizarMatch(MatchDtoCriacao dto, @PathVariable int id){
         return ResponseEntity.ok(matchService.putById(id, dto));
@@ -85,9 +109,13 @@ public class MatchController {
     @GetMapping("/usuario/{id1}/{id2}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - requisição realizada com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Match entre os usuários não encontrado"),
+            @ApiResponse(responseCode = "404", description = "Match entre os usuários não encontrado", content = {
+                    @Content()
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
     })
     public ResponseEntity<List<MatchDtoResposta>> getMatchEntreUsuarios(@PathVariable int id1, @PathVariable int id2){
         return ResponseEntity.ok(matchService.getMatchEntreUsuarios(id1, id2));
@@ -96,9 +124,13 @@ public class MatchController {
     @DeleteMapping("/{id}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - requisição realizada com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Match não encontrado"),
+            @ApiResponse(responseCode = "404", description = "Match não encontrado", content = {
+                    @Content( )
+            }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema")
+                    "você não está autenticado no sistema", content = {
+                    @Content( )
+            })
     })
     public ResponseEntity<Void> deleteById(@PathVariable int id){
         matchService.deleteById(id);
