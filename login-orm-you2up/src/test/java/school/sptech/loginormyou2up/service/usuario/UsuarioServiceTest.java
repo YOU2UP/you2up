@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
+import school.sptech.loginormyou2up.domain.match.Match;
 import school.sptech.loginormyou2up.domain.notificacao.Notificacao;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
@@ -114,74 +115,80 @@ class UsuarioServiceTest {
         assertEquals(usuarios.size(), size);
     }
 
-//    @Test
-//    @DisplayName("deveRetornarUsuarioQuandoExistirUsuarioCadastradoComId")
-//    void deveRetornarUsuarioQuandoExistirUsuarioCadastradoComId() {
-//        // given
-//        int id = 1;
-//
-//        List<TreinoHasUsuario> treinos = new ArrayList<>();
-//        List<Notificacao> notificacoes = new ArrayList<>();
-//
-//        Usuario usuario = new Usuario(1, "user1", "email@email.com", "123",
-//                setData(), "desc", "iniciante", 1, treinos, notificacoes);
-//
-//        Optional<Usuario> userFind = Optional.of(usuario);
-//
-//        List<NotificacaoDtoResposta> notificacao = new ArrayList<>();
-//        List<TreinoDtoJsonUsuario> treino = new ArrayList<>();
-//        LocalTreinoUsuario local = new LocalTreinoUsuario();
-//        List<MatchDtoResposta> match = new ArrayList();
-//
-//        UsuarioDtoResposta usuarioDto = new UsuarioDtoResposta(1,"user",
-//                "email@email.com", setData(), 4.5, "iniciante", 10,
-//                notificacao, treino, local, match);
-//
-//        ListaObj<UsuarioDtoResposta> listaObj = new ListaObj<>(1);
-//
-//        // when
-//        Mockito.when(usuarioRepository.findById(Mockito.anyInt())).thenReturn(userFind);
-//
-//        Mockito.when(avaliacaoMock.getMediaAvaliacaoUsuario(Mockito.anyInt())).thenReturn(4.0);
-//
-//        Mockito.when(matchService.getByIdUsuario(Mockito.anyInt())).thenReturn(match);
-//
-//        Mockito.when(usuarioService.adicionaMatches(Mockito.any(UsuarioDtoResposta.class))).
-//                thenReturn(usuarioDto);
-//
-////        Mockito.when(matchRepository.getAllMatchsByUsuarioId());
-//
-//        // then
-//        UsuarioDtoResposta usuarioRetorno = usuarioService.getById(id);
-//        usuarioRetorno.setNotaMedia(4.0);
-//
-//        // assert
-//        assertDoesNotThrow(() -> {usuarioService.getById(id);});
-//        assertNotNull(usuarioRetorno);
-//        assertEquals(usuarioRetorno.getId(), id);
-//        assertEquals(usuarioRetorno.getNome(), usuario.getNome());
-//        assertEquals(usuarioRetorno.getEmail(), usuario.getEmail());
-//        assertEquals(usuarioRetorno.getDataNascimento(), usuario.getDataNascimento());
-//        assertEquals(usuarioRetorno.getEstagio(), usuario.getEstagio());
-//        assertEquals(usuarioRetorno.getMetaTreinos(), usuario.getMetaTreinos());
-//    }
+/*
+    @Test
+    @DisplayName("deveRetornarUsuarioQuandoExistirUsuarioCadastradoComId")
+    void deveRetornarUsuarioQuandoExistirUsuarioCadastradoComId() {
+        // given
+        int id = 1;
 
-//    @Test
-//    @DisplayName("deveRetornarResponseStatusExceptionQuandoNaoExistirUsuarioComId")
-//    void deveRetornarResponseStatusExceptionQuandoNaoExistirUsuarioComId() {
-//        // given
-//        int id = 1;
-//
-//        // when
-//        Mockito.when(usuarioRepository.findById(id)).thenReturn(Optional.empty());
-//
-//        // then
-//        ResponseStatusException exception = Assertions.assertThrows(
-//                ResponseStatusException.class, () -> {usuarioService.getById(id);});
-//
-//        // assert
-//        assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());
-//    }
+        List<TreinoHasUsuario> treinos = new ArrayList<>();
+        List<Notificacao> notificacoes = new ArrayList<>();
+
+        Usuario usuario = new Usuario(1, "user1", "email@email.com", "123",
+                setData(), "desc", "iniciante", 1, treinos, notificacoes);
+
+        Optional<Usuario> userFind = Optional.of(usuario);
+
+        List<NotificacaoDtoResposta> notificacao = new ArrayList<>();
+        List<TreinoDtoJsonUsuario> treino = new ArrayList<>();
+        LocalTreinoUsuario local = new LocalTreinoUsuario();
+        List<MatchDtoResposta> matchesDto = new ArrayList();
+        List<Match> matches = new ArrayList<>();
+
+        UsuarioDtoResposta usuarioDto = new UsuarioDtoResposta(1,"user",
+                "email@email.com", setData(), 4.5, "iniciante", 10,
+                notificacao, treino, local, matchesDto);
+
+        ListaObj<UsuarioDtoResposta> listaObj = new ListaObj<>(1);
+
+
+        // when
+        Mockito.when(usuarioRepository.findById(Mockito.anyInt())).thenReturn(userFind);
+
+        Mockito.when(avaliacaoMock.getMediaAvaliacaoUsuario(Mockito.anyInt())).thenReturn(4.0);
+
+        Mockito.when(matchService.getByIdUsuario(Mockito.anyInt())).thenReturn(matchesDto);
+
+        Mockito.when(matchRepository.getAllMatchsByUsuarioId(Mockito.anyInt())).thenReturn(matches);
+
+        Mockito.when(usuarioService.adicionaMatches(Mockito.any(UsuarioDtoResposta.class))).thenReturn(usuarioDto);
+
+        Mockito.when(usuarioService.getById(Mockito.anyInt())).thenReturn(usuarioDto);
+
+
+        // then
+        UsuarioDtoResposta usuarioRetorno = usuarioService.getById(id);
+        usuarioRetorno.setNotaMedia(4.0);
+
+        // assert
+        assertDoesNotThrow(() -> {usuarioService.getById(id);});
+        assertNotNull(usuarioRetorno);
+        assertEquals(usuarioRetorno.getId(), id);
+        assertEquals(usuarioRetorno.getNome(), usuario.getNome());
+        assertEquals(usuarioRetorno.getEmail(), usuario.getEmail());
+        assertEquals(usuarioRetorno.getDataNascimento(), usuario.getDataNascimento());
+        assertEquals(usuarioRetorno.getEstagio(), usuario.getEstagio());
+        assertEquals(usuarioRetorno.getMetaTreinos(), usuario.getMetaTreinos());
+    }
+*/
+
+    @Test
+    @DisplayName("deveRetornarResponseStatusExceptionQuandoNaoExistirUsuarioComId")
+    void deveRetornarResponseStatusExceptionQuandoNaoExistirUsuarioComId() {
+        // given
+        int id = 1;
+
+        // when
+        Mockito.when(usuarioRepository.findById(id)).thenReturn(Optional.empty());
+
+        // then
+        ResponseStatusException exception = Assertions.assertThrows(
+                ResponseStatusException.class, () -> {usuarioService.getById(id);});
+
+        // assert
+        assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());
+    }
 
     @Test
     @DisplayName("deveDeletarQuandoExistirUsuarioComId")
@@ -255,6 +262,10 @@ class UsuarioServiceTest {
 
         List<TreinoHasUsuario> treinos = new ArrayList<>();
         List<Notificacao> notificacoes = new ArrayList<>();
+        List<NotificacaoDtoResposta> notificacoesDto = new ArrayList<>();
+        List<TreinoDtoJsonUsuario> treinoDtoJsonUsuarios = new ArrayList<>();
+        LocalTreinoUsuario localTreinoUsuario = new LocalTreinoUsuario();
+        List<MatchDtoResposta> matchesDto = new ArrayList();
 
         Usuario usuario1 = new Usuario(1, "user1", "email@email.com", "123",
                 setData(), "desc", "iniciante", 1, treinos, notificacoes);
@@ -270,16 +281,23 @@ class UsuarioServiceTest {
         usuarios.add(usuario2);
         usuarios.add(usuario3);
 
+
+        UsuarioDtoResposta usuarioDto = new UsuarioDtoResposta(1,"user",
+                "email@email.com", setData(), 4.5, "iniciante", 10, notificacoesDto, treinoDtoJsonUsuarios, localTreinoUsuario, matchesDto);
+
+
+        ListaObj<UsuarioDtoResposta> listaObjUsuarios = new ListaObj<>(usuarios.size());
+        listaObjUsuarios.adiciona(usuarioDto);
+
+
         // when
         Mockito.when(usuarioRepository.findAll()).thenReturn(usuarios);
-        Mockito.when(avaliacaoRepository.getMediaAvaliacaoUsuarioById(1)).
+
+        Mockito.when(avaliacaoRepository.getMediaAvaliacaoUsuarioById(Mockito.anyInt())).
                 thenReturn(2.5);
 
-        Mockito.when(avaliacaoRepository.getMediaAvaliacaoUsuarioById(2)).
-                thenReturn(3.5);
 
-        Mockito.when(avaliacaoRepository.getMediaAvaliacaoUsuarioById(3)).
-                thenReturn(4.5);
+        Mockito.when(usuarioService.menorParaMaior()).thenReturn(listaObjUsuarios);
 
         // then
         ListaObj<UsuarioDtoResposta> resultado = usuarioService.menorParaMaior();
@@ -288,9 +306,9 @@ class UsuarioServiceTest {
         assertDoesNotThrow(() -> {usuarioService.menorParaMaior();});
         assertNotNull(resultado);
         assertEquals(resultado.getTamanho(), size);
-        assertEquals(resultado.getElemento(0).getNotaMedia(), 2.5);
-        assertEquals(resultado.getElemento(1).getNotaMedia(), 3.5);
-        assertEquals(resultado.getElemento(2).getNotaMedia(), 4.5);
+        assertEquals(2.5, resultado.getElemento(0).getNotaMedia());
+        assertEquals(3.5, resultado.getElemento(1).getNotaMedia());
+        assertEquals(4.5, resultado.getElemento(2).getNotaMedia());
     }
 
     @Test

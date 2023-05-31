@@ -6,6 +6,8 @@ import java.time.LocalDate;
 
 public class
 UsuarioDtoRespostaCadastro {
+
+    @Schema(description = "Id do usuário", example = "1")
     private Integer id;
     @Schema(description = "Nome do usuário", example = "Natalia")
     private String nome;

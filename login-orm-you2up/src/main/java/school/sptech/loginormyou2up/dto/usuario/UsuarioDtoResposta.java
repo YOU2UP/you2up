@@ -11,6 +11,7 @@ import java.util.List;
 
 public class UsuarioDtoResposta {
 
+    @Schema(description = "Id do usuário", example = "1")
     private Integer id;
 
     @Schema(description = "Nome do usuário", example = "Natalia")
@@ -37,10 +38,10 @@ public class UsuarioDtoResposta {
     @Schema(description = "Lista de treinos do usuário")
     private List<TreinoDtoJsonUsuario> treinos;
 
-    public UsuarioDtoResposta(Integer id, String nome, String email, LocalDate dataNascimento, Double notaMedia, String estagio, String sexo, int metaTreinos, List<NotificacaoDtoResposta> notificacoes, List<TreinoDtoJsonUsuario> treinos) {
-    }
+    @Schema(description = "Local de treino do usuário")
     private LocalTreinoUsuario localTreino;
 
+    @Schema(description = "Lista de matches do usuário")
     private List<MatchDtoResposta> matches;
 
     public UsuarioDtoResposta(Integer id, String nome, String email, LocalDate dataNascimento, Double notaMedia, String estagio, int metaTreinos, List<NotificacaoDtoResposta> notificacoes, List<TreinoDtoJsonUsuario> treinos, LocalTreinoUsuario localTreino, List<MatchDtoResposta> matches) {
