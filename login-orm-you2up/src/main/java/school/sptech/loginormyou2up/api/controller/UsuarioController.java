@@ -216,5 +216,24 @@ public class UsuarioController {
         return ResponseEntity.ok().body(usuarioService.getQuantidadeTreinosPorDiaSemana(id));
     }
 
+    @GetMapping("listar-recursivo")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - Lista com todos usuários " +
+                    "retornada"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
+                    "ao retornar a lista de usuários", content = {
+                    @Content()
+            }),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
+                    "você não está autenticado no sistema", content = {
+                    @Content()
+            })
+    })
+    public void getAllRecursivo() {
+        List<UsuarioDtoResposta> usersList = usuarioService.getAll();
+        usuarioService.exibeRecursivo(usersList, 0);
+    }
+
+
 }
 

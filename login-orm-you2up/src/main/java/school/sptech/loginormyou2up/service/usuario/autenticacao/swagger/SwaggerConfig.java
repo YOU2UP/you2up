@@ -1,4 +1,4 @@
-package school.sptech.loginormyou2up.api.swagger;
+package school.sptech.loginormyou2up.service.usuario.autenticacao.swagger;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;

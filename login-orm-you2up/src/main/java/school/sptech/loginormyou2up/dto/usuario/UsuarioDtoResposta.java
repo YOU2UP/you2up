@@ -149,4 +149,22 @@ public class UsuarioDtoResposta {
     public void setMatches(List<MatchDtoResposta> matches) {
         this.matches = matches;
     }
+
+    @Override
+    public String toString() {
+        return "UsuarioDtoResposta{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", notaMedia=" + notaMedia +
+                ", estagio='" + estagio + '\'' +
+                ", metaTreinos=" + metaTreinos +
+                ", notificacoes=" + notificacoes +
+                ", treinos=" + treinos +
+                ", localTreino=" + localTreino +
+                ", matches=" + matches +
+                '}';
+    }
+
 }

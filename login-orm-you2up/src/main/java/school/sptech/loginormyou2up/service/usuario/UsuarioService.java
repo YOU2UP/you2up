@@ -306,7 +306,17 @@ public class UsuarioService {
         return null;
     }
 
-
-
+    public void exibeRecursivo(List<UsuarioDtoResposta> userLists, int tamanho){
+        if (tamanho == userLists.size() -1) {
+            UsuarioDtoResposta user = userLists.get(tamanho);
+            System.out.println(user);
+        } else {
+            UsuarioDtoResposta user = userLists.get(tamanho);
+            System.out.println(user);
+            System.out.println("=".repeat(50));
+            tamanho++;
+            exibeRecursivo(userLists, tamanho);
+        }
+    }
 
 }
