@@ -10,6 +10,9 @@ import java.util.List;
 
 public class UsuarioMapper {
 
+    //o usuário será automaticamente criado com essa foto de perfil
+    private static final String FOTO_PERFIL  = "https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png";
+
     public static UsuarioDtoJson convertToUsuarioDtoJson(Usuario usuario){
         UsuarioDtoJson dto = new UsuarioDtoJson();
 
@@ -31,6 +34,7 @@ public class UsuarioMapper {
         dto.setMetaTreinos(usuario.getMetaTreinos());
         dto.setEstagio(usuario.getEstagio());
         dto.setLocalTreino(usuario.getLocalTreino());
+        dto.setFotoPefil(usuario.getFotoPerfil());
 
 
         List<TreinoDtoJsonUsuario> listaTreino = new ArrayList<>();
@@ -96,7 +100,7 @@ public class UsuarioMapper {
         usuario.setMetaTreinos(0);
         usuario.setNotificacoes(new ArrayList<>());
         usuario.setLocalTreino(TreinoMapper.convertToLocalTreinoUsuario(usuarioDto.getLocalTreino()));
-
+        usuario.setFotoPerfil(FOTO_PERFIL);
         return usuario;
     }
 
