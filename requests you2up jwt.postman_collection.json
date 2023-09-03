@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f4bbc973-0998-49f9-95a8-029f184bee22",
+		"_postman_id": "8ad6fb14-bcf3-4b95-8125-31584e5ae0d6",
 		"name": "requests you2up jwt",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -41,7 +41,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjkyMzEzMzMzLCJleHAiOjE2OTI2NzMzMzN9.ZGFx90H-FVGXBKhSjISmQhBIffwbnLMPlzOukiCMJk2Y-XMmKqoqtT3xOeS77UhkHciy8_-zO-SRjXwEteequQ",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjkzNjk4NDgxLCJleHAiOjE2OTQwNTg0ODF9.mEkRvIg2gLnl6HUveLOdydmKcLV762u99HcJdiHKmbH3G6hZxO5Qhlwfg7FFTc4mY7wsjIOq-dRDDJFcDtfQsA",
 									"type": "string"
 								}
 							]
@@ -114,7 +114,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjkyMzEzMzMzLCJleHAiOjE2OTI2NzMzMzN9.ZGFx90H-FVGXBKhSjISmQhBIffwbnLMPlzOukiCMJk2Y-XMmKqoqtT3xOeS77UhkHciy8_-zO-SRjXwEteequQ",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjg1MzkwOTc3LCJleHAiOjE2ODU3NTA5Nzd9.HgXfhlkZ24fLBVuzXaFWt2_6JkWgq-IvUssADxRaNdecknkcKmc5FTGdQ7bCZaWsfOQcPdr5BFdyy2tXL-u6aA",
 									"type": "string"
 								}
 							]
@@ -254,27 +254,37 @@
 				{
 					"name": "get usuarios recursivo",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjkyMzEzMTIwLCJleHAiOjE2OTI2NzMxMjB9.b9QUixi1Q1aODcC1ERyd9L_8Un8WK5loJoxo7T8qFaIGXmyzX-IyUQ8FiTLhbsmidTNLJGqSIl5meLXL4np3lA",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/usuarios/listar-recursivo",
+							"raw": "localhost:8080/usuarios/recursivo",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"usuarios",
-								"listar-recursivo"
+								"recursivo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get usario por id recursivo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuarios/recursivo/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios",
+								"recursivo",
+								"1"
 							]
 						}
 					},

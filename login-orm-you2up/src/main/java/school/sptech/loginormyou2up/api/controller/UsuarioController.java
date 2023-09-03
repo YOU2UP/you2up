@@ -16,6 +16,7 @@ import school.sptech.loginormyou2up.repository.UsuarioRepository;
 import school.sptech.loginormyou2up.service.extra.ListaObj;
 import school.sptech.loginormyou2up.service.usuario.UsuarioService;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -216,7 +217,7 @@ public class UsuarioController {
         return ResponseEntity.ok().body(usuarioService.getQuantidadeTreinosPorDiaSemana(id));
     }
 
-    @GetMapping("listar-recursivo")
+    @GetMapping("recursivo")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - Lista com todos usuários " +
                     "retornada"),
@@ -232,6 +233,29 @@ public class UsuarioController {
     public void getAllRecursivo() {
         List<UsuarioDtoResposta> usersList = usuarioService.getAll();
         usuarioService.exibeRecursivo(usersList, 0);
+    }
+
+    @GetMapping("recursivo/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - Usuário com id escolhido " +
+                    "encontrado"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
+                    "ao retornar o usuário com o id especificado", content = {
+                    @Content( )
+            }),
+            @ApiResponse(responseCode = "204", description = "Não existe usuário cadastrado " +
+                    "com esse id", content = {
+                    @Content( )
+            }),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
+                    "você não está autenticado no sistema", content = {
+                    @Content()
+            })
+    })
+    public Integer getByIdRecursivo(@PathVariable Integer id) {
+        long totalUser = usuarioRepository.count();
+        usuarioService.buscarPorIdRecursivo(0, totalUser, id);
+        return 200;
     }
 
 
