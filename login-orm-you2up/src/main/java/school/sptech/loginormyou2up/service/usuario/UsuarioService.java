@@ -324,7 +324,7 @@ public class UsuarioService {
         if (atual >= total) {
             return ResponseEntity.status(204).build();
         } else {
-            Optional<Usuario> usuarioOptional = usuarioRepository.findById(atual);
+            Optional<Usuario> usuarioOptional = usuarioRepository.findById(atual + 1);
             if (usuarioOptional.get().getId() == id) {
                 UsuarioDtoResposta userDtoResposta = UsuarioMapper.convertToDtoResposta(usuarioOptional.get());
                 return ResponseEntity.status(200).body(userDtoResposta);

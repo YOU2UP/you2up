@@ -252,10 +252,10 @@ public class UsuarioController {
                     @Content()
             })
     })
-    public Integer getByIdRecursivo(@PathVariable Integer id) {
+    public ResponseEntity<UsuarioDtoResposta> getByIdRecursivo(@PathVariable Integer id) {
         long totalUser = usuarioRepository.count();
-        usuarioService.buscarPorIdRecursivo(0, totalUser, id);
-        return 200;
+        System.out.println(totalUser);
+        return usuarioService.buscarPorIdRecursivo(0, totalUser, id);
     }
 
 
