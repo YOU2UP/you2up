@@ -64,6 +64,20 @@ public class UsuarioController {
         return ResponseEntity.created(null).body(usuarioService.criar(usuarioDtoCriacao));
     }
 
+    @PostMapping("/imagem-perfil/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - foto de perfil alterada " +
+                    "com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro ao tentar " +
+                    "alterar a foto de perfil", content = {
+                    @Content()
+            })
+    })
+    public ResponseEntity<String> postImagemPerfil(@PathVariable int id, @RequestParam String link, @RequestParam String token) {
+        System.out.println(link);
+        return ResponseEntity.ok().body(usuarioService.postFotoPerfil(id, link, token));
+    }
+
     @GetMapping("/{id}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - Usuário com id escolhido " +

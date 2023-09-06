@@ -2,6 +2,7 @@ package school.sptech.loginormyou2up.service.usuario;
 
 import org.hibernate.hql.internal.ast.tree.TableReferenceNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.ast.StringLiteral;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -332,6 +333,43 @@ public class UsuarioService {
                 return buscarPorIdRecursivo(atual + 1, total, id);
             }
         }
+    }
+
+    public String postFotoPerfil(int id, String link, String token) {
+        Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
+
+        if (usuarioOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        //adiciona o token ao link pois o link original interpreta
+        // o caracter & como um novo parâmetro
+
+        StringBuffer linkTranformacao = new StringBuffer(link + "&token=" + token);
+
+        int contagemBarras = 0;
+
+        for (int i = 0; i < linkTranformacao.length(); i++) {
+            if (linkTranformacao.charAt(i) == '/') {
+                contagemBarras++;
+            }
+
+            //localiza a oitava barra que era pra ser %2F e a substitui pelo caracter necessário
+            if (contagemBarras == 8) {
+                linkTranformacao.delete(i, i+1);
+                linkTranformacao.insert(i, "%2F");
+                break;
+            }
+        }
+
+        String newLink = linkTranformacao.toString();
+
+        Usuario usuario = usuarioOpt.get();
+        usuario.setFotoPerfil(newLink);
+
+        usuarioRepository.save(usuario);
+
+        return newLink;
     }
 
 }

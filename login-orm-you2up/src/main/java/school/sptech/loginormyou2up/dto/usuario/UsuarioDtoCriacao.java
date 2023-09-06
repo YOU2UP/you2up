@@ -33,6 +33,7 @@ public class UsuarioDtoCriacao {
 
     private String academia;
 
+
     public UsuarioDtoCriacao(Integer id, String nome, String email, String senha, LocalDate dataNascimento, String descricao, String estagio, String academia) {
         this.id = id;
         this.nome = nome;

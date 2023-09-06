@@ -9,6 +9,7 @@ public class UsuarioDtoJson { // essa classe mostra o usuario sem mostrar o seu 
     @Schema(description = "E-mail do usuário", example = "natalia@example.com")
     private String email;
 
+
     public UsuarioDtoJson(Integer id, String nome, String email) {
         this.id = id;
         this.nome = nome;

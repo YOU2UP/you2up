@@ -16,20 +16,29 @@ public class UsuarioDetalhesDto implements UserDetails {
     @Schema(description = "Senha do usuário", example = "mypassword")
     private final String senha;
 
+    @Schema(description = "Link da foto de perfil do usuário", example = "https://www.imagensempng.com.br/wp-content/uploads/2021/09/Icone-usuario-Png-1024x1024.png")
+    private final String fotoPerfil;
+
     public UsuarioDetalhesDto(Usuario usuario) {
         nome = usuario.getNome();
         email = usuario.getEmail();
         senha = usuario.getSenha();
+        fotoPerfil = usuario.getFotoPerfil();
     }
 
-    public UsuarioDetalhesDto(String nome, String email, String senha) {
+    public UsuarioDetalhesDto(String nome, String email, String senha, String fotoPerfil) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.fotoPerfil = fotoPerfil;
     }
 
     public String getNome() {
         return nome;
+    }
+
+    public String getFotoPerfil() {
+        return fotoPerfil;
     }
 
     @Override
@@ -66,4 +75,6 @@ public class UsuarioDetalhesDto implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+
+
 }

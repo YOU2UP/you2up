@@ -29,6 +29,9 @@ public class UsuarioDtoResposta {
     @Schema(description = "Estágio do usuário (iniciante, intermediário, avançado)", example = "iniciante")
     private String estagio;
 
+    @Schema(description = "Link da foto de perfil do usuário", example = "https://www.imagensempng.com.br/wp-content/uploads/2021/09/Icone-usuario-Png-1024x1024.png")
+    private String fotoPefil;
+
     @Schema(description = "Meta de treinos do usuário", example = "5")
     private int metaTreinos;
 
@@ -43,6 +46,7 @@ public class UsuarioDtoResposta {
 
     @Schema(description = "Lista de matches do usuário")
     private List<MatchDtoResposta> matches;
+
 
     public UsuarioDtoResposta(Integer id, String nome, String email, LocalDate dataNascimento, Double notaMedia, String estagio, int metaTreinos, List<NotificacaoDtoResposta> notificacoes, List<TreinoDtoJsonUsuario> treinos, LocalTreinoUsuario localTreino, List<MatchDtoResposta> matches) {
         this.id = id;
@@ -150,6 +154,15 @@ public class UsuarioDtoResposta {
         this.matches = matches;
     }
 
+
+    public String getFotoPefil() {
+        return fotoPefil;
+    }
+
+    public void setFotoPefil(String fotoPefil) {
+        this.fotoPefil = fotoPefil;
+    }
+
     @Override
     public String toString() {
         return "UsuarioDtoResposta{" +
@@ -166,5 +179,5 @@ public class UsuarioDtoResposta {
                 ", matches=" + matches +
                 '}';
     }
-
+  
 }
