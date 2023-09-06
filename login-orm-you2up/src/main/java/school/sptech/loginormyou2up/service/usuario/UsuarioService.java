@@ -4,6 +4,7 @@ import org.hibernate.hql.internal.ast.tree.TableReferenceNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.ast.StringLiteral;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -307,6 +308,33 @@ public class UsuarioService {
         return null;
     }
 
+    public void exibeRecursivo(List<UsuarioDtoResposta> userLists, int tamanho){
+        if (tamanho == userLists.size() -1) {
+            UsuarioDtoResposta user = userLists.get(tamanho);
+            System.out.println(user);
+        } else {
+            UsuarioDtoResposta user = userLists.get(tamanho);
+            System.out.println(user);
+            System.out.println("=".repeat(50));
+            tamanho++;
+            exibeRecursivo(userLists, tamanho);
+        }
+    }
+
+    public ResponseEntity<UsuarioDtoResposta> buscarPorIdRecursivo(Integer atual, long total, Integer id){
+        if (atual >= total) {
+            return ResponseEntity.status(204).build();
+        } else {
+            Optional<Usuario> usuarioOptional = usuarioRepository.findById(atual + 1);
+            if (usuarioOptional.get().getId() == id) {
+                UsuarioDtoResposta userDtoResposta = UsuarioMapper.convertToDtoResposta(usuarioOptional.get());
+                return ResponseEntity.status(200).body(userDtoResposta);
+            } else {
+                return buscarPorIdRecursivo(atual + 1, total, id);
+            }
+        }
+    }
+
     public String postFotoPerfil(int id, String link, String token) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
 
@@ -343,6 +371,5 @@ public class UsuarioService {
 
         return newLink;
     }
-
 
 }

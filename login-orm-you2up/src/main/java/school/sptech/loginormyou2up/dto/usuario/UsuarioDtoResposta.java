@@ -154,6 +154,7 @@ public class UsuarioDtoResposta {
         this.matches = matches;
     }
 
+
     public String getFotoPefil() {
         return fotoPefil;
     }
@@ -161,4 +162,22 @@ public class UsuarioDtoResposta {
     public void setFotoPefil(String fotoPefil) {
         this.fotoPefil = fotoPefil;
     }
+
+    @Override
+    public String toString() {
+        return "UsuarioDtoResposta{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", notaMedia=" + notaMedia +
+                ", estagio='" + estagio + '\'' +
+                ", metaTreinos=" + metaTreinos +
+                ", notificacoes=" + notificacoes +
+                ", treinos=" + treinos +
+                ", localTreino=" + localTreino +
+                ", matches=" + matches +
+                '}';
+    }
+  
 }
