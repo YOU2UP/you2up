@@ -3,6 +3,7 @@ package school.sptech.loginormyou2up.dto.usuario;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
 
 import java.util.Collection;
@@ -15,7 +16,6 @@ public class UsuarioDetalhesDto implements UserDetails {
     private final String email;
     @Schema(description = "Senha do usuário", example = "mypassword")
     private final String senha;
-
     @Schema(description = "Link da foto de perfil do usuário", example = "https://www.imagensempng.com.br/wp-content/uploads/2021/09/Icone-usuario-Png-1024x1024.png")
     private final String fotoPerfil;
 
@@ -31,6 +31,14 @@ public class UsuarioDetalhesDto implements UserDetails {
         this.email = email;
         this.senha = senha;
         this.fotoPerfil = fotoPerfil;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getSenha() {
+        return senha;
     }
 
     public String getNome() {

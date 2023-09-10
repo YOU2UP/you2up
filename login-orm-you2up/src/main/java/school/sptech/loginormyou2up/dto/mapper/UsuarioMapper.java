@@ -136,4 +136,18 @@ public class UsuarioMapper {
 
         return dto;
     }
+
+    public static UsuarioDtoRetornoMatch convertToUsuarioDtoRetornoMatch(Usuario usuario) {
+        UsuarioDtoRetornoMatch dto = new UsuarioDtoRetornoMatch();
+
+        dto.setId(usuario.getId());
+        dto.setNome(usuario.getNome());
+        dto.setEmail(usuario.getEmail());
+        dto.setFotoPerfil(usuario.getFotoPerfil());
+        dto.setLocalTreino(usuario.getLocalTreino());
+        dto.setDescricao(usuario.getDescricao());
+        dto.setDataNascimento(usuario.getDataNascimento());
+
+        return dto;
+    }
 }
