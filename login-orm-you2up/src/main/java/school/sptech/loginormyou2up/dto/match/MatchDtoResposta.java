@@ -2,6 +2,7 @@ package school.sptech.loginormyou2up.dto.match;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
+import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoRetornoMatch;
 import school.sptech.loginormyou2up.dto.usuario.UsuarioResumoDto;
 
 import java.time.LocalDateTime;
@@ -18,10 +19,10 @@ public class MatchDtoResposta {
     private boolean isAtivo;
 
     @Schema(description = "Usuário 1 do match")
-    private UsuarioResumoDto usuario1;
+    private UsuarioDtoRetornoMatch usuario1;
 
     @Schema(description = "Usuário 2 do match")
-    private UsuarioResumoDto usuario2;
+    private UsuarioDtoRetornoMatch usuario2;
 
    public Integer getId() {
       return id;
@@ -47,19 +48,21 @@ public class MatchDtoResposta {
       isAtivo = ativo;
    }
 
-   public UsuarioResumoDto getUsuario1() {
-      return usuario1;
-   }
+    public UsuarioDtoRetornoMatch getUsuario1() {
+        return usuario1;
+    }
 
-   public void setUsuario1(UsuarioResumoDto usuario1) {
-      this.usuario1 = usuario1;
-   }
+    public void setUsuario1(UsuarioDtoRetornoMatch usuario1) {
+        this.usuario1 = usuario1;
+    }
 
-   public UsuarioResumoDto getUsuario2() {
-      return usuario2;
-   }
+    public UsuarioDtoRetornoMatch getUsuario2() {
+        return usuario2;
+    }
 
-   public void setUsuario2(UsuarioResumoDto usuario2) {
-      this.usuario2 = usuario2;
-   }
+    public void setUsuario2(UsuarioDtoRetornoMatch usuario2) {
+        this.usuario2 = usuario2;
+    }
 }
+
+
