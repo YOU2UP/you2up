@@ -22,6 +22,7 @@ public class Usuario{
     private String senha;
     private LocalDate dataNascimento;
     private String descricao;
+    private String fotoPerfil;
 
     private String estagio; // iniciante, intermediário, avançado
 
@@ -33,6 +34,16 @@ public class Usuario{
 
     @OneToMany(mappedBy = "usuario")
     private List<Notificacao> notificacoes;
+
+    @OneToOne
+    private LocalTreinoUsuario localTreino;
+
+    @OneToMany(mappedBy = "avaliado")
+    private List<Avaliacao> avaliacoesRecebidas;
+
+    @OneToMany(mappedBy = "avaliador")
+    private List<Avaliacao> avaliacoesDadas;
+
 
     public Usuario(Integer id, String nome, String email, String senha, LocalDate dataNascimento, String descricao, String estagio, int metaTreinos, List<TreinoHasUsuario> treinos, List<Notificacao> notificacoes) {
         this.id = id;
@@ -49,16 +60,6 @@ public class Usuario{
 
     public Usuario() {
     }
-
-    @OneToOne
-    private LocalTreinoUsuario localTreino;
-
-    @OneToMany(mappedBy = "avaliado")
-    private List<Avaliacao> avaliacoesRecebidas;
-
-    @OneToMany(mappedBy = "avaliador")
-    private List<Avaliacao> avaliacoesDadas;
-
 
     
     public int getMetaTreinos() {
@@ -148,4 +149,13 @@ public class Usuario{
     public void setLocalTreino(LocalTreinoUsuario locaTreino) {
         this.localTreino = locaTreino;
     }
+
+    public String getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
+    }
+
 }

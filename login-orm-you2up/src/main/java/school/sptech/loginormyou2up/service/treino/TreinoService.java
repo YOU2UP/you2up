@@ -23,7 +23,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Service
-public class TreinoService {
+public class    TreinoService {
 
     @Autowired
     private TreinoRepository treinoRepository;
@@ -166,6 +166,23 @@ public class TreinoService {
         return TreinoMapper.convertToTreinoDtoResposta(treinos);
     }
 
+    public List<TreinoDtoResposta> findTreinosEntreDoisUsuarios(int idUsuario1, int idUsuario2) {
+        List<TreinoHasUsuario> treinoHasUsuarios1 = treinoHasUsuarioRepository.contagemDeTreinosPorUsuario(idUsuario1);
+        List<TreinoHasUsuario> treinoHasUsuarios2 = treinoHasUsuarioRepository.contagemDeTreinosPorUsuario(idUsuario2);
+        List<Treino> treinos = new ArrayList<>();
+
+        for (TreinoHasUsuario tu1: treinoHasUsuarios1) {
+            for (TreinoHasUsuario tu2: treinoHasUsuarios2) {
+                if (tu1.getTreino().getId() == tu2.getTreino().getId()) {
+                    treinos.add(treinoRepository.findById(tu1.getTreino().getId()).get());
+                }
+            }
+        }
+
+        return TreinoMapper.convertToTreinoDtoResposta(treinos);
+    }
+
+
     public List<String> getUsuariosTreinados(int idUsuario){
         if(usuarioRepository.findById(idUsuario).isEmpty()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
@@ -194,6 +211,7 @@ public class TreinoService {
 
     }
 
+
     public TreinoDtoResposta findTreinoByHash(int id) {
         // Verificar se o treino está na tabela hash
         TreinoDtoResposta treinoDto = hashTable.get(id);
@@ -218,7 +236,6 @@ public class TreinoService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Treino não encontrado");
         }
     }
-
 
 
     public void delete(Treino treino) {

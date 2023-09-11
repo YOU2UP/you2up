@@ -16,6 +16,7 @@ import school.sptech.loginormyou2up.repository.UsuarioRepository;
 import school.sptech.loginormyou2up.service.extra.ListaObj;
 import school.sptech.loginormyou2up.service.usuario.UsuarioService;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +62,20 @@ public class UsuarioController {
     public ResponseEntity<UsuarioDtoRespostaCadastro> post(@RequestBody @Valid UsuarioDtoCriacao usuarioDtoCriacao) {
         System.out.println(usuarioDtoCriacao.getEmail());
         return ResponseEntity.created(null).body(usuarioService.criar(usuarioDtoCriacao));
+    }
+
+    @PostMapping("/imagem-perfil/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - foto de perfil alterada " +
+                    "com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro ao tentar " +
+                    "alterar a foto de perfil", content = {
+                    @Content()
+            })
+    })
+    public ResponseEntity<String> postImagemPerfil(@PathVariable int id, @RequestParam String link, @RequestParam String token) {
+        System.out.println(link);
+        return ResponseEntity.ok().body(usuarioService.postFotoPerfil(id, link, token));
     }
 
     @GetMapping("/{id}")
@@ -215,6 +230,48 @@ public class UsuarioController {
     public ResponseEntity<QuantidadeTreinosPorDiaSemanaDto> getQuantidadeTreinosSemanaById(@PathVariable int id){
         return ResponseEntity.ok().body(usuarioService.getQuantidadeTreinosPorDiaSemana(id));
     }
+
+    @GetMapping("recursivo")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - Lista com todos usuários " +
+                    "retornada"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
+                    "ao retornar a lista de usuários", content = {
+                    @Content()
+            }),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
+                    "você não está autenticado no sistema", content = {
+                    @Content()
+            })
+    })
+    public void getAllRecursivo() {
+        List<UsuarioDtoResposta> usersList = usuarioService.getAll();
+        usuarioService.exibeRecursivo(usersList, 0);
+    }
+
+    @GetMapping("recursivo/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - Usuário com id escolhido " +
+                    "encontrado"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
+                    "ao retornar o usuário com o id especificado", content = {
+                    @Content( )
+            }),
+            @ApiResponse(responseCode = "204", description = "Não existe usuário cadastrado " +
+                    "com esse id", content = {
+                    @Content( )
+            }),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
+                    "você não está autenticado no sistema", content = {
+                    @Content()
+            })
+    })
+    public ResponseEntity<UsuarioDtoResposta> getByIdRecursivo(@PathVariable Integer id) {
+        long totalUser = usuarioRepository.count();
+        System.out.println(totalUser);
+        return usuarioService.buscarPorIdRecursivo(0, totalUser, id);
+    }
+
 
 }
 
