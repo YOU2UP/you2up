@@ -15,13 +15,12 @@ import school.sptech.loginormyou2up.repository.UsuarioRepository;
 import school.sptech.loginormyou2up.dto.mapper.TreinoMapper;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
+import school.sptech.loginormyou2up.service.extra.HashObj;
 
 
 import javax.transaction.Transactional;
-import javax.persistence.criteria.CriteriaBuilder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 @Service
 public class    TreinoService {
@@ -35,6 +34,7 @@ public class    TreinoService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    private HashObj<Integer, TreinoDtoResposta> hashTable = new HashObj<>(); // Inicializa a tabela hash com um tamanho de 100 como exemplo
 
     public TreinoDtoResposta criar(TreinoDtoCriacao treinoDtoCriacao) {
         Treino treino = TreinoMapper.convertToTreino(treinoDtoCriacao);
@@ -210,6 +210,33 @@ public class    TreinoService {
         return nomes;
 
     }
+
+
+    public TreinoDtoResposta findTreinoByHash(int id) {
+        // Verificar se o treino está na tabela hash
+        TreinoDtoResposta treinoDto = hashTable.get(id);
+
+        if (treinoDto != null) {
+            // Se encontrado na tabela hash, retornar imediatamente
+            return treinoDto;
+        }
+
+        // Se não encontrado na tabela hash, buscar no banco de dados
+        Optional<Treino> treinoOptional = treinoRepository.findById(id);
+
+        if (treinoOptional.isPresent()) {
+            // Converter o treino para um DTO de resposta
+            TreinoDtoResposta treinoResposta = TreinoMapper.convertToTreinoDtoResposta(treinoOptional.get());
+
+            // Adicionar o treino à tabela hash
+            hashTable.put(id, treinoResposta);
+
+            return treinoResposta;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Treino não encontrado");
+        }
+    }
+
 
     public void delete(Treino treino) {
         treinoRepository.delete(treino);
