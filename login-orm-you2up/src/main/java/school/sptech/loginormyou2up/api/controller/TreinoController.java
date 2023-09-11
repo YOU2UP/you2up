@@ -7,8 +7,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import school.sptech.loginormyou2up.domain.treino.Treino;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
@@ -19,6 +22,11 @@ import school.sptech.loginormyou2up.service.extra.PilhaObj;
 import school.sptech.loginormyou2up.service.treino.TreinoService;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 @Tag(name = "Treinos", description =
@@ -149,6 +157,7 @@ public class TreinoController {
         }
     }
 
+
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - contagem de treinos realizada com sucessoo"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
@@ -202,9 +211,22 @@ public class TreinoController {
             treinoService.realizaTreinoNaFila(naoRealizados.poll());
             return ResponseEntity.status(204).build();
         }
-
-
     }
 
+
+    @GetMapping("/findTreinoByHash/{id}")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Treino encontrado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Treino não encontrado")
+    })
+    public ResponseEntity<TreinoDtoResposta> getTreinoByHash(@PathVariable int id) {
+        TreinoDtoResposta treinoDto = treinoService.findTreinoByHash(id);
+
+        if (treinoDto != null) {
+            return ResponseEntity.status(200).body(treinoDto);
+        } else {
+            return ResponseEntity.status(404).build();
+        }
+    }
 }
 
