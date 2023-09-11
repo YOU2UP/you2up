@@ -30,7 +30,7 @@ public class TreinoController {
     @Autowired
     private TreinoService treinoService;
 
-    private PilhaObj<Integer> pilhaDesfazer= new PilhaObj<>(10);
+    private PilhaObj<Integer> pilhaDesfazer = new PilhaObj<>(10);
 
     private FilaObj<Integer> naoRealizados = new FilaObj<>(90);
 
@@ -41,11 +41,11 @@ public class TreinoController {
                     "retornada"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
                     "ao retornar a lista de treinos", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
                     "você não está autenticado no sistema", content = {
-                    @Content( )
+                    @Content()
             })
     })
     public ResponseEntity<List<TreinoDtoResposta>> getAll() {
@@ -58,7 +58,7 @@ public class TreinoController {
                     "com sucesso"),
             @ApiResponse(responseCode = "400", description = "Houve um erro ao tentar " +
                     "cadastrar o treino", content = {
-                    @Content( )
+                    @Content()
             })
     })
     public ResponseEntity<TreinoDtoResposta> post(@RequestBody @Valid TreinoDtoCriacao treino) {
@@ -74,7 +74,7 @@ public class TreinoController {
                     "encontrado"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
                     "ao retornar o treino com o id especificado", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "404", description = "Não existe treino cadastrado" +
                     "com esse id", content = {
@@ -82,7 +82,7 @@ public class TreinoController {
             }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
                     "você não está autenticado no sistema", content = {
-                    @Content( )
+                    @Content()
             })
     })
     public ResponseEntity<TreinoDtoResposta> getById(@PathVariable int id) {
@@ -95,15 +95,15 @@ public class TreinoController {
                     "deletado"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
                     "ao retornar o treino com o id especificado", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "404", description = "Não existe treino cadastrado" +
                     "com esse id", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
                     "você não está autenticado no sistema", content = {
-                    @Content( )
+                    @Content()
             })
     })
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
@@ -117,7 +117,7 @@ public class TreinoController {
                     "foi atualizado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
                     "para atualizar o treino com o id especificado", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "404", description = "Não existe treino cadastrado" +
                     "com esse id", content = {
@@ -129,7 +129,7 @@ public class TreinoController {
             })
     })
     public ResponseEntity<TreinoDtoResposta> putById(@PathVariable Integer id, @RequestBody Treino treino) {
-        return ResponseEntity.ok().body(treinoService.putById(id,treino));
+        return ResponseEntity.ok().body(treinoService.putById(id, treino));
     }
 
     @DeleteMapping("/desfazer")
@@ -137,7 +137,7 @@ public class TreinoController {
             @ApiResponse(responseCode = "200", description = "Ok - última ação desfeita"),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
                     "você não está autenticado no sistema", content = {
-                    @Content( )
+                    @Content()
             })
     })
     public ResponseEntity<Void> desfazer() {
@@ -153,33 +153,32 @@ public class TreinoController {
             @ApiResponse(responseCode = "200", description = "Ok - contagem de treinos realizada com sucessoo"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
                     "para atualizar o treino com o id especificado", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "404", description = "Não existe treino cadastrado " +
                     "com esse id", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
                     "você não está autenticado no sistema", content = {
-                    @Content( )
+                    @Content()
             })
     })
     @GetMapping("/contagem-treinos/{id}")
-    public ResponseEntity<List<String>> getNomesParceirosDeTreino(@PathVariable int id){
+    public ResponseEntity<List<String>> getNomesParceirosDeTreino(@PathVariable int id) {
         return ResponseEntity.ok().body(treinoService.getUsuariosTreinados(id));
     }
-  
 
-  
+
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ok - ação refeita"),
             @ApiResponse(responseCode = "404", description = "Não existe um usuário cadastrado " +
                     "com esse id", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
                     "você não está autenticado no sistema", content = {
-                    @Content( )
+                    @Content()
             })
     })
     @PatchMapping("/realizar/{idUsuario}")
@@ -204,6 +203,16 @@ public class TreinoController {
         }
 
 
+    }
+
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity<List<TreinoDtoResposta>> getTreinosByUsuarioId(@PathVariable int id) {
+        return ResponseEntity.ok().body(treinoService.findTreinosByUsuarioId(id));
+    }
+
+    @GetMapping("/usuario/{id1}/{id2}")
+    public ResponseEntity<List<TreinoDtoResposta>> getTreinosEntreDoisUsuarios(@PathVariable int id1, @PathVariable int id2) {
+        return ResponseEntity.ok().body(treinoService.findTreinosEntreDoisUsuarios(id1, id2));
     }
 
 }

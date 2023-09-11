@@ -23,4 +23,5 @@ public interface TreinoHasUsuarioRepository extends JpaRepository<TreinoHasUsuar
     @Query("SELECT t FROM TreinoHasUsuario t WHERE t.usuario.id = :idUsuario")
     List<TreinoHasUsuario> contagemDeTreinosPorUsuario(int idUsuario);
 
+
 }

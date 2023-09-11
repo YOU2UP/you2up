@@ -11,7 +11,7 @@ import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import java.util.List;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TreinoRepository extends JpaRepository<Treino, Integer> {
-
 }
