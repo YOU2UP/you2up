@@ -24,8 +24,8 @@ public class MatchMapper {
         dto.setId(match.getId());
         dto.setAtivo(match.isAtivo());
         dto.setDataMatch(match.getDataMatch());
-        dto.setUsuario1(UsuarioMapper.convertToUsuarioDtoRetornoMatch(match.getUsuario1()));
-        dto.setUsuario2(UsuarioMapper.convertToUsuarioDtoRetornoMatch(match.getUsuario2()));
+        dto.setUsuario1(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(match.getUsuario1()));
+        dto.setUsuario2(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(match.getUsuario2()));
 
         return dto;
     }
