@@ -13,17 +13,13 @@ public class TreinoDtoJsonUsuario { // essa classe mostra seu treino sem mostrar
     @Schema(description = "Data e hora do treino")
     private LocalDateTime dataHora;
 
-    @Schema(description = "Quantidade de treinos realizados", example = "10")
-    private Integer quantidadeTreinos;
-
     @Schema(description = "Indica se o treino foi realizado ou não", example = "true")
     private boolean isRealizado;
 
-    public TreinoDtoJsonUsuario(Integer id, String periodo, LocalDateTime dataHora, Integer quantidadeTreinos, boolean isRealizado) {
+    public TreinoDtoJsonUsuario(Integer id, String periodo, LocalDateTime dataHora, boolean isRealizado) {
         this.id = id;
         this.periodo = periodo;
         this.dataHora = dataHora;
-        this.quantidadeTreinos = quantidadeTreinos;
         this.isRealizado = isRealizado;
     }
 
@@ -36,14 +32,6 @@ public class TreinoDtoJsonUsuario { // essa classe mostra seu treino sem mostrar
 
     public void setDataHora(LocalDateTime dataHora) {
         this.dataHora = dataHora;
-    }
-
-    public Integer getQuantidadeTreinos() {
-        return quantidadeTreinos;
-    }
-
-    public void setQuantidadeTreinos(Integer quantidadeTreinos) {
-        this.quantidadeTreinos = quantidadeTreinos;
     }
 
     public boolean isRealizado() {

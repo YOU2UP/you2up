@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import school.sptech.loginormyou2up.domain.avaliacao.Avaliacao;
 import school.sptech.loginormyou2up.domain.treino.Treino;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuarioId;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoJson;
+import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoRetornoDetalhes;
+import school.sptech.loginormyou2up.repository.AvaliacaoRepository;
 import school.sptech.loginormyou2up.repository.TreinoHasUsuarioRepository;
 import school.sptech.loginormyou2up.repository.TreinoRepository;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
@@ -23,7 +26,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Service
-public class    TreinoService {
+public class TreinoService {
 
     @Autowired
     private TreinoRepository treinoRepository;
@@ -34,10 +37,14 @@ public class    TreinoService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private AvaliacaoRepository avaliacaoRepository;
+
     private HashObj<Integer, TreinoDtoResposta> hashTable = new HashObj<>(); // Inicializa a tabela hash com um tamanho de 100 como exemplo
 
     public TreinoDtoResposta criar(TreinoDtoCriacao treinoDtoCriacao) {
         Treino treino = TreinoMapper.convertToTreino(treinoDtoCriacao);
+        treino.setRealizado(false);
         Treino treinoCadastrado = treinoRepository.save(treino);
 
         List<TreinoHasUsuario> treinoHasUsuarios = new ArrayList<>();
@@ -46,8 +53,6 @@ public class    TreinoService {
             TreinoHasUsuario treinoHasUsuario = new TreinoHasUsuario();
             treinoHasUsuario.setTreino(treinoCadastrado);
             treinoHasUsuario.setInicioTreino(treinoDtoCriacao.getInicioTreino());
-            treinoHasUsuario.setQuantidadeTreinos(1);
-            treinoHasUsuario.setRealizado(false);
 
             TreinoHasUsuarioId treinoHasUsuarioId = new TreinoHasUsuarioId();
             treinoHasUsuarioId.setTreinoId(treinoCadastrado.getId());
@@ -106,7 +111,7 @@ public class    TreinoService {
     public void deleteById(Integer id) {
         Optional<Treino> treinoOpt = treinoRepository.findById(id);
 
-        if (treinoOpt.isEmpty()){
+        if (treinoOpt.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         } else {
             treinoRepository.deleteById(id);
@@ -125,7 +130,7 @@ public class    TreinoService {
 
     }
 
-    public TreinoDtoResposta putById(Integer id, Treino treino){
+    public TreinoDtoResposta putById(Integer id, Treino treino) {
         Optional<Treino> treinoOpt = treinoRepository.findById(id);
 
         if (treinoOpt.isPresent()) {
@@ -136,30 +141,11 @@ public class    TreinoService {
     }
 
 
-    public List<Integer> buscarIdsTreino(int idUsuario) {
-        List<TreinoHasUsuario> t = treinoHasUsuarioRepository.encontrarTreinosPeloIdUsuario(idUsuario);
-        List<Integer> ids = new ArrayList<>();
-        if (t.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } else {
-            for (int i = 0; i < t.size(); i++) {
-                ids.add(t.get(i).getTreino().getId());
-            }
-            return ids;
-        }
-    }
-
-    @Transactional
-    public int realizaTreinoNaFila(int idTreino) {
-        Integer rowAffected = treinoHasUsuarioRepository.realizarTreino(idTreino);
-        return rowAffected;   
-    }
-
     public List<TreinoDtoResposta> findTreinosByUsuarioId(int idUsuario) {
         List<TreinoHasUsuario> treinoHasUsuarios = treinoHasUsuarioRepository.contagemDeTreinosPorUsuario(idUsuario);
         List<Treino> treinos = new ArrayList<>();
 
-        for (TreinoHasUsuario tu: treinoHasUsuarios) {
+        for (TreinoHasUsuario tu : treinoHasUsuarios) {
             treinos.add(treinoRepository.findById(tu.getTreino().getId()).get());
         }
 
@@ -171,8 +157,8 @@ public class    TreinoService {
         List<TreinoHasUsuario> treinoHasUsuarios2 = treinoHasUsuarioRepository.contagemDeTreinosPorUsuario(idUsuario2);
         List<Treino> treinos = new ArrayList<>();
 
-        for (TreinoHasUsuario tu1: treinoHasUsuarios1) {
-            for (TreinoHasUsuario tu2: treinoHasUsuarios2) {
+        for (TreinoHasUsuario tu1 : treinoHasUsuarios1) {
+            for (TreinoHasUsuario tu2 : treinoHasUsuarios2) {
                 if (tu1.getTreino().getId() == tu2.getTreino().getId()) {
                     treinos.add(treinoRepository.findById(tu1.getTreino().getId()).get());
                 }
@@ -183,25 +169,25 @@ public class    TreinoService {
     }
 
 
-    public List<String> getUsuariosTreinados(int idUsuario){
-        if(usuarioRepository.findById(idUsuario).isEmpty()){
+    public List<String> getUsuariosTreinados(int idUsuario) {
+        if (usuarioRepository.findById(idUsuario).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
         }
 
         return getUsuariosTreino(findTreinosByUsuarioId(idUsuario), idUsuario);
     }
 
-    public List<String> getUsuariosTreino(List<TreinoDtoResposta> treinos, int idUsuario){
+    public List<String> getUsuariosTreino(List<TreinoDtoResposta> treinos, int idUsuario) {
 
         String nomeUsuario = usuarioRepository.findById(idUsuario).get().getNome();
 
         List<String> nomes = new ArrayList<>();
 
-        for (TreinoDtoResposta t: treinos ) {
-            List<UsuarioDtoJson> usuarios = t.getUsuarios();
+        for (TreinoDtoResposta t : treinos) {
+            List<UsuarioDtoRetornoDetalhes> usuarios = t.getUsuarios();
 
-            for (UsuarioDtoJson u: usuarios) {
-                if (!u.getNome().equalsIgnoreCase(nomeUsuario)){
+            for (UsuarioDtoRetornoDetalhes u : usuarios) {
+                if (!u.getNome().equalsIgnoreCase(nomeUsuario)) {
                     nomes.add(u.getNome());
                 }
             }
@@ -237,6 +223,40 @@ public class    TreinoService {
         }
     }
 
+    public List<TreinoDtoResposta> getTreinosRealizadosNaoAvaliados(int idUsuario) {
+        Optional<Usuario> usuarioOpt = usuarioRepository.findById(idUsuario);
+
+        if (usuarioOpt.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
+        }
+
+        List<TreinoHasUsuario> treinoHasUsuarios = treinoHasUsuarioRepository.selectTreinoFromUsuarioID(idUsuario);
+        List<Treino> treinos = new ArrayList<>();
+        List<Avaliacao> avaliacoes = new ArrayList<>();
+
+        avaliacoes.addAll(avaliacaoRepository.findByIdAvaliador(idUsuario));
+        avaliacoes.addAll(avaliacaoRepository.findByIdAvaliado(idUsuario));
+
+        boolean avaliado = false;
+
+
+        for (TreinoHasUsuario tu : treinoHasUsuarios) {
+            for (Avaliacao a : avaliacoes) {
+                if (tu.getTreino().getId() == a.getTreino().getId()) {
+                    avaliado = true;
+                }
+            }
+
+            if (!avaliado) {
+                treinos.add(tu.getTreino());
+            }
+
+            avaliado = false;
+        }
+
+
+        return TreinoMapper.convertToTreinoDtoResposta(treinos);
+    }
 
     public void delete(Treino treino) {
         treinoRepository.delete(treino);
@@ -250,5 +270,16 @@ public class    TreinoService {
         return !treino.getUsuarios().isEmpty();
     }
 
+    public void realizarTreino(int idTreino){
+        Optional<Treino> treinoOpt = treinoRepository.findById(idTreino);
+
+        if(treinoOpt.isPresent()){
+            Treino treino = treinoOpt.get();
+            treino.setRealizado(true);
+            treinoRepository.save(treino);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Treino não encontrado");
+        }
+    }
 
 }

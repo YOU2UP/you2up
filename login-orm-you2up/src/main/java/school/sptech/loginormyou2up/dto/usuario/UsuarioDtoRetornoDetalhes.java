@@ -5,9 +5,9 @@ import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
 
 import java.time.LocalDate;
 
-public class UsuarioDtoRetornoMatch {
+public class UsuarioDtoRetornoDetalhes {
 
-    //Essa DTO retorna as informações do usuário nos endpoints de match
+    //Essa DTO retorna algumas informações a mais para os endpoints
 
     private int id;
 

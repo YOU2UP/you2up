@@ -17,6 +17,8 @@ public class Treino{
     @OneToMany(mappedBy = "treino", orphanRemoval = true)
     private List<TreinoHasUsuario> usuarios;
 
+    private boolean isRealizado;
+
     public Treino(Integer id, String periodo, List<TreinoHasUsuario> usuarios) {
         this.id = id;
         this.periodo = periodo;
@@ -48,5 +50,13 @@ public class Treino{
 
     public void setUsuarios(List<TreinoHasUsuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    public boolean isRealizado() {
+        return isRealizado;
+    }
+
+    public void setRealizado(boolean realizado) {
+        isRealizado = realizado;
     }
 }

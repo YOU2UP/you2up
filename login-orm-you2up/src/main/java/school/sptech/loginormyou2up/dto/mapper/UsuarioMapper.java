@@ -137,8 +137,8 @@ public class UsuarioMapper {
         return dto;
     }
 
-    public static UsuarioDtoRetornoMatch convertToUsuarioDtoRetornoMatch(Usuario usuario) {
-        UsuarioDtoRetornoMatch dto = new UsuarioDtoRetornoMatch();
+    public static UsuarioDtoRetornoDetalhes convertToUsuarioDtoRetornoDetalhes(Usuario usuario) {
+        UsuarioDtoRetornoDetalhes dto = new UsuarioDtoRetornoDetalhes();
 
         dto.setId(usuario.getId());
         dto.setNome(usuario.getNome());

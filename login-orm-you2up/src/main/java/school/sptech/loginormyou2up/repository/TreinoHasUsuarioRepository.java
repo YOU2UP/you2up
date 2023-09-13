@@ -12,16 +12,11 @@ import java.util.List;
 
 public interface TreinoHasUsuarioRepository extends JpaRepository<TreinoHasUsuario, TreinoHasUsuarioId> {
 
-    @Modifying
-    @Query("UPDATE from TreinoHasUsuario t SET t.isRealizado = true WHERE t.treino.id = :idTreino")
-    public Integer realizarTreino(int idTreino);
-
-    @Query("SELECT t FROM TreinoHasUsuario t WHERE t.usuario.id = :idUsuario AND t.isRealizado = false")
-    List<TreinoHasUsuario> encontrarTreinosPeloIdUsuario(int idUsuario);
-
-
     @Query("SELECT t FROM TreinoHasUsuario t WHERE t.usuario.id = :idUsuario")
     List<TreinoHasUsuario> contagemDeTreinosPorUsuario(int idUsuario);
+
+    @Query("SELECT t FROM TreinoHasUsuario t WHERE t.usuario.id = :idUsuario and t.treino.isRealizado = true")
+    List<TreinoHasUsuario> selectTreinoFromUsuarioID(int idUsuario);
 
 
 }
