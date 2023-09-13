@@ -1,6 +1,6 @@
-INSERT INTO Treino (periodo)
-VALUES ('noturno'),
-       ('vespertino');
+INSERT INTO Treino (periodo, is_realizado)
+VALUES ('noturno', false),
+       ('vespertino', false);
 
 INSERT INTO local_treino_usuario
     (nome, numero, rua, bairro, cidade, uf, is_academia)
@@ -26,37 +26,25 @@ VALUES
     ('Você tem um novo treino no momento', '2023-12-21 17:20:00', 1);
 
 INSERT INTO treino_has_usuario
-    (inicio_treino, is_realizado, quantidade_treinos, treino_id, usuario_id)
+    (inicio_treino, treino_id, usuario_id)
 VALUES
-    ('2023-10-10 20:00:00', false, 1, 1, 1),
-    ('2023-10-10 20:00:00', false, 1, 1, 2),
-    ('2023-12-21 17:20:00', false, 1, 2, 3),
-    ('2023-12-21 17:20:00', false, 1, 2, 4),
-    ('2023-12-21 17:20:00', false, 1, 2, 5);
+    ('2023-10-10 20:00:00', 1, 1),
+    ('2023-10-10 20:00:00', 1, 2),
+    ('2023-12-21 17:20:00', 2, 3),
+    ('2023-12-21 17:20:00', 2, 4),
+    ('2023-12-21 17:20:00', 2, 5);
 
 INSERT INTO avaliacao
-    (nota, avaliador_id, avaliado_id)
+    (nota, avaliador_id, avaliado_id, treino_id)
 VALUES
-    (5, 1, 2),
-    (4.3, 1, 3),
-    (3, 1, 4),
-    (2.5, 1, 5),
-    (1.5, 2, 1),
-    (2, 2, 3),
-    (3, 2, 4),
-    (4.9, 2, 5),
-    (5, 3, 1),
-    (4.1, 3, 2),
-    (3.3, 3, 4),
-    (2.7, 3, 5),
-    (1, 4, 1),
-    (2, 4, 2),
-    (3, 4, 3),
-    (4.5, 4, 5),
-    (5, 5, 1),
-    (4, 5, 2),
-    (3, 5, 3),
-    (2, 5, 4);
+    (5, 1, 2, 1),
+    (1.5, 2, 1, 1),
+    (3.3, 3, 4, 2),
+    (2.7, 3, 5, 2),
+    (3, 4, 3, 2),
+    (4.5, 4, 5, 2),
+    (3, 5, 3, 2),
+    (2, 5, 4, 2);
 
 INSERT INTO match
     (data_match, is_ativo ,usuario1_id, usuario2_id)
