@@ -215,5 +215,20 @@ public class TreinoController {
         return ResponseEntity.ok().body(treinoService.findTreinosEntreDoisUsuarios(id1, id2));
     }
 
+
+    @GetMapping("/listTreinosCsv/{id}")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Arquivo CSV gerado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Treinos não encontrados para o usuário")
+    })
+    public ResponseEntity<String> listTreinosCsv(@PathVariable int id) {
+        String csvFileName = treinoService.generateTreinosCsv(id);
+
+        if (csvFileName == null) {
+            return ResponseEntity.status(404).body("Treinos não encontrados para o usuário");
+        }
+
+        return ResponseEntity.status(200).body("Arquivo CSV gerado com sucesso: " + csvFileName);
+    }
 }
 
