@@ -19,6 +19,9 @@ import school.sptech.loginormyou2up.service.extra.HashObj;
 
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -213,24 +216,14 @@ public class    TreinoService {
 
 
     public TreinoDtoResposta findTreinoByHash(int id) {
-        // Verificar se o treino está na tabela hash
         TreinoDtoResposta treinoDto = hashTable.get(id);
-
         if (treinoDto != null) {
-            // Se encontrado na tabela hash, retornar imediatamente
             return treinoDto;
         }
-
-        // Se não encontrado na tabela hash, buscar no banco de dados
         Optional<Treino> treinoOptional = treinoRepository.findById(id);
-
         if (treinoOptional.isPresent()) {
-            // Converter o treino para um DTO de resposta
             TreinoDtoResposta treinoResposta = TreinoMapper.convertToTreinoDtoResposta(treinoOptional.get());
-
-            // Adicionar o treino à tabela hash
             hashTable.put(id, treinoResposta);
-
             return treinoResposta;
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Treino não encontrado");
@@ -250,5 +243,52 @@ public class    TreinoService {
         return !treino.getUsuarios().isEmpty();
     }
 
+    public String generateTreinosCsv(int idUsuario) {
+        List<TreinoDtoResposta> treinos = findTreinosByUsuarioId(idUsuario);
 
+        if (treinos.isEmpty()) {
+            return null; // Não há treinos para este usuário
+        }
+
+        String nomeUsuario = usuarioRepository.findById(idUsuario)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"))
+                .getNome();
+
+        String formattedNomeUsuario = nomeUsuario.replaceAll("\\s+", "_");
+
+        StringBuilder csvContent = new StringBuilder();
+        csvContent.append("Usuario 1,Email Usuario 1,Usuario 2,Email Usuario 2,Data Treino,Periodo Treino\n");
+
+        for (TreinoDtoResposta treino : treinos) {
+            List<UsuarioDtoJson> usuarios = treino.getUsuarios();
+            UsuarioDtoJson usuario1 = usuarios.get(0);
+            UsuarioDtoJson usuario2 = usuarios.get(1);
+
+            csvContent.append(String.format("%s,%s,%s,%s,%s,%s\n",
+                    usuario1.getNome(),
+                    usuario1.getEmail(),
+                    usuario2.getNome(),
+                    usuario2.getEmail(),
+                    treino.getInicioTreino(),
+                    treino.getPeriodo()));
+        }
+
+        String csvFileName = "treinos_usuario_" + formattedNomeUsuario + ".csv";
+
+        String desktopDirectory = System.getProperty("user.home") + "/Desktop/";
+
+        String csvFilePath = desktopDirectory + csvFileName;
+
+        try {
+            File arquivoCSV = new File(csvFilePath);
+            FileWriter csvWriter = new FileWriter(arquivoCSV);
+            csvWriter.write(csvContent.toString());
+            csvWriter.close();
+            
+            return csvFileName;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
