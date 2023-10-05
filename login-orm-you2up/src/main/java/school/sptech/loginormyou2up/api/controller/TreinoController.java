@@ -210,19 +210,32 @@ public class TreinoController {
     }
 
 
-    @GetMapping("/listTreinosCsv/{id}")
+    @GetMapping("/listTreinos/{id}/{fileType}")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Arquivo CSV gerado com sucesso"),
+            @ApiResponse(responseCode = "200", description = "Arquivo gerado com sucesso"),
             @ApiResponse(responseCode = "404", description = "Treinos não encontrados para o usuário")
     })
-    public ResponseEntity<String> listTreinosCsv(@PathVariable int id) {
-        String csvFileName = treinoService.generateTreinosCsv(id);
+    public ResponseEntity<String> listTreinos(@PathVariable int id, @PathVariable String fileType) {
+        String fileName = null;
 
-        if (csvFileName == null) {
+        if (!fileType.equalsIgnoreCase("csv") && !fileType.equalsIgnoreCase("txt")) {
+            return ResponseEntity.status(400).body("Tipo de arquivo inválido. Use 'csv' ou 'txt'.");
+        }
+
+        if (fileType.equalsIgnoreCase("csv")) {
+            fileName = treinoService.generateTreinosCsvAndTxt(id, "csv");
+        } else if (fileType.equalsIgnoreCase("txt")) {
+            fileName = treinoService.generateTreinosCsvAndTxt(id, "txt");
+        }
+
+        if (fileName == null) {
             return ResponseEntity.status(404).body("Treinos não encontrados para o usuário");
         }
 
-        return ResponseEntity.status(200).body("Arquivo CSV gerado com sucesso: " + csvFileName);
+        return ResponseEntity.status(200).body("Arquivo gerado com sucesso: " + fileName);
     }
+
+
+
 }
 
