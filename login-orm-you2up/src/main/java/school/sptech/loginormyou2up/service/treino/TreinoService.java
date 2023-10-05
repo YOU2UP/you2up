@@ -243,7 +243,11 @@ public class    TreinoService {
         return !treino.getUsuarios().isEmpty();
     }
 
-    public String generateTreinosCsv(int idUsuario) {
+    public String generateTreinosCsvAndTxt(int idUsuario, String fileType) {
+        if (!fileType.equalsIgnoreCase("csv") && !fileType.equalsIgnoreCase("txt")) {
+            return null; // Tipo de arquivo inválido
+        }
+
         List<TreinoDtoResposta> treinos = findTreinosByUsuarioId(idUsuario);
 
         if (treinos.isEmpty()) {
@@ -256,39 +260,46 @@ public class    TreinoService {
 
         String formattedNomeUsuario = nomeUsuario.replaceAll("\\s+", "_");
 
-        StringBuilder csvContent = new StringBuilder();
-        csvContent.append("Usuario 1,Email Usuario 1,Usuario 2,Email Usuario 2,Data Treino,Periodo Treino\n");
+        StringBuilder content = new StringBuilder();
+        content.append("Usuario 1,Email Usuario 1,Usuario 2,Email Usuario 2,Data Treino,Periodo Treino\n");
 
         for (TreinoDtoResposta treino : treinos) {
             List<UsuarioDtoJson> usuarios = treino.getUsuarios();
             UsuarioDtoJson usuario1 = usuarios.get(0);
             UsuarioDtoJson usuario2 = usuarios.get(1);
 
-            csvContent.append(String.format("%s,%s,%s,%s,%s,%s\n",
+            String line = String.format("%s,%s,%s,%s,%s,%s\n",
                     usuario1.getNome(),
                     usuario1.getEmail(),
                     usuario2.getNome(),
                     usuario2.getEmail(),
                     treino.getInicioTreino(),
-                    treino.getPeriodo()));
+                    treino.getPeriodo());
+
+            content.append(line);
         }
 
-        String csvFileName = "treinos_usuario_" + formattedNomeUsuario + ".csv";
+        String fileExtension = fileType.equalsIgnoreCase("csv") ? "csv" : "txt";
+        String fileName = "treinos_usuario_" + formattedNomeUsuario + "." + fileExtension;
 
         String desktopDirectory = System.getProperty("user.home") + "/Desktop/";
 
-        String csvFilePath = desktopDirectory + csvFileName;
+        String filePath = desktopDirectory + fileName;
 
         try {
-            File arquivoCSV = new File(csvFilePath);
-            FileWriter csvWriter = new FileWriter(arquivoCSV);
-            csvWriter.write(csvContent.toString());
-            csvWriter.close();
+            // Cria o arquivo (CSV ou TXT) conforme selecionado
+            File arquivo = new File(filePath);
+            FileWriter writer = new FileWriter(arquivo);
+            writer.write(content.toString());
+            writer.close();
 
-            return csvFileName;
+            // Retorna o nome do arquivo criado
+            return fileName;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
+
+
 }
