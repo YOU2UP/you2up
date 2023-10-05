@@ -276,26 +276,13 @@ public class TreinoService {
 
         String formattedNomeUsuario = nomeUsuario.replaceAll("\\s+", "_");
 
-    public void realizarTreino(int idTreino){
-        Optional<Treino> treinoOpt = treinoRepository.findById(idTreino);
-
-        if(treinoOpt.isPresent()){
-            Treino treino = treinoOpt.get();
-            treino.setRealizado(true);
-            treinoRepository.save(treino);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Treino não encontrado");
-        }
-    }
-
-
         StringBuilder csvContent = new StringBuilder();
         csvContent.append("Usuario 1,Email Usuario 1,Usuario 2,Email Usuario 2,Data Treino,Periodo Treino\n");
 
         for (TreinoDtoResposta treino : treinos) {
-            List<UsuarioDtoJson> usuarios = treino.getUsuarios();
-            UsuarioDtoJson usuario1 = usuarios.get(0);
-            UsuarioDtoJson usuario2 = usuarios.get(1);
+            List<UsuarioDtoRetornoDetalhes> usuarios = treino.getUsuarios();
+            UsuarioDtoRetornoDetalhes usuario1 = usuarios.get(0);
+            UsuarioDtoRetornoDetalhes usuario2 = usuarios.get(1);
 
             csvContent.append(String.format("%s,%s,%s,%s,%s,%s\n",
                     usuario1.getNome(),

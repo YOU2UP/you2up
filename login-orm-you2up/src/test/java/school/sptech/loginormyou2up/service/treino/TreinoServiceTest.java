@@ -21,6 +21,7 @@ import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
 import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoJson;
 import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoResposta;
+import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoRetornoDetalhes;
 import school.sptech.loginormyou2up.repository.TreinoRepository;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
 
@@ -203,7 +204,7 @@ class TreinoServiceTest {
         // assert
         assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());
     }
-    
+
     @Test
     @DisplayName("deveRetornarResponseStatusExceptionQuandoNaoExistirTreinoComIdAtualiza")
     void deveRetornarResponseStatusExceptionQuandoNaoExistirTreinoComIdAtualiza() {
@@ -253,9 +254,9 @@ class TreinoServiceTest {
     void retornaTrueSeTreinoDtoRespostaPossuiUsuarios() {
         // given
         TreinoDtoResposta treino = new TreinoDtoResposta();
-        List<UsuarioDtoJson> usuarios = new ArrayList<>();
-        usuarios.add(new UsuarioDtoJson());
-        usuarios.add(new UsuarioDtoJson());
+        List<UsuarioDtoRetornoDetalhes> usuarios = new ArrayList<>();
+        usuarios.add(new UsuarioDtoRetornoDetalhes());
+        usuarios.add(new UsuarioDtoRetornoDetalhes());
         treino.setUsuarios(usuarios);
 
         // assert
@@ -267,7 +268,7 @@ class TreinoServiceTest {
     void retornaFalseSeTreinoDtoRespostaNaoPossuiUsuarios() {
         // given
         TreinoDtoResposta treino = new TreinoDtoResposta();
-        List<UsuarioDtoJson> usuarios = new ArrayList<>();
+        List<UsuarioDtoRetornoDetalhes> usuarios = new ArrayList<>();
         treino.setUsuarios(usuarios);
 
         // assert

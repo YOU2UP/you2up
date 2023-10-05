@@ -199,12 +199,6 @@ public class TreinoController {
         return ResponseEntity.ok().body(treinoService.getTreinosRealizadosNaoAvaliados(id));
     }
 
-    @GetMapping("/realizar/{id}")
-    public ResponseEntity<Void> realizarTreino(@PathVariable int id) {
-        treinoService.realizarTreino(id);
-        return ResponseEntity.ok().build();
-    }
-  
     @GetMapping("/usuario/{id}")
     public ResponseEntity<List<TreinoDtoResposta>> getTreinosByUsuarioId(@PathVariable int id) {
         return ResponseEntity.ok().body(treinoService.findTreinosByUsuarioId(id));
