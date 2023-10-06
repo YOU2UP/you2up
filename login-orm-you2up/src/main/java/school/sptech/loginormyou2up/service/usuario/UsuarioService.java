@@ -1,8 +1,6 @@
 package school.sptech.loginormyou2up.service.usuario;
 
-import org.hibernate.hql.internal.ast.tree.TableReferenceNode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.spel.ast.StringLiteral;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import school.sptech.loginormyou2up.api.configuration.security.jwt.GerenciadorTokenJwt;
 import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
-import school.sptech.loginormyou2up.domain.treino.Treino;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.dto.treino.QuantidadeTreinosPorDiaSemanaDto;
@@ -27,12 +24,10 @@ import school.sptech.loginormyou2up.service.extra.ListaObj;
 import school.sptech.loginormyou2up.service.match.MatchService;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService {
@@ -326,7 +321,7 @@ public class UsuarioService {
             return ResponseEntity.status(204).build();
         } else {
             Optional<Usuario> usuarioOptional = usuarioRepository.findById(atual + 1);
-            if (usuarioOptional.get().getId() == id) {
+            if (usuarioOptional.get().getIdUsuario() == id) {
                 UsuarioDtoResposta userDtoResposta = UsuarioMapper.convertToDtoResposta(usuarioOptional.get());
                 return ResponseEntity.status(200).body(userDtoResposta);
             } else {

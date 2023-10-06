@@ -27,19 +27,19 @@ public class MatchService {
 
 
     public MatchDtoResposta criarMatch(MatchDtoCriacao dto) {
-        if (dto.getUsuario1().getId().equals(dto.getUsuario2().getId())) {
+        if (dto.getUsuario1().getIdUsuario().equals(dto.getUsuario2().getIdUsuario())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não é possível criar um match com o mesmo usuário");
         }
 
-        if (matchExiste(dto.getUsuario1().getId(), dto.getUsuario2().getId())) {
+        if (matchExiste(dto.getUsuario1().getIdUsuario(), dto.getUsuario2().getIdUsuario())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Match já existe");
         }
 
-        if (usuarioRepository.findById(dto.getUsuario1().getId()).isEmpty()) {
+        if (usuarioRepository.findById(dto.getUsuario1().getIdUsuario()).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário 1 não encontrado");
         }
 
-        if (usuarioRepository.findById(dto.getUsuario2().getId()).isEmpty()) {
+        if (usuarioRepository.findById(dto.getUsuario2().getIdUsuario()).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário 2 não encontrado");
         }
 
@@ -112,20 +112,20 @@ public class MatchService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Match não encontrado");
         }
 
-        if (dto.getUsuario1().getId() == dto.getUsuario2().getId()) {
+        if (dto.getUsuario1().getIdUsuario() == dto.getUsuario2().getIdUsuario()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não é possível criar um match com o mesmo usuário");
         }
 
-        if (usuarioRepository.findById(dto.getUsuario1().getId()).isEmpty()) {
+        if (usuarioRepository.findById(dto.getUsuario1().getIdUsuario()).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário 1 não encontrado");
         }
 
-        if (usuarioRepository.findById(dto.getUsuario2().getId()).isEmpty()) {
+        if (usuarioRepository.findById(dto.getUsuario2().getIdUsuario()).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário 2 não encontrado");
         }
 
         Match match = MatchMapper.convertToMatch(dto);
-        match.setId(id);
+        match.setIdMatch(id);
 
         return MatchMapper.convertToMatchDto(matchRepository.save(match));
     }

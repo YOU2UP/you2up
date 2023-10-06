@@ -10,7 +10,7 @@ import java.util.List;
 public class Treino{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idTreino;
 
     private String periodo;
 
@@ -19,8 +19,8 @@ public class Treino{
 
     private boolean isRealizado;
 
-    public Treino(Integer id, String periodo, List<TreinoHasUsuario> usuarios) {
-        this.id = id;
+    public Treino(Integer idTreino, String periodo, List<TreinoHasUsuario> usuarios) {
+        this.idTreino = idTreino;
         this.periodo = periodo;
         this.usuarios = usuarios;
     }
@@ -28,12 +28,12 @@ public class Treino{
     public Treino() {
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdTreino() {
+        return idTreino;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdTreino(Integer idTreino) {
+        this.idTreino = idTreino;
     }
 
     public String getPeriodo() {

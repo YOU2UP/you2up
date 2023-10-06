@@ -7,7 +7,6 @@ import school.sptech.loginormyou2up.dto.treino.LocalTreinoCriacaoDto;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
-import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoJson;
 import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoRetornoDetalhes;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ public class TreinoMapper {
     public static TreinoDtoJsonUsuario convertToTreinoDtoJsonUsuario(Treino treino) {
         TreinoDtoJsonUsuario dto = new TreinoDtoJsonUsuario();
 
-        dto.setId(treino.getId());
+        dto.setId(treino.getIdTreino());
         dto.setPeriodo(treino.getPeriodo());
         dto.setDataHora(treino.getUsuarios().get(0).getInicioTreino());
 
@@ -38,7 +37,7 @@ public class TreinoMapper {
     public static TreinoDtoResposta convertToTreinoDtoResposta(Treino treino) {
         TreinoDtoResposta treinoDtoResposta = new TreinoDtoResposta();
 
-        treinoDtoResposta.setId(treino.getId());
+        treinoDtoResposta.setId(treino.getIdTreino());
         treinoDtoResposta.setPeriodo(treino.getPeriodo());
         treinoDtoResposta.setInicioTreino(treino.getUsuarios().get(0).getInicioTreino());
         treinoDtoResposta.setRealizado(treino.isRealizado());
@@ -58,7 +57,7 @@ public class TreinoMapper {
     public static TreinoDtoResposta convertToTreinoDtoResposta(Treino treino, List<TreinoHasUsuario> treinoHasUsuarios) {
         TreinoDtoResposta treinoDtoResposta = new TreinoDtoResposta();
 
-        treinoDtoResposta.setId(treino.getId());
+        treinoDtoResposta.setId(treino.getIdTreino());
         treinoDtoResposta.setPeriodo(treino.getPeriodo());
         treinoDtoResposta.setInicioTreino(treinoHasUsuarios.get(0).getInicioTreino());
         treinoDtoResposta.setRealizado(treino.isRealizado());
@@ -81,7 +80,7 @@ public class TreinoMapper {
 
             TreinoDtoResposta treinoDtoResposta = new TreinoDtoResposta();
 
-            treinoDtoResposta.setId(treinos.get(i).getId());
+            treinoDtoResposta.setId(treinos.get(i).getIdTreino());
             treinoDtoResposta.setPeriodo(treinos.get(i).getPeriodo());
 
             treinoDtoResposta.setInicioTreino(treinos.get(i).getUsuarios().get(0).getInicioTreino());

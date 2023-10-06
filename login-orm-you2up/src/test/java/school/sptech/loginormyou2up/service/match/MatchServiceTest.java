@@ -14,7 +14,6 @@ import school.sptech.loginormyou2up.domain.match.Match;
 import school.sptech.loginormyou2up.domain.notificacao.Notificacao;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
-import school.sptech.loginormyou2up.dto.mapper.MatchMapper;
 import school.sptech.loginormyou2up.dto.match.MatchDtoCriacao;
 import school.sptech.loginormyou2up.dto.match.MatchDtoResposta;
 import school.sptech.loginormyou2up.repository.MatchRepository;
@@ -60,9 +59,9 @@ class MatchServiceTest {
     void deveRetornarBadRequestQuandoDoisUsuariosIguais() {
         // given
         Usuario usuario1 = new Usuario();
-        usuario1.setId(1);
+        usuario1.setIdUsuario(1);
         Usuario usuario2 = new Usuario();
-        usuario2.setId(1);
+        usuario2.setIdUsuario(1);
 
         MatchDtoCriacao dto = new MatchDtoCriacao();
         dto.setUsuario1(usuario1);
@@ -78,7 +77,7 @@ class MatchServiceTest {
         // assert
         assertEquals(HttpStatus.BAD_REQUEST, exception.getStatus());
         assertEquals(mensagem, exception.getMessage());
-        assertEquals(dto.getUsuario1().getId(), dto.getUsuario2().getId());
+        assertEquals(dto.getUsuario1().getIdUsuario(), dto.getUsuario2().getIdUsuario());
     }
 
     @Test
@@ -86,9 +85,9 @@ class MatchServiceTest {
     void deveRetornarBadRequestQuandoExistirMatch() {
         // given
         Usuario usuario1 = new Usuario();
-        usuario1.setId(1);
+        usuario1.setIdUsuario(1);
         Usuario usuario2 = new Usuario();
-        usuario2.setId(2);
+        usuario2.setIdUsuario(2);
 
         MatchDtoCriacao dto = new MatchDtoCriacao();
         dto.setUsuario1(usuario1);
@@ -97,8 +96,8 @@ class MatchServiceTest {
         String mensagem = HttpStatus.BAD_REQUEST + " \"Match já existe\"";
 
         // when
-        Mockito.when(matchRepository.countMatches(dto.getUsuario1().getId(),
-                dto.getUsuario2().getId())).thenReturn(1);
+        Mockito.when(matchRepository.countMatches(dto.getUsuario1().getIdUsuario(),
+                dto.getUsuario2().getIdUsuario())).thenReturn(1);
 
         // then
         ResponseStatusException exception = Assertions.assertThrows(
@@ -114,9 +113,9 @@ class MatchServiceTest {
     void deveRetornarNotFoundQuandoUsuarioUmNaoExiste() {
         // given
         Usuario usuario1 = new Usuario();
-        usuario1.setId(2);
+        usuario1.setIdUsuario(2);
         Usuario usuario2 = new Usuario();
-        usuario2.setId(1);
+        usuario2.setIdUsuario(1);
 
         MatchDtoCriacao dto = new MatchDtoCriacao();
         dto.setUsuario1(usuario1);
@@ -151,7 +150,7 @@ class MatchServiceTest {
 
         List<Match> matches = new ArrayList<>();
         Match match1 = new Match();
-        match1.setId(1);
+        match1.setIdMatch(1);
         match1.setUsuario1(usuario1);
         match1.setUsuario2(usuario2);
         match1.setAtivo(true);
@@ -159,7 +158,7 @@ class MatchServiceTest {
         matches.add(match1);
 
         Match match2 = new Match();
-        match2.setId(2);
+        match2.setIdMatch(2);
         match2.setUsuario1(usuario1);
         match2.setUsuario2(usuario2);
         match2.setAtivo(true);
@@ -202,16 +201,16 @@ class MatchServiceTest {
     void deveDeletarMatchQuandoExistirMatchComId() {
         // given
         Match match = new Match();
-        match.setId(1);
+        match.setIdMatch(1);
 
         // when
-        Mockito.when(matchRepository.findById(match.getId())).thenReturn(Optional.of(match));
+        Mockito.when(matchRepository.findById(match.getIdMatch())).thenReturn(Optional.of(match));
 
         // then
-        matchService.deleteById(match.getId());
+        matchService.deleteById(match.getIdMatch());
 
         // assert
-        assertDoesNotThrow(() -> {matchService.deleteById(match.getId());});
+        assertDoesNotThrow(() -> {matchService.deleteById(match.getIdMatch());});
     }
 
     @Test
@@ -255,9 +254,9 @@ class MatchServiceTest {
         // given
         // given
         Usuario usuario1 = new Usuario();
-        usuario1.setId(1);
+        usuario1.setIdUsuario(1);
         Usuario usuario2 = new Usuario();
-        usuario2.setId(1);
+        usuario2.setIdUsuario(1);
 
         MatchDtoCriacao dto = new MatchDtoCriacao();
         dto.setUsuario1(usuario1);

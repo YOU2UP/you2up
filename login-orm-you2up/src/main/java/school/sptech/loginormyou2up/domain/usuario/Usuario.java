@@ -4,7 +4,6 @@ import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.avaliacao.Avaliacao;
 import school.sptech.loginormyou2up.domain.notificacao.Notificacao;
-import school.sptech.loginormyou2up.service.extra.FilaObj;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,7 +15,7 @@ public class Usuario{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idUsuario;
     private String nome;
     private String email;
     private String senha;
@@ -46,7 +45,7 @@ public class Usuario{
 
 
     public Usuario(Integer id, String nome, String email, String senha, LocalDate dataNascimento, String descricao, String estagio, int metaTreinos, List<TreinoHasUsuario> treinos, List<Notificacao> notificacoes) {
-        this.id = id;
+        this.idUsuario = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -94,12 +93,12 @@ public class Usuario{
         this.estagio = estagio;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNome() {

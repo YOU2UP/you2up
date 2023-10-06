@@ -16,7 +16,7 @@ public class UsuarioMapper {
     public static UsuarioDtoJson convertToUsuarioDtoJson(Usuario usuario){
         UsuarioDtoJson dto = new UsuarioDtoJson();
 
-        dto.setId(usuario.getId());
+        dto.setId(usuario.getIdUsuario());
         dto.setNome(usuario.getNome());
         dto.setEmail(usuario.getEmail());
 
@@ -26,7 +26,7 @@ public class UsuarioMapper {
     public static UsuarioDtoResposta convertToDtoResposta(Usuario usuario) {
         UsuarioDtoResposta dto = new UsuarioDtoResposta();
 
-        dto.setId(usuario.getId());
+        dto.setId(usuario.getIdUsuario());
         dto.setNome(usuario.getNome());
         dto.setEmail(usuario.getEmail());
         dto.setDataNascimento(usuario.getDataNascimento());
@@ -54,7 +54,7 @@ public class UsuarioMapper {
 
         for (Usuario u: usuarios) {
             UsuarioDtoResposta dto = new UsuarioDtoResposta();
-            dto.setId(u.getId());
+            dto.setId(u.getIdUsuario());
             dto.setNome(u.getNome());
             dto.setEmail(u.getEmail());
             dto.setDataNascimento(u.getDataNascimento());
@@ -80,7 +80,7 @@ public class UsuarioMapper {
     public static UsuarioDtoRespostaCadastro convertToUsuarioDtoRespostaCadastro(Usuario usuario){
         UsuarioDtoRespostaCadastro dto = new UsuarioDtoRespostaCadastro();
 
-        dto.setId(usuario.getId());
+        dto.setId(usuario.getIdUsuario());
         dto.setNome(usuario.getNome());
         dto.setDataNascimento(usuario.getDataNascimento());
         dto.setEmail(usuario.getEmail());
@@ -107,7 +107,7 @@ public class UsuarioMapper {
     public static UsuarioTokenDto of(Usuario usuario, String token){
         UsuarioTokenDto usuarioTokenDto = new UsuarioTokenDto();
 
-        usuarioTokenDto.setUserId(usuario.getId());
+        usuarioTokenDto.setUserId(usuario.getIdUsuario());
         usuarioTokenDto.setEmail(usuario.getEmail());
         usuarioTokenDto.setNome(usuario.getNome());
         usuarioTokenDto.setToken(token);
@@ -130,7 +130,7 @@ public class UsuarioMapper {
     public static UsuarioResumoDto convertToUsuarioResumoDto(Usuario usuario) {
         UsuarioResumoDto dto = new UsuarioResumoDto();
 
-        dto.setId(usuario.getId());
+        dto.setId(usuario.getIdUsuario());
         dto.setNome(usuario.getNome());
         dto.setEmail(usuario.getEmail());
 
@@ -140,7 +140,7 @@ public class UsuarioMapper {
     public static UsuarioDtoRetornoDetalhes convertToUsuarioDtoRetornoDetalhes(Usuario usuario) {
         UsuarioDtoRetornoDetalhes dto = new UsuarioDtoRetornoDetalhes();
 
-        dto.setId(usuario.getId());
+        dto.setId(usuario.getIdUsuario());
         dto.setNome(usuario.getNome());
         dto.setEmail(usuario.getEmail());
         dto.setFotoPerfil(usuario.getFotoPerfil());
