@@ -10,7 +10,7 @@ public class Match {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idMatch;
     private LocalDateTime dataMatch;
     private boolean isAtivo;
     @ManyToOne
@@ -18,12 +18,12 @@ public class Match {
     @ManyToOne
     private Usuario usuario2;
 
-    public Integer getId() {
-        return id;
+    public Integer getIdMatch() {
+        return idMatch;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdMatch(Integer idMatch) {
+        this.idMatch = idMatch;
     }
 
     public LocalDateTime getDataMatch() {

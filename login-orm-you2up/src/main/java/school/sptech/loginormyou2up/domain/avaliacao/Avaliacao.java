@@ -10,7 +10,7 @@ public class Avaliacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idAvaliacao;
 
     private double nota;
 
@@ -24,12 +24,12 @@ public class Avaliacao {
     private Treino treino;
 
 
-    public Integer getId() {
-        return id;
+    public Integer getIdAvaliacao() {
+        return idAvaliacao;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdAvaliacao(Integer idAvaliacao) {
+        this.idAvaliacao = idAvaliacao;
     }
 
     public double getNota() {

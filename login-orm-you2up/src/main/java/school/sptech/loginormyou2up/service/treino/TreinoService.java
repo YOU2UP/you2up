@@ -9,7 +9,6 @@ import school.sptech.loginormyou2up.domain.treino.Treino;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuarioId;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
-import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoJson;
 import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoRetornoDetalhes;
 import school.sptech.loginormyou2up.repository.AvaliacaoRepository;
 import school.sptech.loginormyou2up.repository.TreinoHasUsuarioRepository;
@@ -21,11 +20,9 @@ import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
 import school.sptech.loginormyou2up.service.extra.HashObj;
 
 
-import javax.transaction.Transactional;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -58,12 +55,12 @@ public class TreinoService {
             treinoHasUsuario.setInicioTreino(treinoDtoCriacao.getInicioTreino());
 
             TreinoHasUsuarioId treinoHasUsuarioId = new TreinoHasUsuarioId();
-            treinoHasUsuarioId.setTreinoId(treinoCadastrado.getId());
+            treinoHasUsuarioId.setTreinoId(treinoCadastrado.getIdTreino());
 
-            Optional<Usuario> usuarioOpt = usuarioRepository.findById(u.getId());
+            Optional<Usuario> usuarioOpt = usuarioRepository.findById(u.getIdUsuario());
 
             if (usuarioOpt.isPresent()) {
-                treinoHasUsuarioId.setUsuarioId(usuarioOpt.get().getId());
+                treinoHasUsuarioId.setUsuarioId(usuarioOpt.get().getIdUsuario());
                 treinoHasUsuario.setUsuario(usuarioOpt.get());
             } else {
                 treinoRepository.delete(treinoCadastrado);
@@ -127,7 +124,7 @@ public class TreinoService {
 
         for (int i = 0; i < treinos.size(); i++) {
             if (!treinoPossuiUsuarios(treinos.get(i))) {
-                deleteById(treinos.get(i).getId());
+                deleteById(treinos.get(i).getIdTreino());
             }
         }
 
@@ -149,7 +146,7 @@ public class TreinoService {
         List<Treino> treinos = new ArrayList<>();
 
         for (TreinoHasUsuario tu : treinoHasUsuarios) {
-            treinos.add(treinoRepository.findById(tu.getTreino().getId()).get());
+            treinos.add(treinoRepository.findById(tu.getTreino().getIdTreino()).get());
         }
 
         return TreinoMapper.convertToTreinoDtoResposta(treinos);
@@ -162,8 +159,8 @@ public class TreinoService {
 
         for (TreinoHasUsuario tu1 : treinoHasUsuarios1) {
             for (TreinoHasUsuario tu2 : treinoHasUsuarios2) {
-                if (tu1.getTreino().getId() == tu2.getTreino().getId()) {
-                    treinos.add(treinoRepository.findById(tu1.getTreino().getId()).get());
+                if (tu1.getTreino().getIdTreino() == tu2.getTreino().getIdTreino()) {
+                    treinos.add(treinoRepository.findById(tu1.getTreino().getIdTreino()).get());
                 }
             }
         }
@@ -235,7 +232,7 @@ public class TreinoService {
 
         for (TreinoHasUsuario tu : treinoHasUsuarios) {
             for (Avaliacao a : avaliacoes) {
-                if (tu.getTreino().getId() == a.getTreino().getId()) {
+                if (tu.getTreino().getIdTreino() == a.getTreino().getIdTreino()) {
                     avaliado = true;
                 }
             }

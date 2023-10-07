@@ -11,7 +11,6 @@ import school.sptech.loginormyou2up.domain.notificacao.Notificacao;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.repository.NotificacaoRepository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -47,7 +46,7 @@ class NotificacaoServiceTest {
 
         // assert
         assertNotNull(resposta);
-        assertEquals(resposta.getId(), notificacao.getId());
+        assertEquals(resposta.getIdNotificacao(), notificacao.getIdNotificacao());
         assertEquals(resposta.getConteudo(), notificacao.getConteudo());
         assertEquals(resposta.getDataHora(), resposta.getDataHora());
         assertEquals(resposta.getUsuario(), resposta.getUsuario());

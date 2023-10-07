@@ -21,7 +21,7 @@ public class MatchMapper {
     public static MatchDtoResposta convertToMatchDto(Match match){
         MatchDtoResposta dto = new MatchDtoResposta();
 
-        dto.setId(match.getId());
+        dto.setId(match.getIdMatch());
         dto.setAtivo(match.isAtivo());
         dto.setDataMatch(match.getDataMatch());
         dto.setUsuario1(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(match.getUsuario1()));

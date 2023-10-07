@@ -11,7 +11,7 @@ public class AvaliacaoMapper {
     public static AvaliacaoRespostaDto convertToAvaliacaoRespostaDto(Avaliacao avaliacao) {
         AvaliacaoRespostaDto avaliacaoRespostaDto = new AvaliacaoRespostaDto();
 
-        avaliacaoRespostaDto.setId(avaliacao.getId());
+        avaliacaoRespostaDto.setId(avaliacao.getIdAvaliacao());
         avaliacaoRespostaDto.setAvaliador(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(avaliacao.getAvaliador()));
         avaliacaoRespostaDto.setAvaliado(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(avaliacao.getAvaliado()));
         avaliacaoRespostaDto.setNota(avaliacao.getNota());
@@ -25,7 +25,7 @@ public class AvaliacaoMapper {
 
         for (Avaliacao avaliacao : avaliacoes) {
             AvaliacaoRespostaDto avaliacaoRespostaDto = new AvaliacaoRespostaDto();
-            avaliacaoRespostaDto.setId(avaliacao.getId());
+            avaliacaoRespostaDto.setId(avaliacao.getIdAvaliacao());
             avaliacaoRespostaDto.setAvaliador(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(avaliacao.getAvaliador()));
             avaliacaoRespostaDto.setAvaliado(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(avaliacao.getAvaliado()));
             avaliacaoRespostaDto.setNota(avaliacao.getNota());

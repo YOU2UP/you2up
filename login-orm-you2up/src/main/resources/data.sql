@@ -21,12 +21,12 @@ VALUES
     ('Martin Scorsese', 'martin@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1998-11-30',  'Sou um usuário legal', 60, 'iniciante', 5);
 
 INSERT INTO notificacao
-    (conteudo,data_hora, usuario_id)
+    (conteudo,data_hora, usuario_id_usuario)
 VALUES
     ('Você tem um novo treino no momento', '2023-12-21 17:20:00', 1);
 
 INSERT INTO treino_has_usuario
-    (inicio_treino, treino_id, usuario_id)
+    (inicio_treino, treino_id_treino, usuario_id_usuario)
 VALUES
     ('2023-10-10 20:00:00', 1, 1),
     ('2023-10-10 20:00:00', 1, 2),
@@ -35,7 +35,7 @@ VALUES
     ('2023-12-21 17:20:00', 2, 5);
 
 INSERT INTO avaliacao
-    (nota, avaliador_id, avaliado_id, treino_id)
+    (nota, avaliador_id_usuario, avaliado_id_usuario, treino_id_treino)
 VALUES
     (5, 1, 2, 1),
     (1.5, 2, 1, 1),
@@ -47,7 +47,7 @@ VALUES
     (2, 5, 4, 2);
 
 INSERT INTO match
-    (data_match, is_ativo ,usuario1_id, usuario2_id)
+    (data_match, is_ativo ,usuario1_id_usuario, usuario2_id_usuario)
 VALUES
     ('2023-10-10 20:00:00', true, 1, 2),
     ('2023-11-11 20:00:00', true, 2, 3),
