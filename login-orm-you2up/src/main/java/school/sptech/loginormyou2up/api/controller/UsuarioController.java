@@ -1,5 +1,10 @@
 package school.sptech.loginormyou2up.api.controller;
 
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -18,6 +23,7 @@ import school.sptech.loginormyou2up.service.usuario.UsuarioService;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -270,6 +276,26 @@ public class UsuarioController {
         long totalUser = usuarioRepository.count();
         System.out.println(totalUser);
         return usuarioService.buscarPorIdRecursivo(0, totalUser, id);
+    }
+
+    @PostMapping("/upload-s3")
+    public void postImagemPerfilS3() {
+        String accessKey = "ASIAU3GBLBPDC4SP3Y3B";
+        String secretKey = "vCQyVMCwGQ2SNLSrETmDWdDPU03BhDu1CuXVXCrR";
+        String region = "us-east-1";
+        String bucketName = "s3-you2up";
+
+        String key = "image_teste_s3.jpeg";
+
+        String filePath = "image_teste_s3.jpeg";
+
+        AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                .withRegion(region)
+                .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKey, secretKey)))
+                .build();
+
+        PutObjectRequest request = new PutObjectRequest(bucketName, key, new File(filePath));
+        s3Client.putObject(request);
     }
 
 
