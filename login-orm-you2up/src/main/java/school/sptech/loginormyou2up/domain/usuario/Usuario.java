@@ -1,11 +1,13 @@
 package school.sptech.loginormyou2up.domain.usuario;
 
+import school.sptech.loginormyou2up.domain.foto.Foto;
 import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.avaliacao.Avaliacao;
 import school.sptech.loginormyou2up.domain.notificacao.Notificacao;
 
 import javax.persistence.*;
+import javax.swing.event.ListDataEvent;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,10 +23,7 @@ public class Usuario{
     private String senha;
     private LocalDate dataNascimento;
     private String descricao;
-    private String fotoPerfil;
-
     private String estagio; // iniciante, intermediário, avançado
-
     private int metaTreinos;
 
 
@@ -42,6 +41,10 @@ public class Usuario{
 
     @OneToMany(mappedBy = "avaliador")
     private List<Avaliacao> avaliacoesDadas;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Foto> feedFotos;
+
 
 
     public Usuario(Integer id, String nome, String email, String senha, LocalDate dataNascimento, String descricao, String estagio, int metaTreinos, List<TreinoHasUsuario> treinos, List<Notificacao> notificacoes) {
@@ -149,12 +152,11 @@ public class Usuario{
         this.localTreino = locaTreino;
     }
 
-    public String getFotoPerfil() {
-        return fotoPerfil;
+    public List<Foto> getFeedFotos() {
+        return feedFotos;
     }
 
-    public void setFotoPerfil(String fotoPerfil) {
-        this.fotoPerfil = fotoPerfil;
+    public void setFeedFotos(List<Foto> feedFotos) {
+        this.feedFotos = feedFotos;
     }
-
 }

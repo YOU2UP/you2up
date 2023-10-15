@@ -12,7 +12,8 @@ VALUES
     ('Praça dos alunos', 112, 'Rua dos Bobos', 'Centro', 'São Paulo', 'SP', false);
 
 INSERT INTO usuario
-(nome, email, senha, data_nascimento, descricao, meta_treinos, estagio, local_treino_id_local_treino)
+(nome, email, senha, data_nascimento, descricao, meta_treinos,
+ estagio, local_treino_id_local_treino)
 VALUES
     ('Steven Spielberg', 'steven@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '2000-11-03', 'Sou um usuário legal', 100, 'iniciante', 1),
     ('Christopher Nolan', 'christopher@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1999-05-21',  'Sou um usuário legal', 70, 'intermediario', 2),
@@ -55,3 +56,24 @@ VALUES
     ('2023-09-04 20:00:00', true, 4, 2),
     ('2023-09-23 20:00:00', true, 1, 4),
     ('2023-08-22 20:00:00', true, 5, 3);
+
+INSERT INTO Foto (id_foto, url, usuario_id_usuario)
+VALUES
+    (1, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 1),
+    (2, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 2),
+    (3, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 3),
+    (4, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 4),
+    (5, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 5),
+    (6, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 1),
+    (7, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 2),
+    (8, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 3),
+    (9, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 4),
+    (10, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 5),
+    (11, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 1),
+    (12, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 2),
+    (13, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 3),
+    (14, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 4),
+    (15, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 5),
+    (16, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 1);
+
+
