@@ -35,6 +35,7 @@ public class UsuarioMapper {
         dto.setEstagio(usuario.getEstagio());
         dto.setLocalTreino(usuario.getLocalTreino());
         dto.setFotoPefil(usuario.getFotoPerfil());
+        dto.setDescricao(usuario.getDescricao());
 
 
         List<TreinoDtoJsonUsuario> listaTreino = new ArrayList<>();
