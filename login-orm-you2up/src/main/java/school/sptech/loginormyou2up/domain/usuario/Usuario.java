@@ -1,6 +1,7 @@
 package school.sptech.loginormyou2up.domain.usuario;
 
 import school.sptech.loginormyou2up.domain.foto.Foto;
+import school.sptech.loginormyou2up.domain.foto.FotoPerfil;
 import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.avaliacao.Avaliacao;
@@ -14,7 +15,6 @@ import java.util.List;
 @Entity
 public class Usuario{
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUsuario;
@@ -25,7 +25,6 @@ public class Usuario{
     private String descricao;
     private String estagio; // iniciante, intermediário, avançado
     private int metaTreinos;
-
 
     @OneToMany(mappedBy = "usuario", orphanRemoval = true)
     private List<TreinoHasUsuario> treinos;
@@ -44,6 +43,9 @@ public class Usuario{
 
     @OneToMany(mappedBy = "usuario")
     private List<Foto> feedFotos;
+
+    @OneToOne
+    private FotoPerfil fotoPerfil;
 
 
 
@@ -158,5 +160,13 @@ public class Usuario{
 
     public void setFeedFotos(List<Foto> feedFotos) {
         this.feedFotos = feedFotos;
+    }
+
+    public FotoPerfil getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(FotoPerfil fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 }

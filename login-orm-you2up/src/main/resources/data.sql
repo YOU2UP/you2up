@@ -11,15 +11,13 @@ VALUES
     ('Praça da luz', 101, 'Rua dos Bobos', 'Centro', 'São Paulo', 'SP', false),
     ('Praça dos alunos', 112, 'Rua dos Bobos', 'Centro', 'São Paulo', 'SP', false);
 
-INSERT INTO usuario
-(nome, email, senha, data_nascimento, descricao, meta_treinos,
- estagio, local_treino_id_local_treino)
+INSERT INTO usuario (nome, email, senha, data_nascimento, descricao, meta_treinos, estagio, local_treino_id_local_treino)
 VALUES
     ('Steven Spielberg', 'steven@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '2000-11-03', 'Sou um usuário legal', 100, 'iniciante', 1),
-    ('Christopher Nolan', 'christopher@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1999-05-21',  'Sou um usuário legal', 70, 'intermediario', 2),
-    ('Quentin Tarantino', 'quaentin@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1945-02-11',  'Sou um usuário legal', 80, 'avancado', 3),
-    ('Alfred Hitchcock', 'alfred@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1998-07-03',  'Sou um usuário legal', 110, 'intermediario', 4),
-    ('Martin Scorsese', 'martin@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1998-11-30',  'Sou um usuário legal', 60, 'iniciante', 5);
+    ('Christopher Nolan', 'christopher@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1999-05-21', 'Sou um usuário legal', 70, 'intermediario', 2),
+    ('Quentin Tarantino', 'quaentin@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1945-02-11', 'Sou um usuário legal', 80, 'avancado', 3),
+    ('Alfred Hitchcock', 'alfred@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1998-07-03', 'Sou um usuário legal', 110, 'intermediario', 4),
+    ('Martin Scorsese', 'martin@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1998-11-30', 'Sou um usuário legal', 60, 'iniciante', 5);
 
 INSERT INTO notificacao
     (conteudo,data_hora, usuario_id_usuario)
@@ -57,23 +55,51 @@ VALUES
     ('2023-09-23 20:00:00', true, 1, 4),
     ('2023-08-22 20:00:00', true, 5, 3);
 
-INSERT INTO Foto (id_foto, url, usuario_id_usuario)
+INSERT INTO foto (url, usuario_id_usuario)
 VALUES
-    (1, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 1),
-    (2, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 2),
-    (3, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 3),
-    (4, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 4),
-    (5, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 5),
-    (6, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 1),
-    (7, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 2),
-    (8, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 3),
-    (9, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 4),
-    (10, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 5),
-    (11, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 1),
-    (12, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 2),
-    (13, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 3),
-    (14, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 4),
-    (15, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 5),
-    (16, 'https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 1);
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 1),
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 2),
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 3),
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 4),
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 5),
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 1),
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 2),
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 3),
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 4),
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 5),
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 1),
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 2),
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 3),
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 4),
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 5),
+    ('https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg', 1);
+
+INSERT INTO foto_perfil (url, usuario_id_usuario)
+VALUES
+    ('https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 1),
+    ('https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 2),
+    ('https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 3),
+    ('https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 4),
+    ('https://www.promoview.com.br/uploads/images/unnamed%2819%29.png', 5);
+
+UPDATE usuario
+SET foto_perfil_id_foto_perfil = 1
+WHERE id_usuario = 1;
+
+UPDATE usuario
+SET foto_perfil_id_foto_perfil = 2
+WHERE id_usuario= 2;
+
+UPDATE usuario
+SET foto_perfil_id_foto_perfil = 3
+WHERE id_usuario = 3;
+
+UPDATE usuario
+SET foto_perfil_id_foto_perfil = 4
+WHERE id_usuario = 4;
+
+UPDATE usuario
+SET foto_perfil_id_foto_perfil = 5
+WHERE id_usuario = 5;
 
 

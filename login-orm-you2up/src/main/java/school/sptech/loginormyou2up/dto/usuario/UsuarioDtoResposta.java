@@ -2,6 +2,7 @@ package school.sptech.loginormyou2up.dto.usuario;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import school.sptech.loginormyou2up.domain.foto.Foto;
+import school.sptech.loginormyou2up.domain.foto.FotoPerfil;
 import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
 import school.sptech.loginormyou2up.dto.FotoRespostaDto;
 import school.sptech.loginormyou2up.dto.match.MatchDtoResposta;
@@ -48,6 +49,9 @@ public class UsuarioDtoResposta {
 
     @Schema(description = "Lista de fotos do usuário")
     private List<FotoRespostaDto> feedFotos;
+
+    @Schema(description = "Foto de perfil do usuário")
+    private FotoRespostaDto fotoPerfil;
 
 
     public UsuarioDtoResposta(Integer id, String nome, String email, LocalDate dataNascimento, Double notaMedia, String estagio, int metaTreinos, List<NotificacaoDtoResposta> notificacoes, List<TreinoDtoJsonUsuario> treinos, LocalTreinoUsuario localTreino, List<MatchDtoResposta> matches) {
@@ -164,7 +168,13 @@ public class UsuarioDtoResposta {
         this.feedFotos = feedFotos;
     }
 
+    public FotoRespostaDto getFotoPerfil() {
+        return fotoPerfil;
+    }
 
+    public void setFotoPerfil(FotoRespostaDto fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
+    }
 
     @Override
     public String toString() {
