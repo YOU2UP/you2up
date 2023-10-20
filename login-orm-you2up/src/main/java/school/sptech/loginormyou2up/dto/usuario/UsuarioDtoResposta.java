@@ -53,8 +53,11 @@ public class UsuarioDtoResposta {
     @Schema(description = "Foto de perfil do usuário")
     private FotoRespostaDto fotoPerfil;
 
+    @Schema(description = "Descrição do usuário")
+    private String descricao;
 
-    public UsuarioDtoResposta(Integer id, String nome, String email, LocalDate dataNascimento, Double notaMedia, String estagio, int metaTreinos, List<NotificacaoDtoResposta> notificacoes, List<TreinoDtoJsonUsuario> treinos, LocalTreinoUsuario localTreino, List<MatchDtoResposta> matches) {
+
+    public UsuarioDtoResposta(Integer id, String nome, String email, LocalDate dataNascimento, Double notaMedia, String estagio, int metaTreinos, List<NotificacaoDtoResposta> notificacoes, List<TreinoDtoJsonUsuario> treinos, LocalTreinoUsuario localTreino, List<MatchDtoResposta> matches, String descricao) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -66,6 +69,7 @@ public class UsuarioDtoResposta {
         this.treinos = treinos;
         this.localTreino = localTreino;
         this.matches = matches;
+        this.descricao = descricao;
     }
 
     public UsuarioDtoResposta() {
@@ -160,12 +164,23 @@ public class UsuarioDtoResposta {
         this.matches = matches;
     }
 
+
     public List<FotoRespostaDto> getFeedFotos() {
         return feedFotos;
     }
 
     public void setFeedFotos(List<FotoRespostaDto> feedFotos) {
         this.feedFotos = feedFotos;
+
+    }
+  
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+
     }
 
     public FotoRespostaDto getFotoPerfil() {
