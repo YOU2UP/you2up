@@ -318,5 +318,16 @@ public class TreinoService {
         }
     }
 
+    public void realizarTreino(int idTreino){
+        Optional<Treino> treinoOpt = treinoRepository.findById(idTreino);
+
+        if(treinoOpt.isPresent()){
+            Treino treino = treinoOpt.get();
+            treino.setRealizado(true);
+            treinoRepository.save(treino);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Treino não encontrado");
+        }
+    }
 
 }
