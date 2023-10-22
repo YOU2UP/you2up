@@ -235,6 +235,12 @@ public class TreinoController {
         return ResponseEntity.status(200).body("Arquivo gerado com sucesso: " + fileName);
     }
 
+    @GetMapping("/realizar/{id}")
+    public ResponseEntity<Void> realizarTreino(@PathVariable int id) {
+        treinoService.realizarTreino(id);
+        return ResponseEntity.ok().build();
+    }
+
 
 
 }
