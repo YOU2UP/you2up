@@ -1,7 +1,6 @@
 package school.sptech.loginormyou2up.api.controller;
 
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,7 +15,6 @@ import school.sptech.loginormyou2up.repository.UsuarioRepository;
 import school.sptech.loginormyou2up.service.extra.ListaObj;
 import school.sptech.loginormyou2up.service.usuario.UsuarioService;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -84,11 +82,11 @@ public class UsuarioController {
                     "encontrado"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
                     "ao retornar o usuário com o id especificado", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "404", description = "Não existe usuário cadastrado " +
                     "com esse id", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
                     "você não está autenticado no sistema", content = {
@@ -105,15 +103,15 @@ public class UsuarioController {
                     "deletado"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
                     "ao retornar o usuário com o id especificado", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "404", description = "Não existe usuário cadastrado " +
                     "com esse id", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
                     "você não está autenticado no sistema", content = {
-                    @Content( )
+                    @Content()
             })
     })
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
@@ -127,15 +125,15 @@ public class UsuarioController {
                     "foi atualizado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
                     "para atualizar o usuário com o id especificado", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "404", description = "Não existe usuário cadastrado " +
                     "com esse id", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
                     "você não está autenticado no sistema", content = {
-                    @Content( )
+                    @Content()
             })
     })
     public ResponseEntity<UsuarioDtoResposta> putById(@PathVariable Integer id, @RequestBody @Valid UsuarioDtoCriacao usuario) {
@@ -155,15 +153,15 @@ public class UsuarioController {
                     "com sucesso"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição, " +
                     "verifique se todos os campos foram preenchidos", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "404", description = "Não existe usuário cadastrado " +
                     "com esse email", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação, credenciais " +
                     "incorretas", content = {
-                    @Content( )
+                    @Content()
             })
     })
     public ResponseEntity<UsuarioTokenDto> login(@RequestBody UsuarioLoginDto usuarioLoginDto) {
@@ -176,11 +174,11 @@ public class UsuarioController {
             @ApiResponse(responseCode = "200", description = "Ok - Notas dos usuários " +
                     "ordenadas"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
                     "você não está autenticado no sistema", content = {
-                    @Content( )
+                    @Content()
             })
     })
     public ResponseEntity<ListaObj<UsuarioDtoResposta>> menorParaMaior() {
@@ -193,15 +191,15 @@ public class UsuarioController {
                     "retornados"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição, " +
                     "verifique a nota digitada", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "404", description = "Não existem usuários cadastrados   " +
                     "com essa nota", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
                     "você não está autenticado no sistema", content = {
-                    @Content( )
+                    @Content()
             })
     })
     public ResponseEntity<ListaObj<UsuarioDtoResposta>> buscarPorNota(@RequestParam Double nota) {
@@ -219,15 +217,15 @@ public class UsuarioController {
             }),
             @ApiResponse(responseCode = "404", description = "Não existem usuários cadastrado, " +
                     "com esse id", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
                     "você não está autenticado no sistema, é necessário passar um token válido " +
                     "no corpo da requisição", content = {
-                    @Content( )
+                    @Content()
             })
     })
-    public ResponseEntity<QuantidadeTreinosPorDiaSemanaDto> getQuantidadeTreinosSemanaById(@PathVariable int id){
+    public ResponseEntity<QuantidadeTreinosPorDiaSemanaDto> getQuantidadeTreinosSemanaById(@PathVariable int id) {
         return ResponseEntity.ok().body(usuarioService.getQuantidadeTreinosPorDiaSemana(id));
     }
 
@@ -255,11 +253,11 @@ public class UsuarioController {
                     "encontrado"),
             @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
                     "ao retornar o usuário com o id especificado", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "204", description = "Não existe usuário cadastrado " +
                     "com esse id", content = {
-                    @Content( )
+                    @Content()
             }),
             @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
                     "você não está autenticado no sistema", content = {
@@ -273,5 +271,27 @@ public class UsuarioController {
     }
 
 
+    @PutMapping("/meta-treinos/{id}/{meta}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ok - Usuário com id escolhido " +
+                    "foi atualizado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Houve um erro na requisição " +
+                    "para atualizar o usuário com o id especificado", content = {
+                    @Content()
+            }),
+            @ApiResponse(responseCode = "404", description = "Não existe usuário cadastrado " +
+                    "com esse id", content = {
+                    @Content()
+            }),
+            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
+                    "você não está autenticado no sistema", content = {
+                    @Content()
+            })
+    })
+    public ResponseEntity<UsuarioResumoDto> editaMetaTreinos(@PathVariable int id, @PathVariable int meta) {
+        return ResponseEntity.ok().body(usuarioService.editaMetaTreinos(id, meta));
+    }
+
 }
+
 

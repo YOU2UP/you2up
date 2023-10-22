@@ -367,4 +367,17 @@ public class UsuarioService {
         return newLink;
     }
 
+
+    public UsuarioResumoDto editaMetaTreinos(int idUsuario, int metaTreinos) {
+        Optional<Usuario> usuarioOpt = usuarioRepository.findById(idUsuario);
+
+        if (usuarioOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
+        }
+
+        Usuario usuario = usuarioOpt.get();
+        usuario.setMetaTreinos(metaTreinos);
+
+        return UsuarioMapper.convertToUsuarioResumoDto(usuarioRepository.save(usuario));
+    }
 }

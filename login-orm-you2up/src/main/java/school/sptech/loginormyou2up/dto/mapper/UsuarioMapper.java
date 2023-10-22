@@ -134,6 +134,7 @@ public class UsuarioMapper {
         dto.setId(usuario.getIdUsuario());
         dto.setNome(usuario.getNome());
         dto.setEmail(usuario.getEmail());
+        dto.setMetaTreinos(usuario.getMetaTreinos());
 
         return dto;
     }
