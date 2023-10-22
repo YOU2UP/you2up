@@ -1,5 +1,6 @@
 package school.sptech.loginormyou2up.dto.mapper;
 
+import school.sptech.loginormyou2up.domain.foto.Foto;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;
@@ -34,8 +35,9 @@ public class UsuarioMapper {
         dto.setMetaTreinos(usuario.getMetaTreinos());
         dto.setEstagio(usuario.getEstagio());
         dto.setLocalTreino(usuario.getLocalTreino());
-        dto.setFotoPefil(usuario.getFotoPerfil());
-        dto.setDescricao(usuario.getDescricao());
+        dto.setFotoPerfil(FotoMapper.converterFotoParaFotoRespostaDto(usuario.getFotoPerfil()));
+        dto.setFeedFotos(FotoMapper.converterFotoParaFotoRespostaDto(usuario.getFeedFotos()));
+
 
 
         List<TreinoDtoJsonUsuario> listaTreino = new ArrayList<>();
@@ -53,20 +55,22 @@ public class UsuarioMapper {
         List<UsuarioDtoResposta> listaRetorno =  new ArrayList<>();
 
 
-        for (Usuario u: usuarios) {
+        for (Usuario usuario: usuarios) {
             UsuarioDtoResposta dto = new UsuarioDtoResposta();
-            dto.setId(u.getIdUsuario());
-            dto.setNome(u.getNome());
-            dto.setEmail(u.getEmail());
-            dto.setDataNascimento(u.getDataNascimento());
-            dto.setNotificacoes(NotificacaoMapper.convertToNotificacaoDtoResposta(u.getNotificacoes()));
-            dto.setMetaTreinos(u.getMetaTreinos());
-            dto.setEstagio(u.getEstagio());
-            dto.setLocalTreino(u.getLocalTreino());
+            dto.setId(usuario.getIdUsuario());
+            dto.setNome(usuario.getNome());
+            dto.setEmail(usuario.getEmail());
+            dto.setDataNascimento(usuario.getDataNascimento());
+            dto.setNotificacoes(NotificacaoMapper.convertToNotificacaoDtoResposta(usuario.getNotificacoes()));
+            dto.setMetaTreinos(usuario.getMetaTreinos());
+            dto.setEstagio(usuario.getEstagio());
+            dto.setLocalTreino(usuario.getLocalTreino());
+            dto.setFotoPerfil(FotoMapper.converterFotoParaFotoRespostaDto(usuario.getFotoPerfil()));
+            dto.setFeedFotos(FotoMapper.converterFotoParaFotoRespostaDto(usuario.getFeedFotos()));
 
             List<TreinoDtoJsonUsuario> listaTreino = new ArrayList<>();
 
-            for (TreinoHasUsuario tu : u.getTreinos()){
+            for (TreinoHasUsuario tu : usuario.getTreinos()){
                 listaTreino.add(TreinoMapper.convertToTreinoDtoJsonUsuario(tu.getTreino()));
             }
 
@@ -101,7 +105,7 @@ public class UsuarioMapper {
         usuario.setMetaTreinos(0);
         usuario.setNotificacoes(new ArrayList<>());
         usuario.setLocalTreino(TreinoMapper.convertToLocalTreinoUsuario(usuarioDto.getLocalTreino()));
-        usuario.setFotoPerfil(FOTO_PERFIL);
+        usuario.setFeedFotos(new ArrayList<>());
         return usuario;
     }
 
@@ -144,7 +148,6 @@ public class UsuarioMapper {
         dto.setId(usuario.getIdUsuario());
         dto.setNome(usuario.getNome());
         dto.setEmail(usuario.getEmail());
-        dto.setFotoPerfil(usuario.getFotoPerfil());
         dto.setLocalTreino(usuario.getLocalTreino());
         dto.setDescricao(usuario.getDescricao());
         dto.setDataNascimento(usuario.getDataNascimento());
