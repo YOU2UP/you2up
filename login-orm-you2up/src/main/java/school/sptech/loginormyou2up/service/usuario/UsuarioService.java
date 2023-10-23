@@ -14,6 +14,7 @@ import school.sptech.loginormyou2up.api.configuration.security.jwt.GerenciadorTo
 import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
+import school.sptech.loginormyou2up.dto.mapper.FotoMapper;
 import school.sptech.loginormyou2up.dto.treino.QuantidadeTreinosPorDiaSemanaDto;
 import school.sptech.loginormyou2up.dto.usuario.*;
 import school.sptech.loginormyou2up.repository.LocalTreinoUsuarioRepository;
@@ -53,6 +54,7 @@ public class UsuarioService {
     @Autowired
     private MatchService matchService;
 
+
     public UsuarioDtoRespostaCadastro criar(UsuarioDtoCriacao usuarioDtoCriacao) {
         if (usuarioRepository.findByEmail(usuarioDtoCriacao.getEmail()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email já cadastrado");
@@ -86,7 +88,7 @@ public class UsuarioService {
     }
 
     public List<UsuarioDtoResposta> getAll() {
-        List<Usuario> usuarios = usuarioRepository.findAll();
+         List<Usuario> usuarios = usuarioRepository.findAll();
 
         if (usuarios.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT);
@@ -103,6 +105,11 @@ public class UsuarioService {
 
         //adicionando os matches em todos os usuários
         listaRetorno = listaRetorno.stream().map(this::adicionaMatches).toList();
+
+        //adicionando feed fotos
+        listaRetorno.forEach(usuarioDtoResposta -> {
+            usuarioDtoResposta.setFeedFotos(FotoMapper.converterFotoParaFotoRespostaDto(usuarioRepository.findById(usuarioDtoResposta.getId()).get().getFeedFotos()));
+        });
 
         return listaRetorno;
     }
@@ -330,44 +337,6 @@ public class UsuarioService {
         }
     }
 
-    public String postFotoPerfil(int id, String link, String token) {
-        Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
-
-        if (usuarioOpt.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-
-        //adiciona o token ao link pois o link original interpreta
-        // o caracter & como um novo parâmetro
-
-        StringBuffer linkTranformacao = new StringBuffer(link + "&token=" + token);
-
-        int contagemBarras = 0;
-
-        for (int i = 0; i < linkTranformacao.length(); i++) {
-            if (linkTranformacao.charAt(i) == '/') {
-                contagemBarras++;
-            }
-
-            //localiza a oitava barra que era pra ser %2F e a substitui pelo caracter necessário
-            if (contagemBarras == 8) {
-                linkTranformacao.delete(i, i+1);
-                linkTranformacao.insert(i, "%2F");
-                break;
-            }
-        }
-
-        String newLink = linkTranformacao.toString();
-
-        Usuario usuario = usuarioOpt.get();
-        usuario.setFotoPerfil(newLink);
-
-        usuarioRepository.save(usuario);
-
-        return newLink;
-    }
-
-
     public UsuarioResumoDto editaMetaTreinos(int idUsuario, int metaTreinos) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findById(idUsuario);
 
@@ -380,4 +349,5 @@ public class UsuarioService {
 
         return UsuarioMapper.convertToUsuarioResumoDto(usuarioRepository.save(usuario));
     }
+
 }

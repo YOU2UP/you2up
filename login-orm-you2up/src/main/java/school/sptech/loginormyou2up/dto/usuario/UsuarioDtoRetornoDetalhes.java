@@ -19,10 +19,6 @@ public class UsuarioDtoRetornoDetalhes {
 
     @Schema(description = "Descrição do usuário", example = "Sou uma pessoa legal")
     private String descricao;
-
-    @Schema(description = "Link da foto de perfil do usuário", example = "https://www.imagensempng.com.br/wp-content/uploads/2021/09/Icone-usuario-Png-1024x1024.png")
-    private String fotoPerfil;
-
     @Schema(description = "Data de nascimento do usuário", example = "2000-01-01")
     private LocalDate dataNascimento;
 
@@ -43,10 +39,6 @@ public class UsuarioDtoRetornoDetalhes {
 
     public String getDescricao() {
         return descricao;
-    }
-
-    public String getFotoPerfil() {
-        return fotoPerfil;
     }
 
     public LocalDate getDataNascimento() {
@@ -71,10 +63,6 @@ public class UsuarioDtoRetornoDetalhes {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public void setFotoPerfil(String fotoPerfil) {
-        this.fotoPerfil = fotoPerfil;
     }
 
     public void setDataNascimento(LocalDate dataNascimento) {

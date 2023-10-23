@@ -1,7 +1,10 @@
 package school.sptech.loginormyou2up.dto.usuario;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import school.sptech.loginormyou2up.domain.foto.Foto;
+import school.sptech.loginormyou2up.domain.foto.FotoPerfil;
 import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
+import school.sptech.loginormyou2up.dto.FotoRespostaDto;
 import school.sptech.loginormyou2up.dto.match.MatchDtoResposta;
 import school.sptech.loginormyou2up.dto.notificacao.NotificacaoDtoResposta;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;
@@ -29,9 +32,6 @@ public class UsuarioDtoResposta {
     @Schema(description = "Estágio do usuário (iniciante, intermediário, avançado)", example = "iniciante")
     private String estagio;
 
-    @Schema(description = "Link da foto de perfil do usuário", example = "https://www.imagensempng.com.br/wp-content/uploads/2021/09/Icone-usuario-Png-1024x1024.png")
-    private String fotoPefil;
-
     @Schema(description = "Meta de treinos do usuário", example = "5")
     private int metaTreinos;
 
@@ -47,8 +47,15 @@ public class UsuarioDtoResposta {
     @Schema(description = "Lista de matches do usuário")
     private List<MatchDtoResposta> matches;
 
+    @Schema(description = "Lista de fotos do usuário")
+    private List<FotoRespostaDto> feedFotos;
+
+    @Schema(description = "Foto de perfil do usuário")
+    private FotoRespostaDto fotoPerfil;
+
     @Schema(description = "Descrição do usuário")
     private String descricao;
+
 
     public UsuarioDtoResposta(Integer id, String nome, String email, LocalDate dataNascimento, Double notaMedia, String estagio, int metaTreinos, List<NotificacaoDtoResposta> notificacoes, List<TreinoDtoJsonUsuario> treinos, LocalTreinoUsuario localTreino, List<MatchDtoResposta> matches, String descricao) {
         this.id = id;
@@ -157,20 +164,31 @@ public class UsuarioDtoResposta {
         this.matches = matches;
     }
 
+
+    public List<FotoRespostaDto> getFeedFotos() {
+        return feedFotos;
+    }
+
+    public void setFeedFotos(List<FotoRespostaDto> feedFotos) {
+        this.feedFotos = feedFotos;
+
+    }
+  
     public String getDescricao() {
         return descricao;
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+
     }
 
-    public String getFotoPefil() {
-        return fotoPefil;
+    public FotoRespostaDto getFotoPerfil() {
+        return fotoPerfil;
     }
 
-    public void setFotoPefil(String fotoPefil) {
-        this.fotoPefil = fotoPefil;
+    public void setFotoPerfil(FotoRespostaDto fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 
     @Override

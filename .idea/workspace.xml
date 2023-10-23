@@ -5,35 +5,74 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9474ba33-7ea4-4d11-b447-ee3095cb541c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/treino/TreinoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/treino/TreinoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/domain/foto/FotoPerfil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/repository/FotoPerfilRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/api/controller/FotoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/api/controller/FotoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/domain/usuario/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/domain/usuario/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/mapper/FotoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/mapper/FotoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/mapper/UsuarioMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/mapper/UsuarioMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/usuario/UsuarioDtoResposta.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/usuario/UsuarioDtoResposta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/usuario/UsuarioDtoRetornoDetalhes.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/usuario/UsuarioDtoRetornoDetalhes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/foto/FotoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/foto/FotoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/resources/data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2W2uhWqwUyzfZgSJ1cEIX5DbpXi" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/Felipe Grossi/Desktop/you2up/login-orm-you2up"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/feed-fotos&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/vini/Projects/sptech/you2up&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration name="LoginOrmYou2upApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="login-orm-you2up" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="school.sptech.loginormyou2up.LoginOrmYou2upApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -42,7 +81,27 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1695943115734</updated>
+      <workItem from="1697339033258" duration="395000" />
+      <workItem from="1697339446599" duration="8292000" />
+      <workItem from="1697489135224" duration="23000" />
+      <workItem from="1697657564848" duration="12695000" />
+      <workItem from="1697755534489" duration="207000" />
+      <workItem from="1697755783798" duration="5923000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/foto/FotoService.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
