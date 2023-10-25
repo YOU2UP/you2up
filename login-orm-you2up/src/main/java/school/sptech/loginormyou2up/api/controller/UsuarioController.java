@@ -279,6 +279,11 @@ public class UsuarioController {
         return ResponseEntity.ok().body(usuarioService.editaMetaTreinos(id, meta));
     }
 
+
+    @GetMapping("/busca-usuario-arvore/{id}")
+    public ResponseEntity<UsuarioDtoResposta> buscaUsuarioArvore(@PathVariable int id) {
+        return ResponseEntity.ok().body(usuarioService.buscaUsuarioArvore(id));
+    }
 }
 
 

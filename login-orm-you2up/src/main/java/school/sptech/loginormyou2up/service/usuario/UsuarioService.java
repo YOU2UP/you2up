@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import school.sptech.loginormyou2up.api.configuration.security.jwt.GerenciadorTokenJwt;
+import school.sptech.loginormyou2up.domain.arvore.Arvore;
+import school.sptech.loginormyou2up.domain.arvore.Node;
 import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
@@ -28,6 +30,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -348,6 +351,23 @@ public class UsuarioService {
         usuario.setMetaTreinos(metaTreinos);
 
         return UsuarioMapper.convertToUsuarioResumoDto(usuarioRepository.save(usuario));
+    }
+
+    public UsuarioDtoResposta buscaUsuarioArvore(int id){
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        Arvore arvore = new Arvore();
+
+        for (Usuario u: usuarios) {
+            arvore.insere(u.getIdUsuario());
+        }
+
+        Node no = arvore.busca(id);
+
+        if (Objects.isNull(no)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
+        }
+
+        return usuarioRepository.findById(no.getInfo()).map(UsuarioMapper::convertToDtoResposta).get();
     }
 
 }
