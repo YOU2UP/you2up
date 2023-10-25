@@ -135,4 +135,10 @@ public class FotoService {
         return FotoMapper.converterFotoParaFotoRespostaDto(fotoPerfilRepository.save(fotoPerfil));
     }
 
+    public FotoPerfil criaFotoPadrao(){
+        FotoPerfil fotoPerfil = new FotoPerfil();
+        fotoPerfil.setUrl("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png");
+        return fotoPerfilRepository.save(fotoPerfil);
+    }
+
 }
