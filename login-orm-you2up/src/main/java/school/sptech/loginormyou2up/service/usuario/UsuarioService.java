@@ -13,17 +13,21 @@ import org.springframework.web.server.ResponseStatusException;
 import school.sptech.loginormyou2up.api.configuration.security.jwt.GerenciadorTokenJwt;
 import school.sptech.loginormyou2up.domain.arvore.Arvore;
 import school.sptech.loginormyou2up.domain.arvore.Node;
+import school.sptech.loginormyou2up.domain.foto.FotoPerfil;
 import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.dto.mapper.FotoMapper;
 import school.sptech.loginormyou2up.dto.treino.QuantidadeTreinosPorDiaSemanaDto;
 import school.sptech.loginormyou2up.dto.usuario.*;
+import school.sptech.loginormyou2up.repository.FotoPerfilRepository;
+import school.sptech.loginormyou2up.repository.FotoRepository;
 import school.sptech.loginormyou2up.repository.LocalTreinoUsuarioRepository;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
 import school.sptech.loginormyou2up.dto.mapper.UsuarioMapper;
 import school.sptech.loginormyou2up.service.avaliacao.AvaliacaoService;
 import school.sptech.loginormyou2up.service.extra.ListaObj;
+import school.sptech.loginormyou2up.service.foto.FotoService;
 import school.sptech.loginormyou2up.service.match.MatchService;
 
 import java.time.DayOfWeek;
@@ -57,6 +61,12 @@ public class UsuarioService {
     @Autowired
     private MatchService matchService;
 
+    @Autowired
+    private FotoService fotoService;
+
+    @Autowired
+    private FotoPerfilRepository fotoPerfilRepository;
+
 
     public UsuarioDtoRespostaCadastro criar(UsuarioDtoCriacao usuarioDtoCriacao) {
         if (usuarioRepository.findByEmail(usuarioDtoCriacao.getEmail()).isPresent()) {
@@ -72,7 +82,16 @@ public class UsuarioService {
         LocalTreinoUsuario localTreinoCadastrado = localTreinoUsuarioRepository.save(novoUsuario.getLocalTreino());
         novoUsuario.getLocalTreino().setIdLocalTreino(localTreinoCadastrado.getIdLocalTreino());
 
-        return UsuarioMapper.convertToUsuarioDtoRespostaCadastro(usuarioRepository.save(novoUsuario));
+        FotoPerfil fotoPerfil = fotoService.criaFotoPadrao();
+        novoUsuario.setFotoPerfil(fotoPerfil);
+
+        Usuario usuarioSalvo = usuarioRepository.save(novoUsuario);
+
+        fotoPerfil.setUsuario(usuarioSalvo);
+        fotoPerfilRepository.save(fotoPerfil);
+        usuarioSalvo.setFotoPerfil(fotoPerfil);
+
+        return UsuarioMapper.convertToUsuarioDtoRespostaCadastro(usuarioRepository.save(usuarioSalvo));
     }
 
     public UsuarioTokenDto autenticar(UsuarioLoginDto usuarioLoginDto) {
