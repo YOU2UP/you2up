@@ -261,14 +261,14 @@ public class    TreinoService {
         String formattedNomeUsuario = nomeUsuario.replaceAll("\\s+", "_");
 
         StringBuilder content = new StringBuilder();
-        content.append("Usuario 1,Email Usuario 1,Usuario 2,Email Usuario 2,Data Treino,Periodo Treino\n");
+        content.append("Usuario 1;Email Usuario 1;Usuario 2;Email Usuario 2;Data Treino;Periodo Treino\n");
 
         for (TreinoDtoResposta treino : treinos) {
             List<UsuarioDtoJson> usuarios = treino.getUsuarios();
             UsuarioDtoJson usuario1 = usuarios.get(0);
             UsuarioDtoJson usuario2 = usuarios.get(1);
 
-            String line = String.format("%s,%s,%s,%s,%s,%s\n",
+            String line = String.format("%s;%s;%s;%s;%s;%s\n",
                     usuario1.getNome(),
                     usuario1.getEmail(),
                     usuario2.getNome(),
