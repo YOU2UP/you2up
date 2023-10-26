@@ -45,11 +45,25 @@ public class UsuarioDtoCriacao {
         this.academia = academia;
     }
 
+    public UsuarioDtoCriacao(String nome, String email, String senha, LocalDate dataNascimento, String descricao, String estagio, String academia) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.dataNascimento = dataNascimento;
+        this.descricao = descricao;
+        this.estagio = estagio;
+        this.academia = academia;
+    }
+
     public UsuarioDtoCriacao() {
     }
 
     public String getAcademia() {
         return academia;
+    }
+
+    public void setAcademia(String academia) {
+        this.academia = academia;
     }
 
     private LocalTreinoCriacaoDto localTreino;

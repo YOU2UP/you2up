@@ -169,4 +169,5 @@ public class Usuario{
     public void setFotoPerfil(FotoPerfil fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
     }
+
 }

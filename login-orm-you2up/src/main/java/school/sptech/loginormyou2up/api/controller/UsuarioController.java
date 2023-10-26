@@ -5,8 +5,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.dto.mapper.UsuarioMapper;
 import school.sptech.loginormyou2up.dto.treino.QuantidadeTreinosPorDiaSemanaDto;
@@ -16,6 +19,9 @@ import school.sptech.loginormyou2up.service.extra.ListaObj;
 import school.sptech.loginormyou2up.service.usuario.UsuarioService;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Optional;
 
@@ -256,6 +262,23 @@ public class UsuarioController {
         System.out.println(totalUser);
         return usuarioService.buscarPorIdRecursivo(0, totalUser, id);
     }
+
+    @GetMapping("/criar-txt")
+    public ResponseEntity<String> carregarUsuariosDoArquivo() {
+       usuarioService.gravaArquivoTxt("Usuarios");
+       return ResponseEntity.ok().body("Arquivo criado");
+    }
+
+    @GetMapping("/ler-txt/{nomeArq}")
+    public ResponseEntity<String> lerUsuariosDoArquivo(@PathVariable String nomeArq) {
+        usuarioService.leArquivoTxt(nomeArq);
+        return (ResponseEntity.ok().body("Usuarios Salvos"));
+    }
+
+
+
+
+
 
 
     @PutMapping("/meta-treinos/{id}/{meta}")

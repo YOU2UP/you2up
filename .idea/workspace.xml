@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9474ba33-7ea4-4d11-b447-ee3095cb541c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/foto/FotoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/foto/FotoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/api/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/api/controller/UsuarioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/domain/usuario/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/domain/usuario/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/usuario/UsuarioDtoCriacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/usuario/UsuarioDtoCriacao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/usuario/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/usuario/UsuarioService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

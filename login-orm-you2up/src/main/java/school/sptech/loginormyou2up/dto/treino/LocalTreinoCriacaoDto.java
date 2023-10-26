@@ -9,6 +9,15 @@ public class LocalTreinoCriacaoDto {
     private String uf;
     private boolean isAcademia;
 
+    public LocalTreinoCriacaoDto(String nome, String rua, int numero, String bairro, String cidade, String uf, boolean isAcademia) {
+        this.nome = nome;
+        this.rua = rua;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+        this.isAcademia = isAcademia;
+    }
 
     public String getNome() {
         return nome;
