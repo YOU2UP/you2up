@@ -278,7 +278,7 @@ public class UsuarioController {
         return usuarioService.buscarPorIdRecursivo(0, totalUser, id);
     }
 
-    @PostMapping("/criar-txt")
+    @GetMapping("/criar-txt")
     public ResponseEntity<String> carregarUsuariosDoArquivo() {
        usuarioService.gravaArquivoTxt("Usuarios");
        return ResponseEntity.ok().body("Arquivo criado");
