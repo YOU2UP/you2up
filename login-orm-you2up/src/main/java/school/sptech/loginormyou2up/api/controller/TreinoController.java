@@ -179,40 +179,6 @@ public class TreinoController {
     }
 
 
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Ok - ação refeita"),
-            @ApiResponse(responseCode = "404", description = "Não existe um usuário cadastrado " +
-                    "com esse id", content = {
-                    @Content()
-            }),
-            @ApiResponse(responseCode = "401", description = "Erro de autenticação. Parece que " +
-                    "você não está autenticado no sistema", content = {
-                    @Content()
-            })
-    })
-    @PatchMapping("/realizar/{idUsuario}")
-    public ResponseEntity<Void> realizarTreino(@PathVariable int idUsuario) {
-
-
-        if (!naoRealizados.isEmpty()) {
-            while (!naoRealizados.isEmpty()) {
-                naoRealizados.poll();
-            }
-
-        }
-        List<Integer> ids = treinoService.buscarIdsTreino(idUsuario);
-        for (Integer id : ids) {
-            naoRealizados.insert(id);
-        }
-        if (naoRealizados.isEmpty()) {
-            return ResponseEntity.status(404).build();
-        } else {
-            treinoService.realizaTreinoNaFila(naoRealizados.poll());
-            return ResponseEntity.status(204).build();
-        }
-    }
-
-
     @GetMapping("/findTreinoByHash/{id}")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Treino encontrado com sucesso"),
@@ -227,7 +193,12 @@ public class TreinoController {
             return ResponseEntity.status(404).build();
         }
     }
-  
+
+    @GetMapping("/nao-avaliados/{id}")
+    public ResponseEntity<List<TreinoDtoResposta>> getTreinosRealizadosNaoAvaliados(@PathVariable int id) {
+        return ResponseEntity.ok().body(treinoService.getTreinosRealizadosNaoAvaliados(id));
+    }
+
     @GetMapping("/usuario/{id}")
     public ResponseEntity<List<TreinoDtoResposta>> getTreinosByUsuarioId(@PathVariable int id) {
         return ResponseEntity.ok().body(treinoService.findTreinosByUsuarioId(id));
@@ -262,6 +233,12 @@ public class TreinoController {
         }
 
         return ResponseEntity.status(200).body("Arquivo gerado com sucesso: " + fileName);
+    }
+
+    @GetMapping("/realizar/{id}")
+    public ResponseEntity<Void> realizarTreino(@PathVariable int id) {
+        treinoService.realizarTreino(id);
+        return ResponseEntity.ok().build();
     }
 
 

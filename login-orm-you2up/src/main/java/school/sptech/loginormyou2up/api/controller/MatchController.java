@@ -52,7 +52,7 @@ public class MatchController {
                     @Content( )
             })
     })
-    public ResponseEntity<MatchDtoResposta> getById(Integer id){
+    public ResponseEntity<List<MatchDtoResposta>> getById(Integer id){
         return ResponseEntity.ok(matchService.getById(id));
     }
 

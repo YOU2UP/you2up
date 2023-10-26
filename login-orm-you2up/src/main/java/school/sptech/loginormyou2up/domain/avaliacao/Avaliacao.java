@@ -1,5 +1,6 @@
 package school.sptech.loginormyou2up.domain.avaliacao;
 
+import school.sptech.loginormyou2up.domain.treino.Treino;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ public class Avaliacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idAvaliacao;
 
     private double nota;
 
@@ -19,13 +20,16 @@ public class Avaliacao {
     @ManyToOne
     private Usuario avaliado;
 
+    @ManyToOne
+    private Treino treino;
 
-    public Integer getId() {
-        return id;
+
+    public Integer getIdAvaliacao() {
+        return idAvaliacao;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdAvaliacao(Integer idAvaliacao) {
+        this.idAvaliacao = idAvaliacao;
     }
 
     public double getNota() {
@@ -50,5 +54,13 @@ public class Avaliacao {
 
     public void setAvaliado(Usuario avaliado) {
         this.avaliado = avaliado;
+    }
+
+    public Treino getTreino() {
+        return treino;
+    }
+
+    public void setTreino(Treino treino) {
+        this.treino = treino;
     }
 }

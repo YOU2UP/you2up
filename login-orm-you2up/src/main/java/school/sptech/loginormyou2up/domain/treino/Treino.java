@@ -10,15 +10,17 @@ import java.util.List;
 public class Treino{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idTreino;
 
     private String periodo;
 
     @OneToMany(mappedBy = "treino", orphanRemoval = true)
     private List<TreinoHasUsuario> usuarios;
 
-    public Treino(Integer id, String periodo, List<TreinoHasUsuario> usuarios) {
-        this.id = id;
+    private boolean isRealizado;
+
+    public Treino(Integer idTreino, String periodo, List<TreinoHasUsuario> usuarios) {
+        this.idTreino = idTreino;
         this.periodo = periodo;
         this.usuarios = usuarios;
     }
@@ -26,12 +28,12 @@ public class Treino{
     public Treino() {
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdTreino() {
+        return idTreino;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdTreino(Integer idTreino) {
+        this.idTreino = idTreino;
     }
 
     public String getPeriodo() {
@@ -48,5 +50,13 @@ public class Treino{
 
     public void setUsuarios(List<TreinoHasUsuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    public boolean isRealizado() {
+        return isRealizado;
+    }
+
+    public void setRealizado(boolean realizado) {
+        isRealizado = realizado;
     }
 }

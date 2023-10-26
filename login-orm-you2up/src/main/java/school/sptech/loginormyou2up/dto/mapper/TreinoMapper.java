@@ -7,7 +7,7 @@ import school.sptech.loginormyou2up.dto.treino.LocalTreinoCriacaoDto;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoCriacao;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoResposta;
-import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoJson;
+import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoRetornoDetalhes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +17,9 @@ public class TreinoMapper {
     public static TreinoDtoJsonUsuario convertToTreinoDtoJsonUsuario(Treino treino) {
         TreinoDtoJsonUsuario dto = new TreinoDtoJsonUsuario();
 
-        dto.setId(treino.getId());
+        dto.setId(treino.getIdTreino());
         dto.setPeriodo(treino.getPeriodo());
         dto.setDataHora(treino.getUsuarios().get(0).getInicioTreino());
-        dto.setRealizado(treino.getUsuarios().get(0).isRealizado());
-        dto.setQuantidadeTreinos(treino.getUsuarios().get(0).getQuantidadeTreinos());
 
         return dto;
     }
@@ -39,15 +37,16 @@ public class TreinoMapper {
     public static TreinoDtoResposta convertToTreinoDtoResposta(Treino treino) {
         TreinoDtoResposta treinoDtoResposta = new TreinoDtoResposta();
 
-        treinoDtoResposta.setId(treino.getId());
+        treinoDtoResposta.setId(treino.getIdTreino());
         treinoDtoResposta.setPeriodo(treino.getPeriodo());
         treinoDtoResposta.setInicioTreino(treino.getUsuarios().get(0).getInicioTreino());
+        treinoDtoResposta.setRealizado(treino.isRealizado());
 
         List<TreinoHasUsuario> lista = treino.getUsuarios();
-        List<UsuarioDtoJson> listaUsuarios = new ArrayList<>();
+        List<UsuarioDtoRetornoDetalhes> listaUsuarios = new ArrayList<>();
 
         for (TreinoHasUsuario tu : lista) {
-            listaUsuarios.add(UsuarioMapper.convertToUsuarioDtoJson(tu.getUsuario() ));
+            listaUsuarios.add(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(tu.getUsuario()));
         }
 
         treinoDtoResposta.setUsuarios(listaUsuarios);
@@ -58,14 +57,15 @@ public class TreinoMapper {
     public static TreinoDtoResposta convertToTreinoDtoResposta(Treino treino, List<TreinoHasUsuario> treinoHasUsuarios) {
         TreinoDtoResposta treinoDtoResposta = new TreinoDtoResposta();
 
-        treinoDtoResposta.setId(treino.getId());
+        treinoDtoResposta.setId(treino.getIdTreino());
         treinoDtoResposta.setPeriodo(treino.getPeriodo());
         treinoDtoResposta.setInicioTreino(treinoHasUsuarios.get(0).getInicioTreino());
+        treinoDtoResposta.setRealizado(treino.isRealizado());
 
-        List<UsuarioDtoJson> listaUsuarios = new ArrayList<>();
+        List<UsuarioDtoRetornoDetalhes> listaUsuarios = new ArrayList<>();
 
         for (TreinoHasUsuario tu : treinoHasUsuarios) {
-            listaUsuarios.add(UsuarioMapper.convertToUsuarioDtoJson(tu.getUsuario()));
+            listaUsuarios.add(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(tu.getUsuario()));
         }
 
         treinoDtoResposta.setUsuarios(listaUsuarios);
@@ -80,15 +80,16 @@ public class TreinoMapper {
 
             TreinoDtoResposta treinoDtoResposta = new TreinoDtoResposta();
 
-            treinoDtoResposta.setId(treinos.get(i).getId());
+            treinoDtoResposta.setId(treinos.get(i).getIdTreino());
             treinoDtoResposta.setPeriodo(treinos.get(i).getPeriodo());
 
             treinoDtoResposta.setInicioTreino(treinos.get(i).getUsuarios().get(0).getInicioTreino());
+            treinoDtoResposta.setRealizado(treinos.get(i).isRealizado());
 
-            List<UsuarioDtoJson> listaUsuarios = new ArrayList<>();
+            List<UsuarioDtoRetornoDetalhes> listaUsuarios = new ArrayList<>();
 
             for (TreinoHasUsuario tu: treinos.get(i).getUsuarios()) {
-                listaUsuarios.add(UsuarioMapper.convertToUsuarioDtoJson(tu.getUsuario()));
+                listaUsuarios.add(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(tu.getUsuario()));
             }
 
             treinoDtoResposta.setUsuarios(listaUsuarios);

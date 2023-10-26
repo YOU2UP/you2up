@@ -11,6 +11,9 @@ public class UsuarioResumoDto {
     @Schema(description = "Email do usuário", example = "joao@email.com")
     private String email;
 
+    @Schema(description = "Quantidade de treinos realizados pelo usuário", example = "10")
+    private int metaTreinos;
+
 
     public int getId() {
         return id;
@@ -34,5 +37,13 @@ public class UsuarioResumoDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getMetaTreinos() {
+        return metaTreinos;
+    }
+
+    public void setMetaTreinos(int metaTreinos) {
+        this.metaTreinos = metaTreinos;
     }
 }

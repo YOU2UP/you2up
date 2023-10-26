@@ -11,26 +11,33 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import school.sptech.loginormyou2up.api.configuration.security.jwt.GerenciadorTokenJwt;
+import school.sptech.loginormyou2up.domain.arvore.Arvore;
+import school.sptech.loginormyou2up.domain.arvore.Node;
+import school.sptech.loginormyou2up.domain.foto.FotoPerfil;
 import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.dto.treino.LocalTreinoCriacaoDto;
+import school.sptech.loginormyou2up.dto.mapper.FotoMapper;
 import school.sptech.loginormyou2up.dto.treino.QuantidadeTreinosPorDiaSemanaDto;
 import school.sptech.loginormyou2up.dto.usuario.*;
+import school.sptech.loginormyou2up.repository.FotoPerfilRepository;
+import school.sptech.loginormyou2up.repository.FotoRepository;
 import school.sptech.loginormyou2up.repository.LocalTreinoUsuarioRepository;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
 import school.sptech.loginormyou2up.dto.mapper.UsuarioMapper;
 import school.sptech.loginormyou2up.service.avaliacao.AvaliacaoService;
 import school.sptech.loginormyou2up.service.extra.ListaObj;
+import school.sptech.loginormyou2up.service.foto.FotoService;
 import school.sptech.loginormyou2up.service.match.MatchService;
 
 import java.io.*;
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -57,6 +64,13 @@ public class UsuarioService {
     @Autowired
     private MatchService matchService;
 
+    @Autowired
+    private FotoService fotoService;
+
+    @Autowired
+    private FotoPerfilRepository fotoPerfilRepository;
+
+
     public UsuarioDtoRespostaCadastro criar(UsuarioDtoCriacao usuarioDtoCriacao) {
         if (usuarioRepository.findByEmail(usuarioDtoCriacao.getEmail()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email já cadastrado");
@@ -71,7 +85,16 @@ public class UsuarioService {
         LocalTreinoUsuario localTreinoCadastrado = localTreinoUsuarioRepository.save(novoUsuario.getLocalTreino());
         novoUsuario.getLocalTreino().setIdLocalTreino(localTreinoCadastrado.getIdLocalTreino());
 
-        return UsuarioMapper.convertToUsuarioDtoRespostaCadastro(usuarioRepository.save(novoUsuario));
+        FotoPerfil fotoPerfil = fotoService.criaFotoPadrao();
+        novoUsuario.setFotoPerfil(fotoPerfil);
+
+        Usuario usuarioSalvo = usuarioRepository.save(novoUsuario);
+
+        fotoPerfil.setUsuario(usuarioSalvo);
+        fotoPerfilRepository.save(fotoPerfil);
+        usuarioSalvo.setFotoPerfil(fotoPerfil);
+
+        return UsuarioMapper.convertToUsuarioDtoRespostaCadastro(usuarioRepository.save(usuarioSalvo));
     }
 
     public UsuarioTokenDto autenticar(UsuarioLoginDto usuarioLoginDto) {
@@ -90,7 +113,7 @@ public class UsuarioService {
     }
 
     public List<UsuarioDtoResposta> getAll() {
-        List<Usuario> usuarios = usuarioRepository.findAll();
+         List<Usuario> usuarios = usuarioRepository.findAll();
 
         if (usuarios.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT);
@@ -107,6 +130,11 @@ public class UsuarioService {
 
         //adicionando os matches em todos os usuários
         listaRetorno = listaRetorno.stream().map(this::adicionaMatches).toList();
+
+        //adicionando feed fotos
+        listaRetorno.forEach(usuarioDtoResposta -> {
+            usuarioDtoResposta.setFeedFotos(FotoMapper.converterFotoParaFotoRespostaDto(usuarioRepository.findById(usuarioDtoResposta.getId()).get().getFeedFotos()));
+        });
 
         return listaRetorno;
     }
@@ -325,7 +353,7 @@ public class UsuarioService {
             return ResponseEntity.status(204).build();
         } else {
             Optional<Usuario> usuarioOptional = usuarioRepository.findById(atual + 1);
-            if (usuarioOptional.get().getId() == id) {
+            if (usuarioOptional.get().getIdUsuario() == id) {
                 UsuarioDtoResposta userDtoResposta = UsuarioMapper.convertToDtoResposta(usuarioOptional.get());
                 return ResponseEntity.status(200).body(userDtoResposta);
             } else {
@@ -334,41 +362,34 @@ public class UsuarioService {
         }
     }
 
-    public String postFotoPerfil(int id, String link, String token) {
-        Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
+    public UsuarioResumoDto editaMetaTreinos(int idUsuario, int metaTreinos) {
+        Optional<Usuario> usuarioOpt = usuarioRepository.findById(idUsuario);
 
         if (usuarioOpt.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
         }
-
-        //adiciona o token ao link pois o link original interpreta
-        // o caracter & como um novo parâmetro
-
-        StringBuffer linkTranformacao = new StringBuffer(link + "&token=" + token);
-
-        int contagemBarras = 0;
-
-        for (int i = 0; i < linkTranformacao.length(); i++) {
-            if (linkTranformacao.charAt(i) == '/') {
-                contagemBarras++;
-            }
-
-            //localiza a oitava barra que era pra ser %2F e a substitui pelo caracter necessário
-            if (contagemBarras == 8) {
-                linkTranformacao.delete(i, i+1);
-                linkTranformacao.insert(i, "%2F");
-                break;
-            }
-        }
-
-        String newLink = linkTranformacao.toString();
 
         Usuario usuario = usuarioOpt.get();
-        usuario.setFotoPerfil(newLink);
+        usuario.setMetaTreinos(metaTreinos);
 
-        usuarioRepository.save(usuario);
+        return UsuarioMapper.convertToUsuarioResumoDto(usuarioRepository.save(usuario));
+    }
 
-        return newLink;
+    public UsuarioDtoResposta buscaUsuarioArvore(int id){
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        Arvore arvore = new Arvore();
+
+        for (Usuario u: usuarios) {
+            arvore.insere(u.getIdUsuario());
+        }
+
+        Node no = arvore.busca(id);
+
+        if (Objects.isNull(no)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
+        }
+
+        return usuarioRepository.findById(no.getInfo()).map(UsuarioMapper::convertToDtoResposta).get();
     }
 
 

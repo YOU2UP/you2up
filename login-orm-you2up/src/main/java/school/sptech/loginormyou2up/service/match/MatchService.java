@@ -1,6 +1,5 @@
 package school.sptech.loginormyou2up.service.match;
 
-import io.jsonwebtoken.impl.crypto.MacProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,8 +11,10 @@ import school.sptech.loginormyou2up.dto.match.MatchDtoResposta;
 import school.sptech.loginormyou2up.repository.MatchRepository;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class MatchService {
@@ -26,19 +27,19 @@ public class MatchService {
 
 
     public MatchDtoResposta criarMatch(MatchDtoCriacao dto) {
-        if (dto.getUsuario1().getId() == dto.getUsuario2().getId()) {
+        if (dto.getUsuario1().getIdUsuario().equals(dto.getUsuario2().getIdUsuario())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não é possível criar um match com o mesmo usuário");
         }
 
-        if (matchExiste(dto.getUsuario1().getId(), dto.getUsuario2().getId())) {
+        if (matchExiste(dto.getUsuario1().getIdUsuario(), dto.getUsuario2().getIdUsuario())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Match já existe");
         }
 
-        if (usuarioRepository.findById(dto.getUsuario1().getId()).isEmpty()) {
+        if (usuarioRepository.findById(dto.getUsuario1().getIdUsuario()).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário 1 não encontrado");
         }
 
-        if (usuarioRepository.findById(dto.getUsuario2().getId()).isEmpty()) {
+        if (usuarioRepository.findById(dto.getUsuario2().getIdUsuario()).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário 2 não encontrado");
         }
 
@@ -46,12 +47,17 @@ public class MatchService {
         return MatchMapper.convertToMatchDto(matchRepository.save(match));
     }
 
-    public MatchDtoResposta getById(Integer id) {
-        if (matchRepository.findById(id).isEmpty()){
+    public List<MatchDtoResposta> getById(Integer id) {
+        if (matchRepository.findById(id).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Match não encontrado");
         }
 
-        return MatchMapper.convertToMatchDto(matchRepository.findById(id).get());
+        List<MatchDtoResposta> listaRetorno = new ArrayList<>();
+
+        listaRetorno.add(MatchMapper.convertToMatchDto(matchRepository.findById(id).get()));
+        listaRetorno.add(inverteUsuarios(MatchMapper.convertToMatchDto(matchRepository.findById(id).get())));
+
+        return listaRetorno;
     }
 
     public List<MatchDtoResposta> getAll() {
@@ -61,7 +67,15 @@ public class MatchService {
 
         List<Match> listaRetorno = matchRepository.findAll();
 
-        return listaRetorno.stream().map(MatchMapper::convertToMatchDto).toList();
+
+        return listaRetorno.stream()
+                .flatMap(match -> Stream.of(
+                        MatchMapper.convertToMatchDto(match),
+                        inverteUsuarios(MatchMapper.convertToMatchDto(match))
+                ))
+                .collect(Collectors.toList());
+
+        //return listaRetorno.stream().map(MatchMapper::convertToMatchDto).toList();
     }
 
     public List<MatchDtoResposta> getByIdUsuario(Integer id) {
@@ -75,7 +89,14 @@ public class MatchService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum match encontrado");
         }
 
-        return listaRetorno.stream().map(MatchMapper::convertToMatchDto).toList();
+        return listaRetorno.stream()
+                .flatMap(match -> Stream.of(
+                        MatchMapper.convertToMatchDto(match),
+                        inverteUsuarios(MatchMapper.convertToMatchDto(match))
+                ))
+                .collect(Collectors.toList());
+
+        //return listaRetorno.stream().map(MatchMapper::convertToMatchDto).toList();
     }
 
     public void deleteById(Integer id) {
@@ -91,20 +112,20 @@ public class MatchService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Match não encontrado");
         }
 
-        if (dto.getUsuario1().getId() == dto.getUsuario2().getId()) {
+        if (dto.getUsuario1().getIdUsuario() == dto.getUsuario2().getIdUsuario()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não é possível criar um match com o mesmo usuário");
         }
 
-        if (usuarioRepository.findById(dto.getUsuario1().getId()).isEmpty()) {
+        if (usuarioRepository.findById(dto.getUsuario1().getIdUsuario()).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário 1 não encontrado");
         }
 
-        if (usuarioRepository.findById(dto.getUsuario2().getId()).isEmpty()) {
+        if (usuarioRepository.findById(dto.getUsuario2().getIdUsuario()).isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário 2 não encontrado");
         }
 
         Match match = MatchMapper.convertToMatch(dto);
-        match.setId(id);
+        match.setIdMatch(id);
 
         return MatchMapper.convertToMatchDto(matchRepository.save(match));
     }
@@ -120,11 +141,31 @@ public class MatchService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Match não encontrado");
         }
 
-        return listaRetorno.stream().map(MatchMapper::convertToMatchDto).toList();
+        return listaRetorno.stream()
+                .flatMap(match -> Stream.of(
+                        MatchMapper.convertToMatchDto(match),
+                        inverteUsuarios(MatchMapper.convertToMatchDto(match))
+                ))
+                .collect(Collectors.toList());
+
+        //return listaRetorno.stream().map(MatchMapper::convertToMatchDto).toList();
     }
 
-    public boolean matchExiste(int id1, int id2){
+    public boolean matchExiste(int id1, int id2) {
         return matchRepository.countMatches(id1, id2) > 0;
+    }
+
+
+    private MatchDtoResposta inverteUsuarios(MatchDtoResposta dto) {
+        MatchDtoResposta newDto = new MatchDtoResposta();
+
+        newDto.setId(dto.getId());
+        newDto.setUsuario1(dto.getUsuario2());
+        newDto.setUsuario2(dto.getUsuario1());
+        newDto.setDataMatch(dto.getDataMatch());
+        newDto.setAtivo(dto.isAtivo());
+
+        return newDto;
     }
 
 }

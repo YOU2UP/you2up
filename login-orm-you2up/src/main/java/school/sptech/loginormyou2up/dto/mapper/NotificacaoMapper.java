@@ -13,7 +13,7 @@ public class NotificacaoMapper {
     public static NotificacaoDtoResposta convertToNotificacaoDtoResposta(Notificacao notificacao) {
         NotificacaoDtoResposta dto = new NotificacaoDtoResposta();
 
-        dto.setId(notificacao.getId());
+        dto.setId(notificacao.getIdNotificacao());
         dto.setDataHora(notificacao.getDataHora());
         dto.setConteudo(notificacao.getConteudo());
 
@@ -25,7 +25,7 @@ public class NotificacaoMapper {
         for (Notificacao n: notificacao) {
             NotificacaoDtoResposta dto = new NotificacaoDtoResposta();
 
-            dto.setId(n.getId());
+            dto.setId(n.getIdNotificacao());
             dto.setDataHora(n.getDataHora());
             dto.setConteudo(n.getConteudo());
             dtos.add(dto);

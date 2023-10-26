@@ -11,10 +11,11 @@ public class AvaliacaoMapper {
     public static AvaliacaoRespostaDto convertToAvaliacaoRespostaDto(Avaliacao avaliacao) {
         AvaliacaoRespostaDto avaliacaoRespostaDto = new AvaliacaoRespostaDto();
 
-        avaliacaoRespostaDto.setId(avaliacao.getId());
-        avaliacaoRespostaDto.setAvaliador(UsuarioMapper.convertToUsuarioResumoDto(avaliacao.getAvaliador()));
-        avaliacaoRespostaDto.setAvaliado(UsuarioMapper.convertToUsuarioResumoDto(avaliacao.getAvaliado()));
+        avaliacaoRespostaDto.setId(avaliacao.getIdAvaliacao());
+        avaliacaoRespostaDto.setAvaliador(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(avaliacao.getAvaliador()));
+        avaliacaoRespostaDto.setAvaliado(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(avaliacao.getAvaliado()));
         avaliacaoRespostaDto.setNota(avaliacao.getNota());
+//        avaliacaoRespostaDto.setTreino(TreinoMapper.convertToTreinoDtoJsonUsuario(avaliacao.getTreino()));
 
         return avaliacaoRespostaDto;
     }
@@ -24,10 +25,11 @@ public class AvaliacaoMapper {
 
         for (Avaliacao avaliacao : avaliacoes) {
             AvaliacaoRespostaDto avaliacaoRespostaDto = new AvaliacaoRespostaDto();
-            avaliacaoRespostaDto.setId(avaliacao.getId());
-            avaliacaoRespostaDto.setAvaliador(UsuarioMapper.convertToUsuarioResumoDto(avaliacao.getAvaliador()));
-            avaliacaoRespostaDto.setAvaliado(UsuarioMapper.convertToUsuarioResumoDto(avaliacao.getAvaliado()));
+            avaliacaoRespostaDto.setId(avaliacao.getIdAvaliacao());
+            avaliacaoRespostaDto.setAvaliador(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(avaliacao.getAvaliador()));
+            avaliacaoRespostaDto.setAvaliado(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(avaliacao.getAvaliado()));
             avaliacaoRespostaDto.setNota(avaliacao.getNota());
+            avaliacaoRespostaDto.setTreino(TreinoMapper.convertToTreinoDtoJsonUsuario(avaliacao.getTreino()));
 
             listaRetorno.add(avaliacaoRespostaDto);
         }

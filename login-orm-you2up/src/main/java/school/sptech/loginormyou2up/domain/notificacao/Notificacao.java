@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class Notificacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idNotificacao;
 
     private String conteudo;
 
@@ -19,7 +19,7 @@ public class Notificacao {
     private Usuario usuario;
 
     public Notificacao(Integer id, String conteudo, LocalDateTime dataHora, Usuario usuario) {
-        this.id = id;
+        this.idNotificacao = id;
         this.conteudo = conteudo;
         this.dataHora = dataHora;
         this.usuario = usuario;
@@ -28,12 +28,12 @@ public class Notificacao {
     public Notificacao() {
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdNotificacao() {
+        return idNotificacao;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdNotificacao(Integer idNotificacao) {
+        this.idNotificacao = idNotificacao;
     }
 
     public String getConteudo() {

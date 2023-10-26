@@ -19,18 +19,13 @@ public class TreinoHasUsuario  {
     @MapsId("usuarioId")
     @ManyToOne
     private Usuario usuario;
-
     private LocalDateTime inicioTreino;
-    private Integer quantidadeTreinos;
-    private boolean isRealizado;
 
     public TreinoHasUsuario(TreinoHasUsuarioId treinoHasUsuarioId, Treino treino, Usuario usuario, LocalDateTime inicioTreino, Integer quantidadeTreinos, boolean isRealizado) {
         this.treinoHasUsuarioId = treinoHasUsuarioId;
         this.treino = treino;
         this.usuario = usuario;
         this.inicioTreino = inicioTreino;
-        this.quantidadeTreinos = quantidadeTreinos;
-        this.isRealizado = isRealizado;
     }
 
     public TreinoHasUsuario() {
@@ -58,22 +53,6 @@ public class TreinoHasUsuario  {
 
     public void setInicioTreino(LocalDateTime inicioTreino) {
         this.inicioTreino = inicioTreino;
-    }
-
-    public Integer getQuantidadeTreinos() {
-        return quantidadeTreinos;
-    }
-
-    public void setQuantidadeTreinos(Integer quantidadeTreinos) {
-        this.quantidadeTreinos = quantidadeTreinos;
-    }
-
-    public boolean isRealizado() {
-        return isRealizado;
-    }
-
-    public void setRealizado(boolean realizado) {
-        isRealizado = realizado;
     }
 
     public TreinoHasUsuarioId getTreinoHasUsuarioId() {

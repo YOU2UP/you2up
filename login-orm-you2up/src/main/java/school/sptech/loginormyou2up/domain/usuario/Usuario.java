@@ -1,33 +1,30 @@
 package school.sptech.loginormyou2up.domain.usuario;
 
+import school.sptech.loginormyou2up.domain.foto.Foto;
+import school.sptech.loginormyou2up.domain.foto.FotoPerfil;
 import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.avaliacao.Avaliacao;
 import school.sptech.loginormyou2up.domain.notificacao.Notificacao;
-import school.sptech.loginormyou2up.service.extra.FilaObj;
 
 import javax.persistence.*;
+import javax.swing.event.ListDataEvent;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 public class Usuario{
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idUsuario;
     private String nome;
     private String email;
     private String senha;
     private LocalDate dataNascimento;
     private String descricao;
-    private String fotoPerfil;
-
     private String estagio; // iniciante, intermediário, avançado
-
     private int metaTreinos;
-
 
     @OneToMany(mappedBy = "usuario", orphanRemoval = true)
     private List<TreinoHasUsuario> treinos;
@@ -44,9 +41,16 @@ public class Usuario{
     @OneToMany(mappedBy = "avaliador")
     private List<Avaliacao> avaliacoesDadas;
 
+    @OneToMany(mappedBy = "usuario")
+    private List<Foto> feedFotos;
+
+    @OneToOne
+    private FotoPerfil fotoPerfil;
+
+
 
     public Usuario(Integer id, String nome, String email, String senha, LocalDate dataNascimento, String descricao, String estagio, int metaTreinos, List<TreinoHasUsuario> treinos, List<Notificacao> notificacoes) {
-        this.id = id;
+        this.idUsuario = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -94,12 +98,12 @@ public class Usuario{
         this.estagio = estagio;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNome() {
@@ -150,13 +154,20 @@ public class Usuario{
         this.localTreino = locaTreino;
     }
 
-    public String getFotoPerfil() {
+    public List<Foto> getFeedFotos() {
+        return feedFotos;
+    }
+
+    public void setFeedFotos(List<Foto> feedFotos) {
+        this.feedFotos = feedFotos;
+    }
+
+    public FotoPerfil getFotoPerfil() {
         return fotoPerfil;
     }
 
-    public void setFotoPerfil(String fotoPerfil) {
+    public void setFotoPerfil(FotoPerfil fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
     }
-
 
 }
