@@ -89,6 +89,8 @@ public class UsuarioService {
         FotoPerfil fotoPerfil = fotoService.criaFotoPadrao();
         novoUsuario.setFotoPerfil(fotoPerfil);
 
+        novoUsuario.setDataCriacaoConta(LocalDateTime.now());
+
         Usuario usuarioSalvo = usuarioRepository.save(novoUsuario);
 
         fotoPerfil.setUsuario(usuarioSalvo);
