@@ -38,6 +38,7 @@ public class UsuarioMapper {
         dto.setFotoPerfil(FotoMapper.converterFotoParaFotoRespostaDto(usuario.getFotoPerfil()));
         dto.setFeedFotos(FotoMapper.converterFotoParaFotoRespostaDto(usuario.getFeedFotos()));
         dto.setDescricao(usuario.getDescricao());
+        dto.setDataCriacaoConta(usuario.getDataCriacaoConta());
 
 
         List<TreinoDtoJsonUsuario> listaTreino = new ArrayList<>();
@@ -68,6 +69,7 @@ public class UsuarioMapper {
             dto.setFotoPerfil(FotoMapper.converterFotoParaFotoRespostaDto(usuario.getFotoPerfil()));
             dto.setFeedFotos(FotoMapper.converterFotoParaFotoRespostaDto(usuario.getFeedFotos()));
             dto.setDescricao(usuario.getDescricao());
+            dto.setDataCriacaoConta(usuario.getDataCriacaoConta());
 
             List<TreinoDtoJsonUsuario> listaTreino = new ArrayList<>();
 
@@ -90,6 +92,7 @@ public class UsuarioMapper {
         dto.setNome(usuario.getNome());
         dto.setDataNascimento(usuario.getDataNascimento());
         dto.setEmail(usuario.getEmail());
+        dto.setDataCriacaoConta(usuario.getDataCriacaoConta());
 
         return dto;
     }

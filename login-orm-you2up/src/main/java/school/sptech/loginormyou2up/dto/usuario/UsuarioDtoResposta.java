@@ -10,6 +10,7 @@ import school.sptech.loginormyou2up.dto.notificacao.NotificacaoDtoResposta;
 import school.sptech.loginormyou2up.dto.treino.TreinoDtoJsonUsuario;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class UsuarioDtoResposta {
@@ -55,6 +56,9 @@ public class UsuarioDtoResposta {
 
     @Schema(description = "Descrição do usuário")
     private String descricao;
+
+    @Schema(description = "Data de entrada do usuário", example = "2021-01-01")
+    private LocalDateTime dataCriacaoConta;
 
 
     public UsuarioDtoResposta(Integer id, String nome, String email, LocalDate dataNascimento, Double notaMedia, String estagio, int metaTreinos, List<NotificacaoDtoResposta> notificacoes, List<TreinoDtoJsonUsuario> treinos, LocalTreinoUsuario localTreino, List<MatchDtoResposta> matches, String descricao) {
@@ -189,6 +193,14 @@ public class UsuarioDtoResposta {
 
     public void setFotoPerfil(FotoRespostaDto fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
+    }
+
+    public LocalDateTime getDataCriacaoConta() {
+        return dataCriacaoConta;
+    }
+
+    public void setDataCriacaoConta(LocalDateTime dataCriacaoConta) {
+        this.dataCriacaoConta = dataCriacaoConta;
     }
 
     @Override

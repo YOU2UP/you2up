@@ -3,6 +3,7 @@ package school.sptech.loginormyou2up.dto.usuario;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class
 UsuarioDtoRespostaCadastro {
@@ -22,6 +23,9 @@ UsuarioDtoRespostaCadastro {
 
     @Schema(description = "Sexo do usuário", example = "F")
     private String sexo;
+
+    @Schema(description = "Data de entrada do usuário", example = "2021-01-01")
+    private LocalDateTime dataCriacaoConta;
 
     public UsuarioDtoRespostaCadastro(Integer id, String nome, String email, LocalDate dataNascimento, String sexo) {
         this.id = id;
@@ -64,6 +68,14 @@ UsuarioDtoRespostaCadastro {
 
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public LocalDateTime getDataCriacaoConta() {
+        return dataCriacaoConta;
+    }
+
+    public void setDataCriacaoConta(LocalDateTime dataCriacaoConta) {
+        this.dataCriacaoConta = dataCriacaoConta;
     }
 }
 
