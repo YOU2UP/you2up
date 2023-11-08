@@ -422,7 +422,6 @@ public class UsuarioService {
         int contaRegistroDado = 0;
         List<UsuarioDtoCriacao> lista = new ArrayList<>();
 
-        lista.add(new UsuarioDtoCriacao(1, "João da Silva", "joao@email.com", "senha12345", LocalDate.parse("1990-01-01"), "Usuário 1", "Iniciante", "Academia A"));
         lista.add(new UsuarioDtoCriacao(2, "Maria Souza", "maria@email.com", "123senha", LocalDate.parse("1985-12-03"), "Usuário 2", "Intermediário", "Academia B"));
         lista.add(new UsuarioDtoCriacao(3, "Pedro Almeida", "pedro@email.com", "teste123", LocalDate.parse("1998-09-15"), "Usuário 3", "Avançado", "Academia C"));
         lista.add(new UsuarioDtoCriacao(4, "Ana Pereira", "ana@email.com", "minhasenha", LocalDate.parse("2000-11-30"), "Usuário 4", "Iniciante", "Academia A"));

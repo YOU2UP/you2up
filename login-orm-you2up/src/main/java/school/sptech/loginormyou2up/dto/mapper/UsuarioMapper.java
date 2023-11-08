@@ -37,7 +37,7 @@ public class UsuarioMapper {
         dto.setLocalTreino(usuario.getLocalTreino());
         dto.setFotoPerfil(FotoMapper.converterFotoParaFotoRespostaDto(usuario.getFotoPerfil()));
         dto.setFeedFotos(FotoMapper.converterFotoParaFotoRespostaDto(usuario.getFeedFotos()));
-
+        dto.setDescricao(usuario.getDescricao());
 
 
         List<TreinoDtoJsonUsuario> listaTreino = new ArrayList<>();
@@ -67,6 +67,7 @@ public class UsuarioMapper {
             dto.setLocalTreino(usuario.getLocalTreino());
             dto.setFotoPerfil(FotoMapper.converterFotoParaFotoRespostaDto(usuario.getFotoPerfil()));
             dto.setFeedFotos(FotoMapper.converterFotoParaFotoRespostaDto(usuario.getFeedFotos()));
+            dto.setDescricao(usuario.getDescricao());
 
             List<TreinoDtoJsonUsuario> listaTreino = new ArrayList<>();
 
