@@ -1,8 +1,10 @@
 {
 	"info": {
-		"_postman_id": "8ad6fb14-bcf3-4b95-8125-31584e5ae0d6",
+		"_postman_id": "088278e0-1bd4-4f74-a9cd-c303e21ac732",
 		"name": "requests you2up jwt",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26044545",
+		"_collection_link": "https://galactic-eclipse-82451.postman.co/workspace/You2up~37b684df-066e-443a-83c0-e654f235f860/collection/26044545-088278e0-1bd4-4f74-a9cd-c303e21ac732?action=share&source=collection_link&creator=26044545"
 	},
 	"item": [
 		{
@@ -34,47 +36,19 @@
 					"response": []
 				},
 				{
-					"name": "login",
+					"name": "Cadastro usuarios",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjkzNjk4NDgxLCJleHAiOjE2OTQwNTg0ODF9.mEkRvIg2gLnl6HUveLOdydmKcLV762u99HcJdiHKmbH3G6hZxO5Qhlwfg7FFTc4mY7wsjIOq-dRDDJFcDtfQsA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjk4MzUwMDIyLCJleHAiOjE2OTg3MTAwMjJ9.rspO53tLvQfobVOa-xUJu5ZYC_qPkBfsLDjW2x8XmNL6wBmTUoJkz6MpKBDE63DCrjZ5UQexMB7NMq15iHZA0Q",
 									"type": "string"
 								}
 							]
 						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"steven@email.com\",\r\n    \"senha\":\"123456\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/usuarios/login",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"usuarios",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Cadastro usuarios",
-					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "",
@@ -83,24 +57,15 @@
 								"disabled": true
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Carlos piloto\",\r\n    \"email\": \"carlos@email.com\",\r\n    \"senha\": \"senha123\",\r\n    \"dataNascimento\": \"2000-11-07\",\r\n    \"descricao\": \"sou um usuario legal\",\r\n    \"estagio\": \"intermediario\",\r\n    \"localTreino\":{\r\n        \"nome\":\"smart fit\",\r\n        \"numero\":106,\r\n        \"rua\":\"professor Antônio Silva, 106\",\r\n        \"bairro\":\"planalto\",\r\n        \"cidade\":\"São bernardo do campo\",\r\n        \"uf\":\"SP\",\r\n        \"isAcademia\": true\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8080/usuarios/cadastro",
+							"raw": "localhost:8080/usuarios/criar-txt",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"usuarios",
-								"cadastro"
+								"criar-txt"
 							]
 						}
 					},
@@ -114,7 +79,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjg1MzkwOTc3LCJleHAiOjE2ODU3NTA5Nzd9.HgXfhlkZ24fLBVuzXaFWt2_6JkWgq-IvUssADxRaNdecknkcKmc5FTGdQ7bCZaWsfOQcPdr5BFdyy2tXL-u6aA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjk4MzUwMDIyLCJleHAiOjE2OTg3MTAwMjJ9.rspO53tLvQfobVOa-xUJu5ZYC_qPkBfsLDjW2x8XmNL6wBmTUoJkz6MpKBDE63DCrjZ5UQexMB7NMq15iHZA0Q",
 									"type": "string"
 								}
 							]
@@ -128,13 +93,16 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/usuarios",
+							"raw": "localhost:8080/treinos/listTreinos/1/csv",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"usuarios"
+								"treinos",
+								"listTreinos",
+								"1",
+								"csv"
 							]
 						}
 					},
@@ -143,6 +111,16 @@
 				{
 					"name": "Get usuario por id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjk0MjgyODEyLCJleHAiOjE2OTQ2NDI4MTJ9.bQg0y38QS9K_4OAnObIKKWRwkFHnIpj5R9Q0gSMZCuto91i5wMcB-frkQVSevE9lO2uNBxMJE3fa9NYK7jOoFw",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -152,14 +130,14 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/usuarios/6",
+							"raw": "localhost:8080/usuarios/5",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"usuarios",
-								"6"
+								"5"
 							]
 						}
 					},
@@ -168,6 +146,16 @@
 				{
 					"name": "Get usuarios ordenados da menor para a maior nota",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjk0MjgyODEyLCJleHAiOjE2OTQ2NDI4MTJ9.bQg0y38QS9K_4OAnObIKKWRwkFHnIpj5R9Q0gSMZCuto91i5wMcB-frkQVSevE9lO2uNBxMJE3fa9NYK7jOoFw",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -252,41 +240,116 @@
 					"response": []
 				},
 				{
-					"name": "get usuarios recursivo",
+					"name": "buscar por id recursivo",
 					"request": {
 						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Post imagem perfil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjk1OTQzMzIyLCJleHAiOjE2OTYzMDMzMjJ9.XNl7hfcvEFZl1o29d12W3h6dL9m1f-lImbDfq41eUTcGEEfx_DduuDYx4bgA3cGnnrjIjkhfBhGDBre1HHbWUw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"url\":\"https://thumbs.dreamstime.com/z/s%C3%ADmbolo-de-perfil-masculino-inteligente-retrato-estilo-desenho-animado-m%C3%ADnimo-166146967.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:8080/usuarios/recursivo",
+							"raw": "localhost:8080/usuarios/imagem-perfil/5",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"usuarios",
-								"recursivo"
+								"imagem-perfil",
+								"5"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "get usario por id recursivo",
+					"name": "login",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"steven@email.com\",\r\n    \"senha\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:8080/usuarios/recursivo/1",
+							"raw": "localhost:8080/usuarios/login",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"usuarios",
-								"recursivo",
-								"1"
+								"login"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edita treinos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuarios/meta-treinos/1/20",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuarios",
+								"meta-treinos",
+								"1",
+								"20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id(arvore)",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}
@@ -303,7 +366,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjg1MzkwOTc3LCJleHAiOjE2ODU3NTA5Nzd9.HgXfhlkZ24fLBVuzXaFWt2_6JkWgq-IvUssADxRaNdecknkcKmc5FTGdQ7bCZaWsfOQcPdr5BFdyy2tXL-u6aA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjk3OTkyNzIxLCJleHAiOjE2OTgzNTI3MjF9.7iWiD4e9E5cJ4s8_JPRGidf6RlBHkecCESXFnUpvAaLWcwihv4bvigB-O2FTbl14O1vXwlfrYVCQ13Cmb4Qyjg",
 									"type": "string"
 								}
 							]
@@ -362,7 +425,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjg1MzkwOTc3LCJleHAiOjE2ODU3NTA5Nzd9.HgXfhlkZ24fLBVuzXaFWt2_6JkWgq-IvUssADxRaNdecknkcKmc5FTGdQ7bCZaWsfOQcPdr5BFdyy2tXL-u6aA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXRoZXVzQGVtYWlsLmNvbSIsImlhdCI6MTY5Nzk5NDM5NSwiZXhwIjoxNjk4MzU0Mzk1fQ.AE6LME-_OkZ9JwEImOb082HEjs_jwrKchcypbhbV_3uu_yPzrxsO3Z57_rGiZlDyH8CwM8UMHoQdD_8XW6HzVg",
 									"type": "string"
 								}
 							]
@@ -377,7 +440,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"periodo\":\"noturno\",\r\n    \"inicioTreino\":\"2023-09-20T19:00:00\",\r\n    \"usuarios\":[\r\n        {\r\n            \"id\":4\r\n        },\r\n        {\r\n            \"id\":5\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"periodo\":\"noturno\",\r\n    \"inicioTreino\":\"2023-10-30T19:00:00\",\r\n    \"usuarios\":[\r\n        {\r\n            \"id\":1\r\n        },\r\n        {\r\n            \"id\":2\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -451,6 +514,68 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get treinos de um usuario",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get treinos entre dois usuarios",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Realizar treino",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXRoZXVzQGVtYWlsLmNvbSIsImlhdCI6MTY5Nzk5NDM5NSwiZXhwIjoxNjk4MzU0Mzk1fQ.AE6LME-_OkZ9JwEImOb082HEjs_jwrKchcypbhbV_3uu_yPzrxsO3Z57_rGiZlDyH8CwM8UMHoQdD_8XW6HzVg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/treinos/realizar/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"treinos",
+								"realizar",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get treino realizado não avaliado",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get hash table",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		},
@@ -502,7 +627,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nota\":3.5,\r\n    \"avaliador\":{\r\n        \"id\":1\r\n    },\r\n    \"avaliado\":{\r\n        \"id\":2\r\n    }\r\n}",
+							"raw": "{\r\n    \"nota\":3.5,\r\n    \"avaliador\":{\r\n        \"id\":1\r\n    },\r\n    \"avaliado\":{\r\n        \"id\":6\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -551,6 +676,14 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "get avaliacoes pelo avaliador",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		},
@@ -565,7 +698,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjgxNTk1NzYxLCJleHAiOjE2ODUxOTU3NjF9.CNBdw9UN6cmWgsburfSo7pcwUf_1AzvGqXgT6BkV50VI4Q5BehPOFJCWXRcnisOYbDTBNVsEjorDct8IdonrAA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjk0MjgyODEyLCJleHAiOjE2OTQ2NDI4MTJ9.bQg0y38QS9K_4OAnObIKKWRwkFHnIpj5R9Q0gSMZCuto91i5wMcB-frkQVSevE9lO2uNBxMJE3fa9NYK7jOoFw",
 									"type": "string"
 								}
 							]
@@ -596,7 +729,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjgxNTk1NzYxLCJleHAiOjE2ODUxOTU3NjF9.CNBdw9UN6cmWgsburfSo7pcwUf_1AzvGqXgT6BkV50VI4Q5BehPOFJCWXRcnisOYbDTBNVsEjorDct8IdonrAA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjk0MjgyODEyLCJleHAiOjE2OTQ2NDI4MTJ9.bQg0y38QS9K_4OAnObIKKWRwkFHnIpj5R9Q0gSMZCuto91i5wMcB-frkQVSevE9lO2uNBxMJE3fa9NYK7jOoFw",
 									"type": "string"
 								}
 							]
@@ -624,7 +757,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjgxNTk1NzYxLCJleHAiOjE2ODUxOTU3NjF9.CNBdw9UN6cmWgsburfSo7pcwUf_1AzvGqXgT6BkV50VI4Q5BehPOFJCWXRcnisOYbDTBNVsEjorDct8IdonrAA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjk0MjgyODEyLCJleHAiOjE2OTQ2NDI4MTJ9.bQg0y38QS9K_4OAnObIKKWRwkFHnIpj5R9Q0gSMZCuto91i5wMcB-frkQVSevE9lO2uNBxMJE3fa9NYK7jOoFw",
 									"type": "string"
 								}
 							]
@@ -654,7 +787,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjgxNTk1NzYxLCJleHAiOjE2ODUxOTU3NjF9.CNBdw9UN6cmWgsburfSo7pcwUf_1AzvGqXgT6BkV50VI4Q5BehPOFJCWXRcnisOYbDTBNVsEjorDct8IdonrAA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjk0MjgyODEyLCJleHAiOjE2OTQ2NDI4MTJ9.bQg0y38QS9K_4OAnObIKKWRwkFHnIpj5R9Q0gSMZCuto91i5wMcB-frkQVSevE9lO2uNBxMJE3fa9NYK7jOoFw",
 									"type": "string"
 								}
 							]
@@ -663,7 +796,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"usuario1\":{\r\n        \"id\":1\r\n    },\r\n    \"usuario2\":{\r\n        \"id\":3\r\n    }\r\n}",
+							"raw": "{\r\n    \"usuario1\":{\r\n        \"id\":1\r\n    },\r\n    \"usuario2\":{\r\n        \"id\":6\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -678,6 +811,110 @@
 							"port": "8080",
 							"path": [
 								"matches"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Foto",
+			"item": [
+				{
+					"name": "Get Fotos",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Fotos Perfil",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Fotos Perfil  by usuario",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Create Foto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjk3NzQ0NzU0LCJleHAiOjE2OTgxMDQ3NTR9.0ZIBjFB-wztz8tTkVTVnR9niDQaPcQKw8gynHjXU73BDvksoooSBjCRPcZIk0RcvGDy8Cq3-JMaeRRkVnv-0tQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\":\"https://static.todamateria.com.br/upload/pa/is/paisagem-natural-og.jpg\",\n    \"usuario\":{\n        \"idUsuario\":1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/fotos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fotos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Foto Perfil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGV2ZW5AZW1haWwuY29tIiwiaWF0IjoxNjk3NzQ0NzU0LCJleHAiOjE2OTgxMDQ3NTR9.0ZIBjFB-wztz8tTkVTVnR9niDQaPcQKw8gynHjXU73BDvksoooSBjCRPcZIk0RcvGDy8Cq3-JMaeRRkVnv-0tQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\":\"updated\",\n    \"usuario\":{\n        \"idUsuario\":1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/fotos/perfil",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"fotos",
+								"perfil"
 							]
 						}
 					},
