@@ -6,6 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="9474ba33-7ea4-4d11-b447-ee3095cb541c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/domain/usuario/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/domain/usuario/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/mapper/UsuarioMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/mapper/UsuarioMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/usuario/UsuarioDtoResposta.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/usuario/UsuarioDtoResposta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/usuario/UsuarioDtoRespostaCadastro.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/usuario/UsuarioDtoRespostaCadastro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/usuario/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/usuario/UsuarioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/resources/data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="fix/descricao-user" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,13 +55,13 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "fix/delete-treino",
-    "last_opened_file_path": "/home/vini/Projects/sptech/paradigmas/implementacao-arvore-binaria",
+    "git-widget-placeholder": "feature/data-criacao",
+    "last_opened_file_path": "/home/vini/Projects/sptech/you2up",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -91,25 +97,19 @@
       <workItem from="1698189992016" duration="4909000" />
       <workItem from="1698266255732" duration="1912000" />
       <workItem from="1698697128229" duration="338000" />
-      <workItem from="1699569708831" duration="50000" />
-      <workItem from="1699571253114" duration="716000" />
-      <workItem from="1700165484121" duration="1250000" />
-      <workItem from="1700168343711" duration="5102000" />
+      <workItem from="1698700766423" duration="28000" />
+      <workItem from="1699303818130" duration="2334000" />
+      <workItem from="1699306927003" duration="90000" />
+      <workItem from="1699401597881" duration="1239000" />
+      <workItem from="1699476504372" duration="2435000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/foto/FotoService.java</url>
-          <line>129</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
