@@ -113,6 +113,8 @@ public class TreinoService {
 
         if (treinoOpt.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } else if (treinoOpt.get().isRealizado()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Treino já realizado");
         } else {
             treinoRepository.deleteById(id);
             return;
