@@ -156,6 +156,7 @@ public class UsuarioMapper {
         dto.setLocalTreino(usuario.getLocalTreino());
         dto.setDescricao(usuario.getDescricao());
         dto.setDataNascimento(usuario.getDataNascimento());
+        dto.setEstagio(usuario.getEstagio());
 
         return dto;
     }

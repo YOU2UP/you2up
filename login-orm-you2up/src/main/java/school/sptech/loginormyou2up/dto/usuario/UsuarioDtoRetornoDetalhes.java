@@ -19,11 +19,16 @@ public class UsuarioDtoRetornoDetalhes {
 
     @Schema(description = "Descrição do usuário", example = "Sou uma pessoa legal")
     private String descricao;
+
+    @Schema(description = "Estágio do usuário", example = "Iniciante")
+    private String estagio;
+
     @Schema(description = "Data de nascimento do usuário", example = "2000-01-01")
     private LocalDate dataNascimento;
 
     @Schema(description = "Local de treino do usuário")
     private LocalTreinoUsuario localTreino;
+
 
     public int getId() {
         return id;
@@ -71,5 +76,13 @@ public class UsuarioDtoRetornoDetalhes {
 
     public void setLocalTreino(LocalTreinoUsuario localTreino) {
         this.localTreino = localTreino;
+    }
+
+    public String getEstagio() {
+        return estagio;
+    }
+
+    public void setEstagio(String estagio) {
+        this.estagio = estagio;
     }
 }

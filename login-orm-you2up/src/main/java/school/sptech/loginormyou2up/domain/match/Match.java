@@ -11,8 +11,6 @@ public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMatch;
-    private LocalDateTime dataMatch;
-    private boolean isAtivo;
     @ManyToOne
     private Usuario usuario1;
     @ManyToOne
@@ -24,22 +22,6 @@ public class Match {
 
     public void setIdMatch(Integer idMatch) {
         this.idMatch = idMatch;
-    }
-
-    public LocalDateTime getDataMatch() {
-        return dataMatch;
-    }
-
-    public void setDataMatch(LocalDateTime dataMatch) {
-        this.dataMatch = dataMatch;
-    }
-
-    public boolean isAtivo() {
-        return isAtivo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        isAtivo = ativo;
     }
 
     public Usuario getUsuario1() {

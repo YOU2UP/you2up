@@ -14,7 +14,6 @@ import school.sptech.loginormyou2up.domain.match.Match;
 import school.sptech.loginormyou2up.domain.notificacao.Notificacao;
 import school.sptech.loginormyou2up.domain.treinoHasUsuario.TreinoHasUsuario;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
-import school.sptech.loginormyou2up.dto.match.MatchDtoCriacao;
 import school.sptech.loginormyou2up.dto.match.MatchDtoResposta;
 import school.sptech.loginormyou2up.repository.MatchRepository;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
