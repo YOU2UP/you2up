@@ -3,10 +3,9 @@ package school.sptech.loginormyou2up.domain.match;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-public class Match {
+public class TbMatch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
