@@ -9,6 +9,7 @@ import school.sptech.loginormyou2up.domain.avaliacao.Avaliacao;
 import school.sptech.loginormyou2up.dto.avaliacao.AvaliacaoRespostaDto;
 import school.sptech.loginormyou2up.dto.mapper.AvaliacaoMapper;
 import school.sptech.loginormyou2up.repository.AvaliacaoRepository;
+import school.sptech.loginormyou2up.repository.TreinoRepository;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
 
 import java.util.List;
@@ -23,9 +24,16 @@ public class AvaliacaoService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private TreinoRepository treinoRepository;
+
     public AvaliacaoRespostaDto save(Avaliacao avaliacao) {
         if(Objects.isNull(avaliacao)){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Avaliação não pode ser nula");
+        } else if (treinoRepository.findById(avaliacao.getTreino().getIdTreino()).isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Treino não existe");
+        } else if (!treinoRepository.findById(avaliacao.getTreino().getIdTreino()).get().isRealizado()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não é possível avaliar um treino que ainda não foi realizado");
         }
 
         return AvaliacaoMapper.convertToAvaliacaoRespostaDto(avaliacaoRepository.save(avaliacao));

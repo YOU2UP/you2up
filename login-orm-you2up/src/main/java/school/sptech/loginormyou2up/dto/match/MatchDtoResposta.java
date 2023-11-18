@@ -10,12 +10,6 @@ public class MatchDtoResposta {
     @Schema(description = "Id do match", example = "5")
     private Integer id;
 
-    @Schema(description = "Data do match", example = "2021-01-01T00:00:00")
-    private LocalDateTime dataMatch;
-
-    @Schema(description = "Status do match", example = "true")
-    private boolean isAtivo;
-
     @Schema(description = "Usuário 1 do match")
     private UsuarioDtoRetornoDetalhes usuario1;
 
@@ -28,22 +22,6 @@ public class MatchDtoResposta {
 
    public void setId(Integer id) {
       this.id = id;
-   }
-
-   public LocalDateTime getDataMatch() {
-      return dataMatch;
-   }
-
-   public void setDataMatch(LocalDateTime dataMatch) {
-      this.dataMatch = dataMatch;
-   }
-
-   public boolean isAtivo() {
-      return isAtivo;
-   }
-
-   public void setAtivo(boolean ativo) {
-      isAtivo = ativo;
    }
 
     public UsuarioDtoRetornoDetalhes getUsuario1() {

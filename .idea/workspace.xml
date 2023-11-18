@@ -6,6 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="9474ba33-7ea4-4d11-b447-ee3095cb541c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/api/controller/MatchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/api/controller/MatchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/domain/match/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/domain/match/Match.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/mapper/MatchMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/mapper/MatchMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/mapper/UsuarioMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/mapper/UsuarioMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/match/MatchDtoCriacao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/match/MatchDtoResposta.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/match/MatchDtoResposta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/usuario/UsuarioDtoRetornoDetalhes.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/dto/usuario/UsuarioDtoRetornoDetalhes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/repository/UsuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/repository/UsuarioRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/avaliacao/AvaliacaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/avaliacao/AvaliacaoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/match/MatchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/match/MatchService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/treino/TreinoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/java/school/sptech/loginormyou2up/service/treino/TreinoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login-orm-you2up/src/test/java/school/sptech/loginormyou2up/service/match/MatchServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/login-orm-you2up/src/test/java/school/sptech/loginormyou2up/service/match/MatchServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +68,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.keymap",
     "vue.rearranger.settings.migration": "true"
   }
@@ -94,7 +108,7 @@
       <workItem from="1699569708831" duration="50000" />
       <workItem from="1699571253114" duration="716000" />
       <workItem from="1700165484121" duration="1250000" />
-      <workItem from="1700168343711" duration="5102000" />
+      <workItem from="1700168343711" duration="20931000" />
     </task>
     <servers />
   </component>
