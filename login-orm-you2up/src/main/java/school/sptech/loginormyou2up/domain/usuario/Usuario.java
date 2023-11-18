@@ -8,8 +8,8 @@ import school.sptech.loginormyou2up.domain.avaliacao.Avaliacao;
 import school.sptech.loginormyou2up.domain.notificacao.Notificacao;
 
 import javax.persistence.*;
-import javax.swing.event.ListDataEvent;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -25,6 +25,7 @@ public class Usuario{
     private String descricao;
     private String estagio; // iniciante, intermediário, avançado
     private int metaTreinos;
+    private LocalDateTime dataCriacaoConta;
 
     @OneToMany(mappedBy = "usuario", orphanRemoval = true)
     private List<TreinoHasUsuario> treinos;
@@ -170,4 +171,11 @@ public class Usuario{
         this.fotoPerfil = fotoPerfil;
     }
 
+    public LocalDateTime getDataCriacaoConta() {
+        return dataCriacaoConta;
+    }
+
+    public void setDataCriacaoConta(LocalDateTime dataEntrada) {
+        this.dataCriacaoConta = dataEntrada;
+    }
 }

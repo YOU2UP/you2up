@@ -18,13 +18,13 @@ VALUES
     ('Praça da República', 99, 'Avenida Paulista', 'Centro', 'São Paulo', 'SP', false);
 
 
-INSERT INTO usuario (nome, email, senha, data_nascimento, descricao, meta_treinos, estagio, local_treino_id_local_treino)
+INSERT INTO usuario (nome, email, senha, data_nascimento, descricao, meta_treinos, estagio, local_treino_id_local_treino, data_criacao_conta)
 VALUES
-    ('Steven Spielberg', 'steven@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '2000-11-03', 'Sou um usuário legal', 100, 'iniciante', 1),
-    ('Christopher Nolan', 'christopher@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1999-05-21', 'Sou um usuário legal', 70, 'intermediario', 2),
-    ('Quentin Tarantino', 'quaentin@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1945-02-11', 'Sou um usuário legal', 80, 'avancado', 3),
-    ('Alfred Hitchcock', 'alfred@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1998-07-03', 'Sou um usuário legal', 110, 'intermediario', 4),
-    ('Martin Scorsese', 'martin@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1998-11-30', 'Sou um usuário legal', 60, 'iniciante', 5);
+    ('Steven Spielberg', 'steven@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '2000-11-03', 'Sou um usuário legal', 100, 'iniciante', 1, '2023-11-08 10:00:00'),
+    ('Christopher Nolan', 'christopher@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1999-05-21', 'Sou um usuário legal', 70, 'intermediario', 2, '2023-11-08 10:15:00'),
+    ('Quentin Tarantino', 'quaentin@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1945-02-11', 'Sou um usuário legal', 80, 'avancado', 3, '2023-11-08 10:30:00'),
+    ('Alfred Hitchcock', 'alfred@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1998-07-03', 'Sou um usuário legal', 110, 'intermediario', 4, '2023-11-08 10:45:00'),
+    ('Martin Scorsese', 'martin@email.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC', '1998-11-30', 'Sou um usuário legal', 60, 'iniciante', 5, '2023-11-08 11:00:00');
 
 INSERT INTO notificacao
     (conteudo,data_hora, usuario_id_usuario)
