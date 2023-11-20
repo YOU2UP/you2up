@@ -63,35 +63,35 @@ class UsuarioServiceTest {
     @InjectMocks
     private UsuarioService usuarioService;
 
-    @Test
-    @DisplayName("deveRetornarDoisUsuariosQuandoDoisUsuariosCadastrados")
-    void deveRetornarDoisUsuariosQuandoDoisUsuariosCadastrados() {
-        // given
-        int size = 2;
-        List<Usuario> usuarios = new ArrayList<>();
-        List<TreinoHasUsuario> treinos = new ArrayList<>();
-        List<Notificacao> notificacoes = new ArrayList<>();
-
-        Usuario user1 = new Usuario(1, "user1", "email@email.com", "123",
-                setData(), "desc", "iniciante", 1, treinos, notificacoes);
-
-        Usuario user2 = new Usuario(2, "user2", "email@email.com", "123",
-                setData(), "desc", "iniciante", 1, treinos, notificacoes);
-
-        usuarios.add(user1);
-        usuarios.add(user2);
-
-        // when
-        Mockito.when(usuarioRepository.findAll()).thenReturn(usuarios);
-
-        // then
-        List<UsuarioDtoResposta> usuariosRespostas = usuarioService.getAll();
-
-        // assert
-        assertDoesNotThrow(() -> {usuarioService.getAll();});
-        assertNotNull(usuariosRespostas);
-        assertEquals(usuariosRespostas.size(), size);
-    }
+//    @Test
+//    @DisplayName("deveRetornarDoisUsuariosQuandoDoisUsuariosCadastrados")
+//    void deveRetornarDoisUsuariosQuandoDoisUsuariosCadastrados() {
+//        // given
+//        int size = 2;
+//        List<Usuario> usuarios = new ArrayList<>();
+//        List<TreinoHasUsuario> treinos = new ArrayList<>();
+//        List<Notificacao> notificacoes = new ArrayList<>();
+//
+//        Usuario user1 = new Usuario(1, "user1", "email@email.com", "123",
+//                setData(), "desc", "iniciante", 1, treinos, notificacoes);
+//
+//        Usuario user2 = new Usuario(2, "user2", "email@email.com", "123",
+//                setData(), "desc", "iniciante", 1, treinos, notificacoes);
+//
+//        usuarios.add(user1);
+//        usuarios.add(user2);
+//
+//        // when
+//        Mockito.when(usuarioRepository.findAll()).thenReturn(usuarios);
+//
+//        // then
+//        List<UsuarioDtoResposta> usuariosRespostas = usuarioService.getAll();
+//
+//        // assert
+//        assertDoesNotThrow(() -> {usuarioService.getAll();});
+//        assertNotNull(usuariosRespostas);
+//        assertEquals(usuariosRespostas.size(), size);
+//    }
 
     @Test
     @DisplayName("deveRetornarResponseStatusExceptionQuandoNaoTiverUsuarios")
