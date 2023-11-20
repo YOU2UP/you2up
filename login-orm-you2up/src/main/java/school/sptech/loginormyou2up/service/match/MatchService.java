@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import school.sptech.loginormyou2up.domain.match.Match;
+import school.sptech.loginormyou2up.domain.match.TbMatch;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
 import school.sptech.loginormyou2up.dto.mapper.MatchMapper;
 import school.sptech.loginormyou2up.dto.match.MatchDtoResposta;
@@ -43,7 +43,7 @@ public class MatchService {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Nenhum match encontrado");
         }
 
-        List<Match> listaRetorno = matchRepository.findAll();
+        List<TbMatch> listaRetorno = matchRepository.findAll();
 
 
         return listaRetorno.stream()
@@ -61,7 +61,7 @@ public class MatchService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
         }
 
-        List<Match> listaRetorno = matchRepository.getAllMatchsByUsuarioId(id);
+        List<TbMatch> listaRetorno = matchRepository.getAllMatchsByUsuarioId(id);
 
         if (listaRetorno.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum match encontrado");
@@ -91,7 +91,7 @@ public class MatchService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Não há matches entre o mesmo usuário");
         }
 
-        List<Match> listaRetorno = matchRepository.getMatchEntreUsuarios(id1, id2);
+        List<TbMatch> listaRetorno = matchRepository.getMatchEntreUsuarios(id1, id2);
 
         if (listaRetorno.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Match não encontrado");
@@ -128,8 +128,8 @@ public class MatchService {
         }
 
         //apagando todos os matches daquele usuario do banco pois sempre que a aplicação é aberta o match é montado
-        List<Match> matches = matchRepository.getAllMatchsByUsuarioId(idUsuario);
-        matches.forEach(match -> matchRepository.deleteById(match.getIdMatch()));
+        List<TbMatch> tbMatches = matchRepository.getAllMatchsByUsuarioId(idUsuario);
+        tbMatches.forEach(match -> matchRepository.deleteById(match.getIdMatch()));
 
 
         Usuario usuario = usuarioRepository.findById(idUsuario).get();
@@ -159,12 +159,12 @@ public class MatchService {
                 usuariosCombinados.add(usuario1.getIdUsuario()); // Adiciona o ID do usuário combinado ao conjunto
 
                 // Cria e salva o match no banco de dados
-                Match match = new Match();
-                match.setUsuario1(usuario);
-                match.setUsuario2(usuario1);
-                matchRepository.save(match);
+                TbMatch tbMatch = new TbMatch();
+                tbMatch.setUsuario1(usuario);
+                tbMatch.setUsuario2(usuario1);
+                matchRepository.save(tbMatch);
 
-                matchesRetorno.add(MatchMapper.convertToMatchDtoResposta(match));
+                matchesRetorno.add(MatchMapper.convertToMatchDtoResposta(tbMatch));
             }
         });
 
