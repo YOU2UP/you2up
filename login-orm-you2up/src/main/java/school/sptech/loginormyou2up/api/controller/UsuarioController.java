@@ -129,15 +129,8 @@ public class UsuarioController {
                     @Content()
             })
     })
-    public ResponseEntity<UsuarioDtoResposta> putById(@PathVariable Integer id, @RequestBody @Valid UsuarioDtoCriacao usuario) {
-        Optional<Usuario> UsuarioOpt = usuarioRepository.findById(id);
-
-        if (UsuarioOpt.isPresent()) {
-            Usuario usuarioCadastrado = usuarioRepository.save(UsuarioMapper.convertToUsuario(usuario));
-            return ResponseEntity.status(200).body(UsuarioMapper.convertToDtoResposta(usuarioCadastrado));
-        }
-
-        return ResponseEntity.status(404).build();
+    public ResponseEntity<UsuarioDtoResposta> putById(@PathVariable Integer id, @RequestBody UsuarioDtoCriacao usuario) {
+        return ResponseEntity.ok(usuarioService.putById(id, usuario));
     }
 
     @PostMapping("/login")
@@ -265,8 +258,8 @@ public class UsuarioController {
 
     @GetMapping("/criar-txt")
     public ResponseEntity<String> carregarUsuariosDoArquivo() {
-       usuarioService.gravaArquivoTxt("Usuarios");
-       return ResponseEntity.ok().body("Arquivo criado");
+        usuarioService.gravaArquivoTxt("Usuarios");
+        return ResponseEntity.ok().body("Arquivo criado");
     }
 
     @GetMapping("/ler-txt/{nomeArq}")
@@ -274,11 +267,6 @@ public class UsuarioController {
         usuarioService.leArquivoTxt(nomeArq);
         return (ResponseEntity.ok().body("Usuarios Salvos"));
     }
-
-
-
-
-
 
 
     @PutMapping("/meta-treinos/{id}/{meta}")
@@ -306,6 +294,11 @@ public class UsuarioController {
     @GetMapping("/busca-usuario-arvore/{id}")
     public ResponseEntity<UsuarioDtoResposta> buscaUsuarioArvore(@PathVariable int id) {
         return ResponseEntity.ok().body(usuarioService.buscaUsuarioArvore(id));
+    }
+
+    @GetMapping("/treinos-realizados/{idUsuario}")
+    public ResponseEntity<Integer> getQtdTreinosRealizados(@PathVariable int idUsuario){
+        return ResponseEntity.ok().body(usuarioService.quantidadeTreinosRealizados(idUsuario));
     }
 }
 

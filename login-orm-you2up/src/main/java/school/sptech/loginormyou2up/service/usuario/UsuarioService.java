@@ -196,16 +196,6 @@ public class UsuarioService {
     }
 
 
-    public UsuarioDtoResposta putById(Integer id, Usuario usuario) {
-        Optional<Usuario> usuarioOpt = usuarioRepository.findById(id);
-
-        if (usuarioOpt.isPresent()) {
-            return UsuarioMapper.convertToDtoResposta(usuarioRepository.save(usuario));
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-    }
-
     public ListaObj<UsuarioDtoResposta> menorParaMaior() {
         if (usuarioRepository.findAll().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT);
@@ -338,6 +328,29 @@ public class UsuarioService {
         return null;
     }
 
+    public UsuarioDtoResposta putById(int id, UsuarioDtoCriacao usuarioDtoCriacao){
+        usuarioRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
+
+        Usuario usuarioCadastrado = usuarioRepository.findById(id).get();
+
+        //verificar os atributos nulos de usuarioDtoCriacao
+        if (usuarioDtoCriacao.getNome() != null) {
+            usuarioCadastrado.setNome(usuarioDtoCriacao.getNome());
+        }
+        if (usuarioDtoCriacao.getEmail() != null) {
+            usuarioCadastrado.setEmail(usuarioDtoCriacao.getEmail());
+        }
+        if (usuarioDtoCriacao.getSenha() != null) {
+            usuarioCadastrado.setSenha(usuarioDtoCriacao.getSenha());
+        }
+        if (usuarioDtoCriacao.getDescricao() != null) {
+            usuarioCadastrado.setDescricao(usuarioDtoCriacao.getDescricao());
+        }
+
+        return UsuarioMapper.convertToDtoResposta(usuarioRepository.save(usuarioCadastrado));
+
+    }
+
     public void exibeRecursivo(List<UsuarioDtoResposta> userLists, int tamanho){
         if (tamanho == userLists.size() -1) {
             UsuarioDtoResposta user = userLists.get(tamanho);
@@ -395,6 +408,21 @@ public class UsuarioService {
         return usuarioRepository.findById(no.getInfo()).map(UsuarioMapper::convertToDtoResposta).get();
     }
 
+
+    public int quantidadeTreinosRealizados(int idUsuario) {
+        Optional<Usuario> usuarioOpt = usuarioRepository.findById(idUsuario);
+
+        if (usuarioOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
+        }
+
+        Usuario usuario = usuarioOpt.get();
+
+        List<TreinoHasUsuario> treinos = usuario.getTreinos();
+
+        return treinos.stream().filter(treinoHasUsuario -> treinoHasUsuario.getTreino().
+                isRealizado()).toList().size();
+    }
 
 
     public static void gravaRegistro(String nomeArq, String registro) {
