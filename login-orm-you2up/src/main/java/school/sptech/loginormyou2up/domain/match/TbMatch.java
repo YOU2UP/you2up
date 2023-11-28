@@ -3,6 +3,8 @@ package school.sptech.loginormyou2up.domain.match;
 import school.sptech.loginormyou2up.domain.usuario.Usuario;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class TbMatch {
@@ -14,6 +16,8 @@ public class TbMatch {
     private Usuario usuario1;
     @ManyToOne
     private Usuario usuario2;
+
+    private LocalDate dataMatch;
 
     public Integer getIdMatch() {
         return idMatch;
@@ -37,5 +41,13 @@ public class TbMatch {
 
     public void setUsuario2(Usuario usuario2) {
         this.usuario2 = usuario2;
+    }
+
+    public LocalDate getDataMatch() {
+        return dataMatch;
+    }
+
+    public void setDataMatch(LocalDate dataMatch) {
+        this.dataMatch = dataMatch;
     }
 }
