@@ -11,6 +11,7 @@ public class MatchMapper {
         dto.setId(tbMatch.getIdMatch());
         dto.setUsuario1(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(tbMatch.getUsuario1()));
         dto.setUsuario2(UsuarioMapper.convertToUsuarioDtoRetornoDetalhes(tbMatch.getUsuario2()));
+        dto.setDataMatch(tbMatch.getDataMatch());
 
         return dto;
     }

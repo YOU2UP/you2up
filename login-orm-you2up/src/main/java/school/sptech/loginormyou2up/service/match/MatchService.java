@@ -11,6 +11,8 @@ import school.sptech.loginormyou2up.dto.match.MatchDtoResposta;
 import school.sptech.loginormyou2up.repository.MatchRepository;
 import school.sptech.loginormyou2up.repository.UsuarioRepository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -162,6 +164,7 @@ public class MatchService {
                 TbMatch tbMatch = new TbMatch();
                 tbMatch.setUsuario1(usuario);
                 tbMatch.setUsuario2(usuario1);
+                tbMatch.setDataMatch(LocalDate.now());
                 matchRepository.save(tbMatch);
 
                 matchesRetorno.add(MatchMapper.convertToMatchDtoResposta(tbMatch));

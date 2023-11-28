@@ -3,6 +3,7 @@ package school.sptech.loginormyou2up.dto.match;
 import io.swagger.v3.oas.annotations.media.Schema;
 import school.sptech.loginormyou2up.dto.usuario.UsuarioDtoRetornoDetalhes;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class MatchDtoResposta {
@@ -15,6 +16,9 @@ public class MatchDtoResposta {
 
     @Schema(description = "Usuário 2 do match")
     private UsuarioDtoRetornoDetalhes usuario2;
+
+    @Schema(description = "Data do match", example = "2021-04-24T10:00:00")
+    private LocalDate dataMatch;
 
    public Integer getId() {
       return id;
@@ -38,6 +42,14 @@ public class MatchDtoResposta {
 
     public void setUsuario2(UsuarioDtoRetornoDetalhes usuario2) {
         this.usuario2 = usuario2;
+    }
+
+    public LocalDate getDataMatch() {
+        return dataMatch;
+    }
+
+    public void setDataMatch(LocalDate dataMatch) {
+        this.dataMatch = dataMatch;
     }
 }
 
