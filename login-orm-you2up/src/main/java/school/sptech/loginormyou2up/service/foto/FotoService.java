@@ -130,7 +130,8 @@ public class FotoService {
         System.out.println("oi");
         int idFotoPerfil = usuario.getFotoPerfil().getIdFotoPerfil();
         fotoPerfil.setIdFotoPerfil(idFotoPerfil);
-
+        fotoPerfil.setUsuario(usuario);
+        fotoPerfil.setUrl(fotoPerfil.getUrl());
 
         return FotoMapper.converterFotoParaFotoRespostaDto(fotoPerfilRepository.save(fotoPerfil));
     }
