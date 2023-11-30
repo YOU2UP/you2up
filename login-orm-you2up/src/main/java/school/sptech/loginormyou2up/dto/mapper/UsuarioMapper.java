@@ -157,6 +157,7 @@ public class UsuarioMapper {
         dto.setDescricao(usuario.getDescricao());
         dto.setDataNascimento(usuario.getDataNascimento());
         dto.setEstagio(usuario.getEstagio());
+        dto.setFotoPerfil(FotoMapper.converterFotoParaFotoRespostaDto(usuario.getFotoPerfil()));
 
         return dto;
     }

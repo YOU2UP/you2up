@@ -1,7 +1,9 @@
 package school.sptech.loginormyou2up.dto.usuario;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import school.sptech.loginormyou2up.domain.foto.FotoPerfil;
 import school.sptech.loginormyou2up.domain.localTreino.LocalTreinoUsuario;
+import school.sptech.loginormyou2up.dto.FotoRespostaDto;
 
 import java.time.LocalDate;
 
@@ -29,6 +31,9 @@ public class UsuarioDtoRetornoDetalhes {
     @Schema(description = "Local de treino do usuário")
     private LocalTreinoUsuario localTreino;
 
+    @Schema(description = "Foto de perfil do usuário")
+    private FotoRespostaDto fotoPerfil;
+
 
     public int getId() {
         return id;
@@ -53,6 +58,7 @@ public class UsuarioDtoRetornoDetalhes {
     public LocalTreinoUsuario getLocalTreino() {
         return localTreino;
     }
+
 
     public void setId(int id) {
         this.id = id;
@@ -84,5 +90,14 @@ public class UsuarioDtoRetornoDetalhes {
 
     public void setEstagio(String estagio) {
         this.estagio = estagio;
+    }
+
+    public FotoRespostaDto getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+
+    public void setFotoPerfil(FotoRespostaDto fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 }
